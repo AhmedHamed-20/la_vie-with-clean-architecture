@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:la_vie_with_clean_architecture/core/components/defaults.dart';
 import 'package:la_vie_with_clean_architecture/core/services/service_locator.dart';
+import 'package:la_vie_with_clean_architecture/features/get_products/presentation/bloc/all_products_bloc.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/utl/request_state.dart';
@@ -73,20 +74,15 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: AppHeight.h10,
                         ),
-                        BlocBuilder<AuthBloc, AuthBlocState>(
+                        BlocBuilder<AllProductsBloc, AllProductsState>(
                           builder: (context, state) {
-                            print(state);
-                            switch (state.authState) {
+                            switch (state.requestState) {
                               case RequestState.idle:
                                 return defaultButton(
                                   onPressed: () {
-                                    context.read<AuthBloc>().add(
-                                          LoginEvent(
-                                              email: TextFormFieldControllers
-                                                  .emailLoginController.text,
-                                              password: TextFormFieldControllers
-                                                  .passwordLoginController
-                                                  .text),
+                                    context.read<AllProductsBloc>().add(
+                                          const AllProductsEvent(
+                                              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQxMTgxNjMsImV4cCI6MTY2NDI5MDk2M30.nYe8Dg-T6WTJzmmwNot1JtLYsz4-t5mGvfxs6hBRVNk'),
                                         );
                                   },
                                   buttonChild: Text(

@@ -11,13 +11,13 @@ class DioHelper {
     ));
   }
 
-  static Future<dynamic> getData({
+  static Future<Response<dynamic>?> getData({
     required String url,
     Map<String, dynamic>? query,
     Map<String, dynamic>? headers,
     ProgressCallback? onReceiveProgress,
   }) async {
-    return response = await dio!.get(
+    return response = await dio?.get(
       url,
       queryParameters: query,
       onReceiveProgress: onReceiveProgress,

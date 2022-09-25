@@ -1,5 +1,5 @@
 import 'package:la_vie_with_clean_architecture/core/error/exceptions.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/data/datasources/remote_datasource.dart';
+import 'package:la_vie_with_clean_architecture/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/auth_entitie.dart';
 import 'package:la_vie_with_clean_architecture/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
