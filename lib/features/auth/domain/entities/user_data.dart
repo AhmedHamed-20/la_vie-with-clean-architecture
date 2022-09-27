@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/notifications_entitie.dart';
 
 class UserDataEntitie extends Equatable {
   final String userId;
@@ -6,13 +7,24 @@ class UserDataEntitie extends Equatable {
   final String lastName;
   final String email;
   final String imageUrl;
-  const UserDataEntitie({
-    required this.userId,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.imageUrl,
-  });
+  final int userPoints;
+  final List<NotificationsEntitie> userNotification;
+  const UserDataEntitie(
+      {required this.userId,
+      required this.firstName,
+      required this.lastName,
+      required this.email,
+      required this.imageUrl,
+      required this.userPoints,
+      required this.userNotification});
   @override
-  List<Object?> get props => [userId, firstName, lastName, email, imageUrl];
+  List<Object?> get props => [
+        userId,
+        firstName,
+        lastName,
+        email,
+        imageUrl,
+        userPoints,
+        userNotification
+      ];
 }

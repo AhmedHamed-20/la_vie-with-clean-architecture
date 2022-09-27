@@ -74,16 +74,17 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: AppHeight.h10,
                         ),
-                        BlocBuilder<AllProductsBloc, AllProductsState>(
+                        BlocBuilder<AuthBloc, AuthBlocState>(
                           builder: (context, state) {
-                            switch (state.requestState) {
+                            switch (state.authState) {
                               case RequestState.idle:
                                 return defaultButton(
                                   onPressed: () {
-                                    context.read<AllProductsBloc>().add(
-                                          const AllProductsEvent(
-                                              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQxMTgxNjMsImV4cCI6MTY2NDI5MDk2M30.nYe8Dg-T6WTJzmmwNot1JtLYsz4-t5mGvfxs6hBRVNk'),
-                                        );
+                                    context.read<AuthBloc>().add(LoginEvent(
+                                        email: TextFormFieldControllers
+                                            .emailLoginController.text,
+                                        password: TextFormFieldControllers
+                                            .passwordLoginController.text));
                                   },
                                   buttonChild: Text(
                                     'Login',
@@ -98,11 +99,20 @@ class LoginScreen extends StatelessWidget {
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
-                              case RequestState.loaded:
+                              case RequestState.loginloaded:
+                                context.read<AuthBloc>().add(GetUserDataEvent(
+                                    state.authDataEntitie!.accessToken));
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
+                              case RequestState.userdataloading:
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              case RequestState.userdataloaded:
+                                return const Text('done');
                               case RequestState.error:
+                                print(state.authMessage);
                                 return const Center(
                                   child: Text('data'),
                                 );

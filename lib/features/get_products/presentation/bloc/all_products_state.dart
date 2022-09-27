@@ -2,18 +2,18 @@ part of 'all_products_bloc.dart';
 
 class AllProductsState extends Equatable {
   final List<AllProductsEntitie> allProductsEntitie;
-  final RequestState requestState;
+  final AllProductsRequestState requestState;
   final String allProductsMessage;
 
   const AllProductsState({
     this.allProductsEntitie = const [],
     this.allProductsMessage = '',
-    this.requestState = RequestState.idle,
+    this.requestState = AllProductsRequestState.idle,
   });
 
   AllProductsState copyWith({
     List<AllProductsEntitie>? allProductsEntitie,
-    RequestState? requestState,
+    AllProductsRequestState? requestState,
     String? allProductsMessage,
   }) {
     return AllProductsState(

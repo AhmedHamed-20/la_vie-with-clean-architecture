@@ -5,10 +5,12 @@ class DioHelper {
   static Dio? dio;
 
   static init() {
-    dio = Dio(BaseOptions(
-      baseUrl: "https://lavie.orangedigitalcenteregypt.com",
-      receiveDataWhenStatusError: true,
-    ));
+    dio = Dio(
+      BaseOptions(
+        baseUrl: "https://lavie.orangedigitalcenteregypt.com",
+        receiveDataWhenStatusError: true,
+      ),
+    );
   }
 
   static Future<Response<dynamic>?> getData({

@@ -16,15 +16,16 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
       AllProductsEvent event, Emitter<AllProductsState> emit) async {
     final result =
         await allProductsUseCase(AllproudctsParams(event.accessToken));
-    emit(state.copyWith(requestState: RequestState.loading));
+    emit(state.copyWith(requestState: AllProductsRequestState.loading));
 
     result.fold(
       (l) => emit(state.copyWith(
-          allProductsMessage: l.message, requestState: RequestState.error)),
+          allProductsMessage: l.message,
+          requestState: AllProductsRequestState.error)),
       (r) => emit(
         state.copyWith(
           allProductsEntitie: r,
-          requestState: RequestState.loaded,
+          requestState: AllProductsRequestState.loaded,
         ),
       ),
     );

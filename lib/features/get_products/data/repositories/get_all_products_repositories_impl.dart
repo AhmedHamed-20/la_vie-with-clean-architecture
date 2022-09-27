@@ -13,9 +13,11 @@ class AllProductsRepositoriesImpl extends AllProductsRepositories {
 
   @override
   Future<Either<Failure, List<AllProductsEntitie>>> getAllProducts(
-      AllproudctsParams params) async {
-    final result = await baseAllProductsRemoteDataSource.getAllProducts(params);
+      AllproudctsParams noParams) async {
     try {
+      final result =
+          await baseAllProductsRemoteDataSource.getAllProducts(params);
+
       return Right(result);
     } on ServerException catch (failure) {
       return left(ServerFailure(failure.errorMessageModel.message));
