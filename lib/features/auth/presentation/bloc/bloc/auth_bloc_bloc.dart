@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/core/utl/utls.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/auth_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/user_data.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/get_userdata_usecase.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/login_usecase.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/signUp_usecase.dart';
+import '../../../../../core/utl/utls.dart';
+import '../../../domain/entities/auth_entitie.dart';
+import '../../../domain/entities/user_data.dart';
+import '../../../domain/usecases/get_userdata_usecase.dart';
+import '../../../domain/usecases/login_usecase.dart';
+import '../../../domain/usecases/signUp_usecase.dart';
 
 part 'auth_bloc_event.dart';
 part 'auth_bloc_state.dart';
@@ -67,7 +67,6 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       UserDataParams(accessToken: event.accessToken),
     );
     emit(state.copyWith(authState: RequestState.userdataloading));
-    print(result);
     result.fold(
         (l) => emit(state.copyWith(
             authState: RequestState.error, authMessage: l.message)),

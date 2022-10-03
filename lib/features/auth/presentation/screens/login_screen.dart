@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:la_vie_with_clean_architecture/core/components/defaults.dart';
-import 'package:la_vie_with_clean_architecture/core/services/service_locator.dart';
-import 'package:la_vie_with_clean_architecture/features/get_products/presentation/bloc/all_products_bloc.dart';
+import '../../../../core/components/defaults.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/utl/utls.dart';

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
 import 'package:la_vie_with_clean_architecture/core/network/dio.dart';
+import 'package:la_vie_with_clean_architecture/core/routes/app_router.dart';
 import 'package:la_vie_with_clean_architecture/core/theme/app_theme.dart';
 import 'package:la_vie_with_clean_architecture/features/blogs/domain/usecases/get_blogs_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/blogs/presentation/screens/blogs_screen.dart';
@@ -13,11 +15,14 @@ import 'features/get_products/presentation/bloc/all_products_bloc.dart';
 void main() {
   ServiceLocator().init();
   DioHelper.init();
-  runApp(const MyApp());
+  runApp(MyApp(
+    appRouter: AppRouter(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, required this.appRouter}) : super(key: key);
+  final AppRouter appRouter;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -32,7 +37,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: lightMode,
-        home: const BlogsScreen(),
+        onGenerateRoute: appRouter.generateRoutes,
+        initialRoute: AppRoutesNames.blogsScreen,
       ),
     );
   }

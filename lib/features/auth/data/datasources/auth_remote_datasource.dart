@@ -1,14 +1,14 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:la_vie_with_clean_architecture/core/error/error_message_model.dart';
-import 'package:la_vie_with_clean_architecture/core/error/exceptions.dart';
-import 'package:la_vie_with_clean_architecture/core/network/dio.dart';
-import 'package:la_vie_with_clean_architecture/core/network/endpoints.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/data/models/auth_model.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/data/models/user_data_model.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/get_userdata_usecase.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/login_usecase.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/signUp_usecase.dart';
+
+import '../../../../core/error/error_message_model.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/network/dio.dart';
+import '../../../../core/network/endpoints.dart';
+import '../../domain/usecases/get_userdata_usecase.dart';
+import '../../domain/usecases/login_usecase.dart';
+import '../../domain/usecases/signUp_usecase.dart';
+import '../models/auth_model.dart';
+import '../models/user_data_model.dart';
 
 abstract class BaseAuthRemoteDataSource {
   Future<AuthModel> login(LoginParams loginParams);

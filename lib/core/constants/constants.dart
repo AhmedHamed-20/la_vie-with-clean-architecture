@@ -191,3 +191,9 @@ Widget appBarWidgets(BuildContext context, int index) {
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
+
+class AppRoutesNames {
+  static const String homeScreen = '/';
+  static const String blogsScreen = '/blogs_screen';
+  static const String blogsScreenDetails = '/blogs_screen/details';
+}
