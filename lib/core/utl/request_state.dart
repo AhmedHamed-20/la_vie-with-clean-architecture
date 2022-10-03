@@ -13,3 +13,9 @@ enum AllProductsRequestState {
   loaded,
   error,
 }
+
+enum BlogsRequestState {
+  loading,
+  loaded,
+  error,
+}

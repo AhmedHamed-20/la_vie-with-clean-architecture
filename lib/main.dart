@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/network/dio.dart';
+import 'package:la_vie_with_clean_architecture/features/blogs/domain/usecases/get_blogs_usecase.dart';
+import 'package:la_vie_with_clean_architecture/features/blogs/presentation/screens/blogs_screen.dart';
 
 import 'core/services/service_locator.dart';
 import 'features/auth/presentation/bloc/bloc/auth_bloc_bloc.dart';
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const LoginScreen(),
+        home: const BlogsScreen(),
       ),
     );
   }

@@ -11,3 +11,11 @@ class AllProductsEvent extends BaseAllProductsEvent {
   @override
   List<Object?> get props => [accessToken];
 }
+
+class BLogsEvent extends BaseAllProductsEvent {
+  final String accessToken;
+
+  const BLogsEvent(this.accessToken);
+  @override
+  List<Object?> get props => [accessToken];
+}

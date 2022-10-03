@@ -1,7 +1,7 @@
 import 'package:la_vie_with_clean_architecture/features/get_products/data/models/plant_model.dart';
 import 'package:la_vie_with_clean_architecture/features/get_products/data/models/seed_model.dart';
 import 'package:la_vie_with_clean_architecture/features/get_products/data/models/tool_model.dart';
-import 'package:la_vie_with_clean_architecture/features/get_products/domain/entities/get_all_products_entitie.dart';
+import 'package:la_vie_with_clean_architecture/features/get_products/domain/entities/all_products_entitie.dart';
 
 class AllProductsModel extends AllProductsEntitie {
   const AllProductsModel(

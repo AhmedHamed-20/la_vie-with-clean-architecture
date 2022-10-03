@@ -41,7 +41,6 @@ class AuthRepositoriesImpl extends AuthRepositories {
       UserDataParams params) async {
     try {
       final result = await baseAuthRemoteDataSource.getUserData(params);
-
       return Right(result);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.message));
