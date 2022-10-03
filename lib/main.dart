@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/network/dio.dart';
+import 'package:la_vie_with_clean_architecture/core/theme/app_theme.dart';
 import 'package:la_vie_with_clean_architecture/features/blogs/domain/usecases/get_blogs_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/blogs/presentation/screens/blogs_screen.dart';
 
@@ -30,9 +31,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: lightMode,
         home: const BlogsScreen(),
       ),
     );

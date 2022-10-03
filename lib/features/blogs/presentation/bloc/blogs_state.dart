@@ -5,25 +5,28 @@ class BlogsState extends Equatable {
   final BLogsEntitie? blogsEntitie;
   final String errorMessage;
   final int currentActiveTab;
+  final List<dynamic>? activeEntitie;
 
   const BlogsState({
     this.blogsRequestState = BlogsRequestState.loading,
     this.blogsEntitie,
     this.errorMessage = '',
     this.currentActiveTab = 0,
+    this.activeEntitie,
   });
 
-  BlogsState copyWith({
-    BlogsRequestState? blogsRequestState,
-    BLogsEntitie? blogsEntitie,
-    String? errorMessage,
-    int? currentActiveTab,
-  }) {
+  BlogsState copyWith(
+      {BlogsRequestState? blogsRequestState,
+      BLogsEntitie? blogsEntitie,
+      String? errorMessage,
+      int? currentActiveTab,
+      List<dynamic>? activeEntitie}) {
     return BlogsState(
       blogsEntitie: blogsEntitie ?? this.blogsEntitie,
       errorMessage: errorMessage ?? this.errorMessage,
       blogsRequestState: blogsRequestState ?? this.blogsRequestState,
       currentActiveTab: currentActiveTab ?? this.currentActiveTab,
+      activeEntitie: activeEntitie ?? this.activeEntitie,
     );
   }
 
@@ -33,5 +36,6 @@ class BlogsState extends Equatable {
         blogsRequestState,
         errorMessage,
         currentActiveTab,
+        activeEntitie,
       ];
 }

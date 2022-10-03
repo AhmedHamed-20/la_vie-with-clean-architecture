@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/core/utl/request_state.dart';
+import 'package:la_vie_with_clean_architecture/core/utl/utls.dart';
 import 'package:la_vie_with_clean_architecture/features/blogs/domain/entities/blogs_entitie.dart';
 import 'package:la_vie_with_clean_architecture/features/blogs/domain/usecases/get_blogs_usecase.dart';
 
@@ -26,6 +26,7 @@ class BlogsBloc extends Bloc<BaseBlogsEvent, BlogsState> {
         state.copyWith(
           blogsEntitie: r,
           blogsRequestState: BlogsRequestState.loaded,
+          activeEntitie: r.plantEntitie,
         ),
       ),
     );
@@ -33,6 +34,27 @@ class BlogsBloc extends Bloc<BaseBlogsEvent, BlogsState> {
 
   FutureOr<void> _changeCurrentActiveTab(
       TobTabsIndex event, Emitter<BlogsState> emit) {
-    emit(state.copyWith(currentActiveTab: event.currentActiveTab));
+    switch (event.currentActiveTab) {
+      case 0:
+        emit(state.copyWith(
+            currentActiveTab: event.currentActiveTab,
+            activeEntitie: state.blogsEntitie?.plantEntitie));
+        break;
+      case 1:
+        emit(state.copyWith(
+            currentActiveTab: event.currentActiveTab,
+            activeEntitie: state.blogsEntitie?.seedsEntitie));
+        break;
+      case 2:
+        emit(state.copyWith(
+            currentActiveTab: event.currentActiveTab,
+            activeEntitie: state.blogsEntitie?.toolEntitie));
+        break;
+      default:
+        emit(state.copyWith(
+            currentActiveTab: event.currentActiveTab,
+            activeEntitie: state.blogsEntitie?.plantEntitie));
+        break;
+    }
   }
 }
