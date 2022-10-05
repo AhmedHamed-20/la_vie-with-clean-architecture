@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/core/error/failures.dart';
+import '../../../../core/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:la_vie_with_clean_architecture/core/usecases/usecases.dart';
-import 'package:la_vie_with_clean_architecture/features/get_products/domain/entities/all_products_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/get_products/domain/repositories/products_repositories.dart';
+import '../../../../core/usecases/usecases.dart';
+import '../entities/all_products_entitie.dart';
+import '../repositories/products_repositories.dart';
 
 class AllProductsUseCase
     extends UseCase<List<AllProductsEntitie>, AllproudctsParams> {

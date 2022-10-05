@@ -1,4 +1,4 @@
-import 'package:la_vie_with_clean_architecture/features/get_products/domain/entities/seed_entitie.dart';
+import '../../domain/entities/seed_entitie.dart';
 
 class SeedModel extends SeedEntitie {
   const SeedModel(

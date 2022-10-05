@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
-import 'package:la_vie_with_clean_architecture/core/network/dio.dart';
-import 'package:la_vie_with_clean_architecture/core/routes/app_router.dart';
-import 'package:la_vie_with_clean_architecture/core/theme/app_theme.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/domain/usecases/get_blogs_usecase.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/presentation/screens/blogs_screen.dart';
+import 'core/constants/constants.dart';
+import 'core/network/dio.dart';
+import 'core/routes/app_router.dart';
+import 'core/theme/app_theme.dart';
+import 'features/blogs/domain/usecases/get_blogs_usecase.dart';
+import 'features/blogs/presentation/screens/blogs_screen.dart';
 
 import 'core/services/service_locator.dart';
 import 'features/auth/presentation/bloc/bloc/auth_bloc_bloc.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: lightMode,
         onGenerateRoute: appRouter.generateRoutes,
-        initialRoute: AppRoutesNames.blogsScreen,
+        initialRoute: AppRoutesNames.forumsScreen,
       ),
     );
   }

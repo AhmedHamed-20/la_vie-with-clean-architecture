@@ -196,4 +196,8 @@ class AppRoutesNames {
   static const String homeScreen = '/';
   static const String blogsScreen = '/blogs_screen';
   static const String blogsScreenDetails = '/blogs_screen/details';
+  static const String forumsScreen = '/forums_screen';
 }
+
+const String defaultImage =
+    'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';

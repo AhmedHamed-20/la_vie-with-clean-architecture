@@ -1,5 +1,5 @@
-import 'package:la_vie_with_clean_architecture/features/auth/data/models/notifications_model.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/user_data.dart';
+import '../../domain/entities/user_data.dart';
+import 'notifications_model.dart';
 
 class UserDataModel extends UserDataEntitie {
   const UserDataModel({

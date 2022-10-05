@@ -19,3 +19,9 @@ enum BlogsRequestState {
   loaded,
   error,
 }
+
+enum ForumsRequestState {
+  loading,
+  loaded,
+  error,
+}

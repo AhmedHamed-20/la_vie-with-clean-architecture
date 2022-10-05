@@ -1,5 +1,5 @@
-import 'package:la_vie_with_clean_architecture/core/network/endpoints.dart';
-import 'package:la_vie_with_clean_architecture/features/get_products/domain/entities/plant_entitie.dart';
+import '../../../../core/network/endpoints.dart';
+import '../../../get_products/domain/entities/plant_entitie.dart';
 
 class PlantBlogsModel extends PlantEntitie {
   const PlantBlogsModel(

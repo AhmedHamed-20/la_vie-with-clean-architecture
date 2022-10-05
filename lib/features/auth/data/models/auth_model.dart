@@ -1,4 +1,4 @@
-import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/auth_entitie.dart';
+import '../../domain/entities/auth_entitie.dart';
 
 class AuthModel extends AuthDataEntitie {
   const AuthModel({

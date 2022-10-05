@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/core/utl/utls.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/domain/entities/blogs_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/domain/usecases/get_blogs_usecase.dart';
+import '../../../../core/utl/utls.dart';
+import '../../domain/entities/blogs_entitie.dart';
+import '../../domain/usecases/get_blogs_usecase.dart';
 
 part 'blogs_event.dart';
 part 'blogs_state.dart';

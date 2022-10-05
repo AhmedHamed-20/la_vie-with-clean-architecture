@@ -1,13 +1,13 @@
-import 'package:la_vie_with_clean_architecture/core/error/exceptions.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/auth_entitie.dart';
-import 'package:la_vie_with_clean_architecture/core/error/failures.dart';
+import '../../../../core/error/exceptions.dart';
+import '../datasources/auth_remote_datasource.dart';
+import '../../domain/entities/auth_entitie.dart';
+import '../../../../core/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/user_data.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/repositories/auth_repositories.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/get_userdata_usecase.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/login_usecase.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/signUp_usecase.dart';
+import '../../domain/entities/user_data.dart';
+import '../../domain/repositories/auth_repositories.dart';
+import '../../domain/usecases/get_userdata_usecase.dart';
+import '../../domain/usecases/login_usecase.dart';
+import '../../domain/usecases/signUp_usecase.dart';
 
 class AuthRepositoriesImpl extends AuthRepositories {
   BaseAuthRemoteDataSource baseAuthRemoteDataSource;

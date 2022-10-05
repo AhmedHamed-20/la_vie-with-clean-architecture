@@ -1,4 +1,4 @@
-import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/notifications_entitie.dart';
+import '../../domain/entities/notifications_entitie.dart';
 
 class NotificationsModel extends NotificationsEntitie {
   const NotificationsModel(

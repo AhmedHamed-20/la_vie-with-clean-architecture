@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/core/error/failures.dart';
+import '../../../../core/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:la_vie_with_clean_architecture/core/usecases/usecases.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/domain/entities/blogs_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/domain/repositories/blogs_repositories.dart';
+import '../../../../core/usecases/usecases.dart';
+import '../entities/blogs_entitie.dart';
+import '../repositories/blogs_repositories.dart';
 
 class BlogsUsecase extends UseCase<BLogsEntitie, BlogsParams> {
   final BlogRepositories blogRepositories;

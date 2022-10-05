@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/core/utl/utls.dart';
-import 'package:la_vie_with_clean_architecture/features/get_products/domain/entities/all_products_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/domain/entities/blogs_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/get_products/domain/usecases/get_all_products_usecase.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/domain/usecases/get_blogs_usecase.dart';
+import '../../../../core/utl/utls.dart';
+import '../../domain/entities/all_products_entitie.dart';
+import '../../../blogs/domain/entities/blogs_entitie.dart';
+import '../../domain/usecases/get_all_products_usecase.dart';
+import '../../../blogs/domain/usecases/get_blogs_usecase.dart';
 part 'all_products_event.dart';
 part 'all_products_state.dart';
 

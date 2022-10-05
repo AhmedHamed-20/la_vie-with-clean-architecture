@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/notifications_entitie.dart';
+import 'notifications_entitie.dart';
 
 class UserDataEntitie extends Equatable {
   final String userId;

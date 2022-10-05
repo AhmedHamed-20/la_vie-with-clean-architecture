@@ -1,4 +1,4 @@
-import 'package:la_vie_with_clean_architecture/features/get_products/domain/entities/plant_entitie.dart';
+import '../../domain/entities/plant_entitie.dart';
 
 class PlantModel extends PlantEntitie {
   const PlantModel(

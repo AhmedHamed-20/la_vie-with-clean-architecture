@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/core/error/failures.dart';
-import 'package:la_vie_with_clean_architecture/core/usecases/usecases.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/entities/auth_entitie.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/usecases/usecases.dart';
+import '../entities/auth_entitie.dart';
 
 import '../repositories/auth_repositories.dart';
 

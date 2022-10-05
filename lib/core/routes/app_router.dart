@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
-import 'package:la_vie_with_clean_architecture/core/params/app_params.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/presentation/screens/login_screen.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/presentation/screens/blogs_details.dart';
-import 'package:la_vie_with_clean_architecture/features/blogs/presentation/screens/blogs_screen.dart';
+import '../../features/forms/presentation/screens/forums_screen.dart';
+import '../constants/constants.dart';
+import '../params/app_params.dart';
+import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/blogs/presentation/screens/blogs_details.dart';
+import '../../features/blogs/presentation/screens/blogs_screen.dart';
 
 class AppRouter {
   Route? generateRoutes(RouteSettings routeSettings) {
@@ -19,6 +20,8 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => BlogDetailes(arguments.blogDetailes,
                 arguments.blogTitle, arguments.photoUrl));
+      case AppRoutesNames.forumsScreen:
+        return MaterialPageRoute(builder: (_) => const ForumsScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(

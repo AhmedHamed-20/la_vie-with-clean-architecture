@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
+import '../../../../core/constants/constants.dart';
 
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utl/utls.dart';
@@ -16,7 +16,7 @@ class BlogsScreen extends StatelessWidget {
       create: (context) => servicelocator<BlogsBloc>()
         ..add(
           const AllBlogsEvent(
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQ4MDU0NTQsImV4cCI6MTY2NDk3ODI1NH0.CcgqAsPi2nzMmCVa1WehkZGoceM18oW7LPCDbXcDKnE'),
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQ5MjMxMjEsImV4cCI6MTY2NTA5NTkyMX0.Ki-V2wepIiRwJ-oazru800Ci-radI3jHPP-gn7IZWWY'),
         ),
       child: Scaffold(
         appBar: AppBar(
