@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'plant_entitie.dart';
 import 'seed_entitie.dart';
 import 'tool_entitie.dart';

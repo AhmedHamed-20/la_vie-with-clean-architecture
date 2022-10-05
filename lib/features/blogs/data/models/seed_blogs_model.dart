@@ -1,8 +1,7 @@
-import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
-
-import '../../../get_products/domain/entities/seed_entitie.dart';
+import '../../../../core/constants/constants.dart';
 
 import '../../../../core/network/endpoints.dart';
+import '../../../products/domain/entities/seed_entitie.dart';
 
 class SeedsBlogsModel extends SeedEntitie {
   const SeedsBlogsModel(

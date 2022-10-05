@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/params/app_params.dart';
 
 import '../../../../core/constants/constants.dart';
+import '../../../../core/params/app_params.dart';
 import '../../../../core/widgets/tob_tab.dart';
 import '../bloc/blogs_bloc.dart';
 

@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
+
 import '../../../../core/error/error_message_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/dio.dart';
 import '../../../../core/network/endpoints.dart';
-import '../models/get_all_products_model.dart';
 import '../../domain/usecases/get_all_products_usecase.dart';
+import '../models/get_all_products_model.dart';
 
 abstract class BaseAllProductsRemoteDataSource {
   Future<List<AllProductsModel>> getAllProducts(AllproudctsParams params);

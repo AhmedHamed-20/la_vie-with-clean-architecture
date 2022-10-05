@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:la_vie_with_clean_architecture/core/network/dio.dart';
-import 'package:la_vie_with_clean_architecture/core/network/endpoints.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/data/models/all_forums_model.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/usecases/get_all_forums.dart';
+import '../../../../core/network/dio.dart';
+import '../../../../core/network/endpoints.dart';
 
 import '../../../../core/error/error_message_model.dart';
 import '../../../../core/error/exceptions.dart';
+import '../../domain/usecases/get_all_forums.dart';
+import '../models/all_forums_model.dart';
 
 abstract class BaseAllForumsRemoteDatesource {
   Future<List<AllForumsModel>> getAllForums(AllForumsParams params);

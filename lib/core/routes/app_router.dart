@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../features/forms/presentation/screens/forums_screen.dart';
-import '../constants/constants.dart';
-import '../params/app_params.dart';
+
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/blogs/presentation/screens/blogs_details.dart';
 import '../../features/blogs/presentation/screens/blogs_screen.dart';
+
+import '../../features/forums/presentation/screens/forums_screen.dart';
+import '../constants/constants.dart';
+import '../params/app_params.dart';
 
 class AppRouter {
   Route? generateRoutes(RouteSettings routeSettings) {

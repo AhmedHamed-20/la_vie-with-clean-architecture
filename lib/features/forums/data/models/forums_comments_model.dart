@@ -1,4 +1,4 @@
-import 'package:la_vie_with_clean_architecture/features/forms/domain/entities/forums_comments_entitie.dart';
+import '../../domain/entities/forums_comments_entitie.dart';
 
 class ForumsCommentsModel extends ForumsCommentsEtitie {
   const ForumsCommentsModel(

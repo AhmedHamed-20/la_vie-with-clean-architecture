@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/entities/forums_comments_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/entities/forums_likes_entitie.dart';
+
+import 'forums_comments_entitie.dart';
+import 'forums_likes_entitie.dart';
 
 class ForumsEntitie extends Equatable {
   final String forumsId;

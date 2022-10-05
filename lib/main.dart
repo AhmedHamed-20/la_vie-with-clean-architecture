@@ -4,13 +4,10 @@ import 'core/constants/constants.dart';
 import 'core/network/dio.dart';
 import 'core/routes/app_router.dart';
 import 'core/theme/app_theme.dart';
-import 'features/blogs/domain/usecases/get_blogs_usecase.dart';
-import 'features/blogs/presentation/screens/blogs_screen.dart';
 
 import 'core/services/service_locator.dart';
 import 'features/auth/presentation/bloc/bloc/auth_bloc_bloc.dart';
-import 'features/auth/presentation/screens/login_screen.dart';
-import 'features/get_products/presentation/bloc/all_products_bloc.dart';
+import 'features/products/presentation/bloc/all_products_bloc.dart';
 
 void main() {
   ServiceLocator().init();

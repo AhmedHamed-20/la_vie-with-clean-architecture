@@ -1,4 +1,4 @@
-import 'package:la_vie_with_clean_architecture/features/forms/domain/entities/forums_likes_entitie.dart';
+import '../../domain/entities/forums_likes_entitie.dart';
 
 class ForumsLikesModel extends ForumsLikesEntitie {
   const ForumsLikesModel({required super.userId, required super.formsId});

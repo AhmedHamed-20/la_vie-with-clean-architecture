@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/core/utl/utls.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/entities/forums_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/usecases/get_all_forums.dart';
+import '../../../../core/utl/utls.dart';
+import '../../domain/usecases/get_all_forums.dart';
 
 part 'forms_event.dart';
 part 'forums_state.dart';

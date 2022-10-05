@@ -1,6 +1,7 @@
-import 'package:equatable/equatable.dart';
-import '../../../../core/error/failures.dart';
 import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
+
+import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecases.dart';
 import '../entities/all_products_entitie.dart';
 import '../repositories/products_repositories.dart';

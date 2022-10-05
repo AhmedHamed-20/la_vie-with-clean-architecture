@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecases.dart';
 import '../entities/auth_entitie.dart';
-
 import '../repositories/auth_repositories.dart';
 
 class SignupUscase implements UseCase<AuthDataEntitie, SignUpParams> {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/constants/constants.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utl/utls.dart';
 import '../bloc/blogs_bloc.dart';

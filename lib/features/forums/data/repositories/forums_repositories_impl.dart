@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/data/datasources/all_forums_remote_datasource.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/entities/forums_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/repositories/forums_repositories.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/usecases/get_all_forums.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
+import '../../domain/entities/forums_entitie.dart';
+import '../../domain/repositories/forums_repositories.dart';
+import '../../domain/usecases/get_all_forums.dart';
+import '../datasources/all_forums_remote_datasource.dart';
 
 class ForumsRepositoriesImpl extends ForumsRepositories {
   final BaseAllForumsRemoteDatesource baseremoteDataSource;

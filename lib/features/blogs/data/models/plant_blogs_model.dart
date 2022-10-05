@@ -1,5 +1,6 @@
+import '../../../../core/constants/constants.dart';
 import '../../../../core/network/endpoints.dart';
-import '../../../get_products/domain/entities/plant_entitie.dart';
+import '../../../products/domain/entities/plant_entitie.dart';
 
 class PlantBlogsModel extends PlantEntitie {
   const PlantBlogsModel(
@@ -17,7 +18,7 @@ class PlantBlogsModel extends PlantEntitie {
         name: json['name'] ?? '',
         description: json['description'] ?? '',
         imageUrl: json['imageUrl'] == null || json['imageUrl'] == ''
-            ? 'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg'
+            ? defaultImage
             : EndPoints.baseUrl + json['imageUrl'],
         waterCapacity: json['waterCapacity'] ?? 0,
         sunLight: json['sunLight'] ?? 0,

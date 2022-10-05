@@ -1,8 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/data/datasources/all_forums_remote_datasource.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/data/repositories/forums_repositories_impl.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/repositories/forums_repositories.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/usecases/get_all_forums.dart';
+
 import '../../features/auth/data/datasources/auth_remote_datasource.dart';
 import '../../features/auth/data/repositories/repositories_impl.dart';
 import '../../features/auth/domain/repositories/auth_repositories.dart';
@@ -15,12 +12,16 @@ import '../../features/blogs/data/repositories/blogs_repositories.dart';
 import '../../features/blogs/domain/repositories/blogs_repositories.dart';
 import '../../features/blogs/domain/usecases/get_blogs_usecase.dart';
 import '../../features/blogs/presentation/bloc/blogs_bloc.dart';
-import '../../features/forms/presentation/bloc/forums_bloc.dart';
-import '../../features/get_products/data/datasource/get_all_products_remote_datasource.dart';
-import '../../features/get_products/data/repositories/get_all_products_repositories_impl.dart';
-import '../../features/get_products/domain/repositories/products_repositories.dart';
-import '../../features/get_products/domain/usecases/get_all_products_usecase.dart';
-import '../../features/get_products/presentation/bloc/all_products_bloc.dart';
+import '../../features/forums/data/datasources/all_forums_remote_datasource.dart';
+import '../../features/forums/data/repositories/forums_repositories_impl.dart';
+import '../../features/forums/domain/repositories/forums_repositories.dart';
+import '../../features/forums/domain/usecases/get_all_forums.dart';
+import '../../features/forums/presentation/bloc/forums_bloc.dart';
+import '../../features/products/data/datasource/get_all_products_remote_datasource.dart';
+import '../../features/products/data/repositories/get_all_products_repositories_impl.dart';
+import '../../features/products/domain/repositories/products_repositories.dart';
+import '../../features/products/domain/usecases/get_all_products_usecase.dart';
+import '../../features/products/presentation/bloc/all_products_bloc.dart';
 
 final servicelocator = GetIt.instance;
 

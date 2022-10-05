@@ -1,8 +1,8 @@
-import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
-import 'package:la_vie_with_clean_architecture/core/network/endpoints.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/data/models/forums_comments_model.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/entities/forums_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/forms/domain/entities/forums_likes_entitie.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/network/endpoints.dart';
+import '../../domain/entities/forums_entitie.dart';
+import '../../domain/entities/forums_likes_entitie.dart';
+import 'forums_comments_model.dart';
 
 class AllForumsModel extends ForumsEntitie {
   const AllForumsModel(
