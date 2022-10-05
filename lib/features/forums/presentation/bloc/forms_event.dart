@@ -12,3 +12,12 @@ class AllForumsEvent extends FormsEvent {
   @override
   List<Object> get props => [accessToken];
 }
+
+class ForumsMeEvent extends FormsEvent {
+  final String accessToken;
+
+  const ForumsMeEvent({required this.accessToken});
+
+  @override
+  List<Object> get props => [accessToken];
+}

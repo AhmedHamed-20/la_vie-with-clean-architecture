@@ -5,13 +5,16 @@ import '../../../../core/network/endpoints.dart';
 import '../../../../core/error/error_message_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../domain/usecases/get_all_forums.dart';
+import '../../domain/usecases/get_forums_me.dart';
 import '../models/all_forums_model.dart';
+import '../models/forums_me_model.dart';
 
-abstract class BaseAllForumsRemoteDatesource {
+abstract class BaseForumsRemoteDatesource {
   Future<List<AllForumsModel>> getAllForums(AllForumsParams params);
+  Future<List<ForumsMeModel>> getForumsMe(ForumsMeParams params);
 }
 
-class AllForumsRemoteDatasource extends BaseAllForumsRemoteDatesource {
+class AllForumsRemoteDatasource extends BaseForumsRemoteDatesource {
   @override
   Future<List<AllForumsModel>> getAllForums(AllForumsParams params) async {
     try {
@@ -28,6 +31,25 @@ class AllForumsRemoteDatasource extends BaseAllForumsRemoteDatesource {
     } on DioError catch (error) {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(error.response?.data));
+    }
+  }
+
+  @override
+  Future<List<ForumsMeModel>> getForumsMe(ForumsMeParams params) async {
+    try {
+      final response = await DioHelper.getData(
+        url: EndPoints.getMeForums,
+        headers: {
+          'Authorization': 'Bearer ${params.accessToken}',
+          'Content-Type': 'application/json',
+        },
+      );
+
+      return List<ForumsMeModel>.from((response?.data['data'] as List).map(
+        (e) => ForumsMeModel.fromJson(e),
+      ));
+    } on DioError catch (error) {
+      throw ServerException(errorMessageModel: error.response?.data);
     }
   }
 }

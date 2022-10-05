@@ -11,9 +11,18 @@ class ForumsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => servicelocator<ForumsBloc>()
-        ..add(const AllForumsEvent(
+        ..add(
+          const ForumsMeEvent(
             accessToken:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQ5MjMxMjEsImV4cCI6MTY2NTA5NTkyMX0.Ki-V2wepIiRwJ-oazru800Ci-radI3jHPP-gn7IZWWY')),
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQ5MjMxMjEsImV4cCI6MTY2NTA5NTkyMX0.Ki-V2wepIiRwJ-oazru800Ci-radI3jHPP-gn7IZWWY',
+          ),
+        )
+        ..add(
+          const ForumsMeEvent(
+            accessToken:
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQ5MjMxMjEsImV4cCI6MTY2NTA5NTkyMX0.Ki-V2wepIiRwJ-oazru800Ci-radI3jHPP-gn7IZWWY',
+          ),
+        ),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Forums'),
@@ -21,7 +30,7 @@ class ForumsScreen extends StatelessWidget {
         body: Center(
           child: BlocBuilder<ForumsBloc, ForumsState>(
             builder: (context, state) {
-              print(state.allForumsEntitie);
+              print(state.forumsMeEntitie);
               return const Text('Forums');
             },
           ),
