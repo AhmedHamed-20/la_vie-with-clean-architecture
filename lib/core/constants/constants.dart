@@ -197,6 +197,7 @@ class AppRoutesNames {
   static const String blogsScreen = '/blogs_screen';
   static const String blogsScreenDetails = '/blogs_screen/details';
   static const String forumsScreen = '/forums_screen';
+  static const String postForumScreen = '/forums_screen/post_forum';
 }
 
 const String defaultImage =

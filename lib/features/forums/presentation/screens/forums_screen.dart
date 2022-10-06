@@ -30,7 +30,6 @@ class ForumsScreen extends StatelessWidget {
         body: Center(
           child: BlocBuilder<ForumsBloc, ForumsState>(
             builder: (context, state) {
-              print(state.forumsMeEntitie);
               return const Text('Forums');
             },
           ),

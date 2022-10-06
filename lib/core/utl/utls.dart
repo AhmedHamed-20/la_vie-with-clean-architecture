@@ -25,3 +25,16 @@ enum ForumsRequestState {
   loaded,
   error,
 }
+
+enum ForumsPostRequestState {
+  idle,
+  loading,
+  posted,
+  error,
+}
+
+enum ImagePickeRequestState {
+  loading,
+  picked,
+  error,
+}

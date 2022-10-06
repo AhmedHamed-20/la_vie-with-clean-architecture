@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/post_new_forums.dart';
 import '../../features/auth/data/datasources/auth_remote_datasource.dart';
 import '../../features/auth/data/repositories/repositories_impl.dart';
 import '../../features/auth/domain/repositories/auth_repositories.dart';
@@ -35,7 +36,7 @@ class ServiceLocator {
     servicelocator
         .registerFactory<BlogsBloc>(() => BlogsBloc(servicelocator()));
     servicelocator.registerFactory<ForumsBloc>(
-        () => ForumsBloc(servicelocator(), servicelocator()));
+        () => ForumsBloc(servicelocator(), servicelocator(), servicelocator()));
     //useCases
     servicelocator.registerLazySingleton(() => LoginUsecase(servicelocator()));
     servicelocator.registerLazySingleton(() => SignupUscase(servicelocator()));
@@ -49,7 +50,8 @@ class ServiceLocator {
         .registerLazySingleton(() => AllForumsUsecase(servicelocator()));
     servicelocator
         .registerLazySingleton(() => ForumsMeUsecase(servicelocator()));
-
+    servicelocator
+        .registerLazySingleton(() => ForumsPostUscase(servicelocator()));
     //Repositories
     servicelocator.registerLazySingleton<AuthRepositories>(
         () => AuthRepositoriesImpl(servicelocator()));

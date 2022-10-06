@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/get_forums_me.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/entities/forums_me_entitie.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/post_new_forums.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
@@ -33,6 +34,17 @@ class ForumsRepositoriesImpl extends ForumsRepositories {
       ForumsMeParams params) async {
     try {
       final forumsMe = await baseremoteDataSource.getForumsMe(params);
+
+      return Right(forumsMe);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> postNewForum(ForumsPostParams params) async {
+    try {
+      final forumsMe = await baseremoteDataSource.postForum(params);
 
       return Right(forumsMe);
     } on ServerException catch (failure) {

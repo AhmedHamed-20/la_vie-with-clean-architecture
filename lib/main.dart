@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: lightMode,
         onGenerateRoute: appRouter.generateRoutes,
-        initialRoute: AppRoutesNames.forumsScreen,
+        initialRoute: AppRoutesNames.postForumScreen,
       ),
     );
   }

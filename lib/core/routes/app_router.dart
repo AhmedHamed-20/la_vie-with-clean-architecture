@@ -6,6 +6,7 @@ import '../../features/blogs/presentation/screens/blogs_details.dart';
 import '../../features/blogs/presentation/screens/blogs_screen.dart';
 
 import '../../features/forums/presentation/screens/forums_screen.dart';
+import '../../features/forums/presentation/screens/post_forum.dart';
 import '../constants/constants.dart';
 import '../params/app_params.dart';
 
@@ -24,6 +25,8 @@ class AppRouter {
                 arguments.blogTitle, arguments.photoUrl));
       case AppRoutesNames.forumsScreen:
         return MaterialPageRoute(builder: (_) => const ForumsScreen());
+      case AppRoutesNames.postForumScreen:
+        return MaterialPageRoute(builder: (_) => const PostForumScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(
