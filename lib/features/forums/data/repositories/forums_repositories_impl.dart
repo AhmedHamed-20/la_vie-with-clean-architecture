@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/get_forums_me.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/domain/entities/forums_me_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/post_new_forums.dart';
+import '../../domain/usecases/get_forums_me.dart';
+import '../../domain/entities/forums_me_entitie.dart';
+import '../../domain/usecases/post_new_forums.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';

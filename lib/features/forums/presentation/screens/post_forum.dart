@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:la_vie_with_clean_architecture/core/services/service_locator.dart';
+import '../../../../core/services/service_locator.dart';
+import '../../../auth/domain/entities/user_data.dart';
 
 import '../../../../core/components/defaults.dart';
 import '../../../../core/constants/constants.dart';

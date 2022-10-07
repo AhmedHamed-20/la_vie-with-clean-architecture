@@ -1,13 +1,14 @@
-import '../../../../core/error/exceptions.dart';
-import '../datasources/auth_remote_datasource.dart';
-import '../../domain/entities/auth_entitie.dart';
-import '../../../../core/error/failures.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
+import '../../domain/entities/auth_entitie.dart';
 import '../../domain/entities/user_data.dart';
 import '../../domain/repositories/auth_repositories.dart';
 import '../../domain/usecases/get_userdata_usecase.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/signUp_usecase.dart';
+import '../datasources/auth_remote_datasource.dart';
 
 class AuthRepositoriesImpl extends AuthRepositories {
   BaseAuthRemoteDataSource baseAuthRemoteDataSource;

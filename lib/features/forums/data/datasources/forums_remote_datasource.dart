@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import '../../../../core/network/dio.dart';
-import '../../../../core/network/endpoints.dart';
 
 import '../../../../core/error/error_message_model.dart';
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/network/dio.dart';
+import '../../../../core/network/endpoints.dart';
 import '../../domain/usecases/get_all_forums.dart';
 import '../../domain/usecases/get_forums_me.dart';
 import '../../domain/usecases/post_new_forums.dart';

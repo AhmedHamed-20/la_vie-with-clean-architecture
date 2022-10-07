@@ -1,7 +1,7 @@
+import '../../domain/entities/blogs_entitie.dart';
 import 'plant_blogs_model.dart';
 import 'seed_blogs_model.dart';
 import 'tool_blogs_model.dart';
-import '../../domain/entities/blogs_entitie.dart';
 
 class BlogsModel extends BLogsEntitie {
   const BlogsModel(super.plantEntitie, super.seedsEntitie, super.toolEntitie);

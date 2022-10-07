@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/components/defaults.dart';
-
 import '../../../../core/constants/constants.dart';
+import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
 import '../../../../core/utl/utls.dart';
 import '../bloc/bloc/auth_bloc_bloc.dart';
-import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);

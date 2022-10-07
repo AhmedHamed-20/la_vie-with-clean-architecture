@@ -38,3 +38,11 @@ enum ImagePickeRequestState {
   picked,
   error,
 }
+
+enum CartRequestState {
+  loading,
+  loaded,
+  insertedSuccessfully,
+  deletedSuccessfully,
+  error,
+}

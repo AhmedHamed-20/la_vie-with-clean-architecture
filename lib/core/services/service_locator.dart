@@ -1,5 +1,9 @@
 import 'package:get_it/get_it.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/post_new_forums.dart';
+import 'package:la_vie_with_clean_architecture/features/products/data/datasource/local_product_datasource.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/delete_product_from_database.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_all_products_from_database.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/insert_product_into_database.dart';
+import '../../features/forums/domain/usecases/post_new_forums.dart';
 import '../../features/auth/data/datasources/auth_remote_datasource.dart';
 import '../../features/auth/data/repositories/repositories_impl.dart';
 import '../../features/auth/domain/repositories/auth_repositories.dart';
@@ -19,7 +23,7 @@ import '../../features/forums/domain/usecases/get_all_forums.dart';
 import '../../features/forums/domain/usecases/get_forums_me.dart';
 import '../../features/forums/presentation/bloc/forums_bloc.dart';
 import '../../features/products/data/datasource/get_all_products_remote_datasource.dart';
-import '../../features/products/data/repositories/get_all_products_repositories_impl.dart';
+import '../../features/products/data/repositories/products_repositories_impl.dart';
 import '../../features/products/domain/repositories/products_repositories.dart';
 import '../../features/products/domain/usecases/get_all_products_usecase.dart';
 import '../../features/products/presentation/bloc/all_products_bloc.dart';
@@ -31,8 +35,11 @@ class ServiceLocator {
     //Bloc
     servicelocator.registerFactory<AuthBloc>(
         () => AuthBloc(servicelocator(), servicelocator(), servicelocator()));
-    servicelocator.registerFactory<AllProductsBloc>(
-        () => AllProductsBloc(servicelocator()));
+    servicelocator.registerFactory<AllProductsBloc>(() => AllProductsBloc(
+        servicelocator(),
+        servicelocator(),
+        servicelocator(),
+        servicelocator()));
     servicelocator
         .registerFactory<BlogsBloc>(() => BlogsBloc(servicelocator()));
     servicelocator.registerFactory<ForumsBloc>(
@@ -52,11 +59,17 @@ class ServiceLocator {
         .registerLazySingleton(() => ForumsMeUsecase(servicelocator()));
     servicelocator
         .registerLazySingleton(() => ForumsPostUscase(servicelocator()));
+    servicelocator.registerLazySingleton(
+        () => ProductDeletionFromDatabaseByIdUsecase(servicelocator()));
+    servicelocator.registerLazySingleton(
+        () => ProductsInsertionIntoDatabaseUsecase(servicelocator()));
+    servicelocator.registerLazySingleton(
+        () => PeroductsFromDatabaseUsecase(servicelocator()));
     //Repositories
     servicelocator.registerLazySingleton<AuthRepositories>(
         () => AuthRepositoriesImpl(servicelocator()));
     servicelocator.registerLazySingleton<AllProductsRepositories>(
-        () => AllProductsRepositoriesImpl(servicelocator()));
+        () => AllProductsRepositoriesImpl(servicelocator(), servicelocator()));
     servicelocator.registerLazySingleton<BlogRepositories>(
         () => BlogsRepositoriesImpl(servicelocator()));
     servicelocator.registerLazySingleton<ForumsRepositories>(
@@ -70,5 +83,7 @@ class ServiceLocator {
         () => BlogsRemoteDataSourceImpl());
     servicelocator.registerLazySingleton<BaseForumsRemoteDatesource>(
         () => AllForumsRemoteDatasource());
+    servicelocator.registerLazySingleton<BaseAllProductsLocalDataSource>(
+        () => AllProductLocalDataSourceImpl());
   }
 }

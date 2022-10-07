@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'notifications_entitie.dart';
 
 class UserDataEntitie extends Equatable {

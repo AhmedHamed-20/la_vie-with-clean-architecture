@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'core/constants/constants.dart';
 import 'core/network/dio.dart';
 import 'core/routes/app_router.dart';
-import 'core/theme/app_theme.dart';
-
 import 'core/services/service_locator.dart';
+import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/bloc/bloc/auth_bloc_bloc.dart';
 import 'features/products/presentation/bloc/all_products_bloc.dart';
 

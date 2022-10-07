@@ -1,6 +1,5 @@
 import '../../../../core/constants/constants.dart';
 import '../../../../core/network/endpoints.dart';
-import '../../domain/entities/forums_entitie.dart';
 import '../../domain/entities/forums_likes_entitie.dart';
 import '../../domain/entities/forums_me_entitie.dart';
 import 'forums_comments_model.dart';

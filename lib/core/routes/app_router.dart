@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/blogs/presentation/screens/blogs_details.dart';
 import '../../features/blogs/presentation/screens/blogs_screen.dart';
-
 import '../../features/forums/presentation/screens/forums_screen.dart';
 import '../../features/forums/presentation/screens/post_forum.dart';
 import '../constants/constants.dart';
