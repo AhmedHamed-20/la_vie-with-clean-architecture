@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/screens/user_data_info_screen.dart';
 
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/blogs/presentation/screens/blogs_details.dart';
@@ -26,6 +26,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const ForumsScreen());
       case AppRoutesNames.postForumScreen:
         return MaterialPageRoute(builder: (_) => const PostForumScreen());
+      case AppRoutesNames.userProfileScreen:
+        return MaterialPageRoute(builder: (_) => const UserProfileScreen());
+
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(

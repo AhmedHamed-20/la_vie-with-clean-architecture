@@ -25,7 +25,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => servicelocator<AuthBloc>(),
+          create: (context) => servicelocator<AuthBloc>()
+            ..add(const GetUserDataEvent(
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjUyNjE2NjAsImV4cCI6MTY2NTQzNDQ2MH0.tddFPf9aPxYvMH9IKC3lySkJav1nUwmKLGSc3t1bg2s')),
         ),
         BlocProvider(
           create: (context) => servicelocator<AllProductsBloc>(),
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: lightMode,
         onGenerateRoute: appRouter.generateRoutes,
-        initialRoute: AppRoutesNames.postForumScreen,
+        initialRoute: AppRoutesNames.userProfileScreen,
       ),
     );
   }
