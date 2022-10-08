@@ -46,3 +46,10 @@ enum CartRequestState {
   deletedSuccessfully,
   error,
 }
+
+enum UpdateUserDataRequestState {
+  idle,
+  loading,
+  updatedSuccessfully,
+  error,
+}
