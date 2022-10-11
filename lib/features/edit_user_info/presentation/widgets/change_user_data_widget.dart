@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/media_query_of_methods.dart';
+import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../auth/presentation/bloc/auth_bloc.dart';
@@ -51,7 +52,7 @@ class ChangeUserDataWidget extends StatelessWidget {
                     const SizedBox(
                       width: AppWidth.w8,
                     ),
-                    BlocBuilder<AuthBloc, AuthBlocState>(
+                    BlocBuilder<AllProductsBloc, AllProductsState>(
                       builder: (context, state) {
                         return Text(
                           '${state.userDataEntitie!.userPoints} points',

@@ -8,6 +8,7 @@ import 'package:la_vie_with_clean_architecture/features/edit_user_info/domain/us
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/bloc/user_info_bloc.dart';
 import 'package:la_vie_with_clean_architecture/features/products/data/datasource/local_product_datasource.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/delete_product_from_database.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_access_token_from_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_all_products_from_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/insert_product_into_database.dart';
 import '../../features/forums/domain/usecases/post_new_forums.dart';
@@ -40,9 +41,14 @@ final servicelocator = GetIt.instance;
 class ServiceLocator {
   void init() {
     //Bloc
-    servicelocator.registerFactory<AuthBloc>(() => AuthBloc(servicelocator(),
-        servicelocator(), servicelocator(), servicelocator()));
+    servicelocator.registerFactory<AuthBloc>(() => AuthBloc(
+          servicelocator(),
+          servicelocator(),
+          servicelocator(),
+        ));
     servicelocator.registerFactory<AllProductsBloc>(() => AllProductsBloc(
+        servicelocator(),
+        servicelocator(),
         servicelocator(),
         servicelocator(),
         servicelocator(),
@@ -79,6 +85,8 @@ class ServiceLocator {
         .registerLazySingleton(() => UpdateUserDataUsecase(servicelocator()));
     servicelocator
         .registerLazySingleton(() => AccessTokenCacheUsecase(servicelocator()));
+    servicelocator.registerLazySingleton(
+        () => AccessTokenFromCacheUsecase(servicelocator()));
     //Repositories
     servicelocator.registerLazySingleton<AuthRepositories>(
         () => AuthRepositoriesImpl(servicelocator(), servicelocator()));

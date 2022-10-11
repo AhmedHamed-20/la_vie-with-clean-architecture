@@ -97,17 +97,10 @@ class LoginScreen extends StatelessWidget {
                                   child: CircularProgressIndicator(),
                                 );
                               case RequestState.loginloaded:
-                                context.read<AuthBloc>().add(GetUserDataEvent(
-                                    state.authDataEntitie!.accessToken));
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
-                              case RequestState.userdataloading:
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              case RequestState.userdataloaded:
-                                return const Text('done');
+
                               case RequestState.error:
                                 print(state.authMessage);
                                 return const Center(
@@ -115,7 +108,8 @@ class LoginScreen extends StatelessWidget {
                                 );
                               case RequestState.cachedSuccess:
                                 // TODO: Handle this case.
-                                break;
+
+                                return Text('data');
                             }
                           },
                         ),

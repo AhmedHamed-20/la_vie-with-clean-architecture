@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../auth/presentation/bloc/auth_bloc.dart';
+import '../../../products/presentation/bloc/all_products_bloc.dart';
 
 class UpPhotoWidget extends StatelessWidget {
   const UpPhotoWidget({
@@ -14,7 +15,7 @@ class UpPhotoWidget extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
-          BlocBuilder<AuthBloc, AuthBlocState>(
+          BlocBuilder<AllProductsBloc, AllProductsState>(
             builder: (context, state) {
               return SizedBox(
                 height: double.infinity,
@@ -51,7 +52,7 @@ class UpPhotoWidget extends StatelessWidget {
           ),
           Align(
             alignment: AlignmentDirectional.center,
-            child: BlocBuilder<AuthBloc, AuthBlocState>(
+            child: BlocBuilder<AllProductsBloc, AllProductsState>(
               builder: (context, state) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,

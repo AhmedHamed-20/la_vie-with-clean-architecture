@@ -15,8 +15,7 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
-  AuthBloc(this.loginUsecase, this.signupUscase, this.userDataUsecase,
-      this.accessTokenCacheUsecase)
+  AuthBloc(this.loginUsecase, this.signupUscase, this.accessTokenCacheUsecase)
       : super(const AuthBlocState()) {
     on<LoginEvent>(_login);
     on<SignupEvent>(_signUp);
@@ -26,7 +25,6 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
 
   LoginUsecase loginUsecase;
   SignupUscase signupUscase;
-  UserDataUsecase userDataUsecase;
   AccessTokenCacheUsecase accessTokenCacheUsecase;
   FutureOr<void> _login(LoginEvent event, Emitter<AuthBlocState> emit) async {
     final result = await loginUsecase(
