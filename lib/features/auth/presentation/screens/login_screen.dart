@@ -71,7 +71,13 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: AppHeight.h10,
                         ),
-                        BlocBuilder<AuthBloc, AuthBlocState>(
+                        BlocConsumer<AuthBloc, AuthBlocState>(
+                          listener: (context, state) {
+                            if (state.accessTokenCached) {
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutesNames.homeScreen);
+                            }
+                          },
                           builder: (context, state) {
                             switch (state.authState) {
                               case RequestState.idle:
@@ -97,6 +103,11 @@ class LoginScreen extends StatelessWidget {
                                   child: CircularProgressIndicator(),
                                 );
                               case RequestState.loginloaded:
+                                context.read<AuthBloc>().add(
+                                      AccessTokenCacheEvent(
+                                        state.authDataEntitie!.accessToken,
+                                      ),
+                                    );
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
@@ -107,9 +118,10 @@ class LoginScreen extends StatelessWidget {
                                   child: Text('data'),
                                 );
                               case RequestState.cachedSuccess:
-                                // TODO: Handle this case.
+                                // accessToken =
+                                //     state.authDataEntitie!.accessToken;
 
-                                return Text('data');
+                                return const SizedBox.shrink();
                             }
                           },
                         ),

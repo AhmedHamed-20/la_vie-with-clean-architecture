@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:la_vie_with_clean_architecture/core/cache/cache_helper.dart';
 
 import 'core/constants/constants.dart';
 import 'core/network/dio.dart';
@@ -9,9 +10,11 @@ import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/products/presentation/bloc/all_products_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator().init();
-  DioHelper.init();
+  await DioHelper.init();
+  await CacheHelper.init();
   runApp(MyApp(
     appRouter: AppRouter(),
   ));
@@ -34,7 +37,9 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: lightMode,
         onGenerateRoute: appRouter.generateRoutes,
-        initialRoute: AppRoutesNames.userProfileScreen,
+        initialRoute: accessToken == ''
+            ? AppRoutesNames.loginScreen
+            : AppRoutesNames.homeScreen,
       ),
     );
   }

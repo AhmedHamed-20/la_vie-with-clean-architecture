@@ -193,13 +193,16 @@ double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
 class AppRoutesNames {
-  static const String homeScreen = '/';
+  static const String loginScreen = '/';
+  static const String homeScreen = '/home_screen';
   static const String blogsScreen = '/blogs_screen';
   static const String blogsScreenDetails = '/blogs_screen/details';
   static const String forumsScreen = '/forums_screen';
   static const String postForumScreen = '/forums_screen/post_forum';
   static const String userProfileScreen = '/user_profile_screen';
 }
+
+String accessToken = '';
 
 const String defaultImage =
     'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';

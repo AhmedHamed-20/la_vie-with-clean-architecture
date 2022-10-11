@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/entities/products_database_entitie.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/entities/user_data.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/delete_product_from_database.dart';
@@ -148,15 +149,17 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
         AccessTokenFromCacheParams(event.key));
 
     result.fold(
-      (l) => emit(state.copyWith(
-          requestState: AllProductsRequestState.error,
-          allProductsMessage: l.message)),
-      (r) => emit(
+        (l) => emit(state.copyWith(
+            requestState: AllProductsRequestState.error,
+            allProductsMessage: l.message)), (r) {
+      accessToken = r;
+      print(accessToken);
+      return emit(
         state.copyWith(
           accessToken: r,
           requestState: AllProductsRequestState.accessTokenGetSuccess,
         ),
-      ),
-    );
+      );
+    });
   }
 }
