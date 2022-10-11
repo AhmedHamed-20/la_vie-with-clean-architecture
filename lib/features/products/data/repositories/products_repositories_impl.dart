@@ -1,3 +1,7 @@
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_access_token_from_cache.dart';
+
+import '../../domain/entities/user_data.dart';
+import '../../domain/usecases/get_userdata_usecase.dart';
 import '../datasource/local_product_datasource.dart';
 import '../../domain/usecases/delete_product_from_database.dart';
 import '../../domain/usecases/get_all_products_from_database.dart';
@@ -73,6 +77,29 @@ class AllProductsRepositoriesImpl extends AllProductsRepositories {
           failure.dataBaseErrorMessageModel.errorMessage,
         ),
       );
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserDataEntitie>> getUserData(
+      UserDataParams params) async {
+    try {
+      final result = await baseAllProductsRemoteDataSource.getUserData(params);
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> getAccessTokenFromCache(
+      AccessTokenFromCacheParams params) async {
+    try {
+      final result =
+          await baseAllProductsLocalDataSource.getAccessTokenFromCache(params);
+      return Right(result);
+    } on CacheException catch (failure) {
+      return Left(CacheFailure(failure.localErrorsMessageModel.errorMessage));
     }
   }
 }

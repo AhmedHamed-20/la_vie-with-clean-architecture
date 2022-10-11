@@ -2,28 +2,32 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
 
-import '../../../../../core/utl/utls.dart';
-import '../../../domain/entities/auth_entitie.dart';
-import '../../../domain/entities/user_data.dart';
-import '../../../domain/usecases/get_userdata_usecase.dart';
-import '../../../domain/usecases/login_usecase.dart';
-import '../../../domain/usecases/signUp_usecase.dart';
+import '../../../../core/utl/utls.dart';
+import '../../domain/entities/auth_entitie.dart';
+import '../../../products/domain/entities/user_data.dart';
+import '../../../products/domain/usecases/get_userdata_usecase.dart';
+import '../../domain/usecases/login_usecase.dart';
+import '../../domain/usecases/signUp_usecase.dart';
 
-part 'auth_bloc_event.dart';
-part 'auth_bloc_state.dart';
+part 'auth_event.dart';
+part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
-  AuthBloc(this.loginUsecase, this.signupUscase, this.userDataUsecase)
+  AuthBloc(this.loginUsecase, this.signupUscase, this.userDataUsecase,
+      this.accessTokenCacheUsecase)
       : super(const AuthBlocState()) {
     on<LoginEvent>(_login);
     on<SignupEvent>(_signUp);
-    on<GetUserDataEvent>(_getUserData);
+
+    on<AccessTokenCacheEvent>(_cacheAccessToken);
   }
 
   LoginUsecase loginUsecase;
   SignupUscase signupUscase;
   UserDataUsecase userDataUsecase;
+  AccessTokenCacheUsecase accessTokenCacheUsecase;
   FutureOr<void> _login(LoginEvent event, Emitter<AuthBlocState> emit) async {
     final result = await loginUsecase(
         LoginParams(email: event.email, password: event.password));
@@ -62,16 +66,20 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     );
   }
 
-  FutureOr<void> _getUserData(
-      GetUserDataEvent event, Emitter<AuthBlocState> emit) async {
-    final result = await userDataUsecase(
-      UserDataParams(accessToken: event.accessToken),
-    );
-    emit(state.copyWith(authState: RequestState.userdataloading));
+  FutureOr<void> _cacheAccessToken(
+      AccessTokenCacheEvent event, Emitter<AuthBlocState> emit) async {
+    final result = await accessTokenCacheUsecase(
+        AccessTokenCacheParams(accessToken: event.accessToken));
+
     result.fold(
-        (l) => emit(state.copyWith(
-            authState: RequestState.error, authMessage: l.message)),
-        (r) => emit(state.copyWith(
-            userDataEntitie: r, authState: RequestState.userdataloaded)));
+      (l) => emit(state.copyWith(
+          authMessage: l.message, authState: RequestState.error)),
+      (r) => emit(
+        state.copyWith(
+          accessTokenCached: r,
+          authState: RequestState.cachedSuccess,
+        ),
+      ),
+    );
   }
 }

@@ -1,4 +1,4 @@
-part of 'auth_bloc_bloc.dart';
+part of 'auth_bloc.dart';
 
 abstract class AuthBlocEvent extends Equatable {
   const AuthBlocEvent();
@@ -28,10 +28,11 @@ class SignupEvent extends AuthBlocEvent {
   List<Object?> get props => [email, password, firstName, lastName];
 }
 
-class GetUserDataEvent extends AuthBlocEvent {
+class AccessTokenCacheEvent extends AuthBlocEvent {
   final String accessToken;
 
-  const GetUserDataEvent(this.accessToken);
+  const AccessTokenCacheEvent(this.accessToken);
+
   @override
   List<Object?> get props => [accessToken];
 }

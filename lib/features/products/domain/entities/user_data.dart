@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'notifications_entitie.dart';
+import '../../../auth/domain/entities/notifications_entitie.dart';
 
 class UserDataEntitie extends Equatable {
   final String userId;

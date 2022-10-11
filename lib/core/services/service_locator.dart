@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:la_vie_with_clean_architecture/features/auth/data/datasources/auth_local_datasource.dart';
+import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/data/datasources/updated_user_remote_datasource.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/data/repositories/updated_user_data_repository.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/domain/repositories/updated_user_data_repository.dart';
@@ -12,10 +14,10 @@ import '../../features/forums/domain/usecases/post_new_forums.dart';
 import '../../features/auth/data/datasources/auth_remote_datasource.dart';
 import '../../features/auth/data/repositories/repositories_impl.dart';
 import '../../features/auth/domain/repositories/auth_repositories.dart';
-import '../../features/auth/domain/usecases/get_userdata_usecase.dart';
+import '../../features/products/domain/usecases/get_userdata_usecase.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/usecases/signUp_usecase.dart';
-import '../../features/auth/presentation/bloc/bloc/auth_bloc_bloc.dart';
+import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/blogs/data/datasource/blogs_remote_datasource.dart';
 import '../../features/blogs/data/repositories/blogs_repositories.dart';
 import '../../features/blogs/domain/repositories/blogs_repositories.dart';
@@ -38,8 +40,8 @@ final servicelocator = GetIt.instance;
 class ServiceLocator {
   void init() {
     //Bloc
-    servicelocator.registerFactory<AuthBloc>(
-        () => AuthBloc(servicelocator(), servicelocator(), servicelocator()));
+    servicelocator.registerFactory<AuthBloc>(() => AuthBloc(servicelocator(),
+        servicelocator(), servicelocator(), servicelocator()));
     servicelocator.registerFactory<AllProductsBloc>(() => AllProductsBloc(
         servicelocator(),
         servicelocator(),
@@ -75,10 +77,11 @@ class ServiceLocator {
         () => PeroductsFromDatabaseUsecase(servicelocator()));
     servicelocator
         .registerLazySingleton(() => UpdateUserDataUsecase(servicelocator()));
-
+    servicelocator
+        .registerLazySingleton(() => AccessTokenCacheUsecase(servicelocator()));
     //Repositories
     servicelocator.registerLazySingleton<AuthRepositories>(
-        () => AuthRepositoriesImpl(servicelocator()));
+        () => AuthRepositoriesImpl(servicelocator(), servicelocator()));
     servicelocator.registerLazySingleton<AllProductsRepositories>(
         () => AllProductsRepositoriesImpl(servicelocator(), servicelocator()));
     servicelocator.registerLazySingleton<BlogRepositories>(
@@ -90,6 +93,8 @@ class ServiceLocator {
     //DataSource
     servicelocator.registerLazySingleton<BaseAuthRemoteDataSource>(
         () => RemoteAuthDataSourceImpl());
+    servicelocator.registerLazySingleton<BaseAuthLocalDataSource>(
+        () => AuthLocalDataSourceImpl());
     servicelocator.registerLazySingleton<BaseAllProductsRemoteDataSource>(
         () => AllProductRemoteDataSourceImpl());
     servicelocator.registerLazySingleton<BaseBlogsRemoteDataSource>(
@@ -98,7 +103,6 @@ class ServiceLocator {
         () => AllForumsRemoteDatasource());
     servicelocator.registerLazySingleton<BaseAllProductsLocalDataSource>(
         () => AllProductLocalDataSourceImpl());
-
     servicelocator.registerLazySingleton<BaseUpdatedUserRemoteDatasource>(
         () => UpdatedUserDataRemoteDataSourceImpl());
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constants/constants.dart';
-import '../../../auth/presentation/bloc/bloc/auth_bloc_bloc.dart';
+import '../../../auth/presentation/bloc/auth_bloc.dart';
 
 class UpPhotoWidget extends StatelessWidget {
   const UpPhotoWidget({

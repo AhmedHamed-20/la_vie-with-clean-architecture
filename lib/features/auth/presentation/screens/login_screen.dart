@@ -5,7 +5,7 @@ import '../../../../core/components/defaults.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
 import '../../../../core/utl/utls.dart';
-import '../bloc/bloc/auth_bloc_bloc.dart';
+import '../../../auth/presentation/bloc/auth_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -113,6 +113,9 @@ class LoginScreen extends StatelessWidget {
                                 return const Center(
                                   child: Text('data'),
                                 );
+                              case RequestState.cachedSuccess:
+                                // TODO: Handle this case.
+                                break;
                             }
                           },
                         ),

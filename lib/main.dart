@@ -6,7 +6,7 @@ import 'core/network/dio.dart';
 import 'core/routes/app_router.dart';
 import 'core/services/service_locator.dart';
 import 'core/theme/app_theme.dart';
-import 'features/auth/presentation/bloc/bloc/auth_bloc_bloc.dart';
+import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/products/presentation/bloc/all_products_bloc.dart';
 
 void main() {
@@ -24,13 +24,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => servicelocator<AuthBloc>()),
         BlocProvider(
-          create: (context) => servicelocator<AuthBloc>()
-            ..add(const GetUserDataEvent(
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjUyNjE2NjAsImV4cCI6MTY2NTQzNDQ2MH0.tddFPf9aPxYvMH9IKC3lySkJav1nUwmKLGSc3t1bg2s')),
-        ),
-        BlocProvider(
-          create: (context) => servicelocator<AllProductsBloc>(),
+          create: (context) => servicelocator<AllProductsBloc>()
+            ..add(const GetAccessTokenFromCacheEvent('accessToken')),
         )
       ],
       child: MaterialApp(

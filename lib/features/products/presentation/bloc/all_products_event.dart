@@ -60,3 +60,20 @@ class ProductDeletionFromDatabaseByIdEvent extends BaseAllProductsEvent {
   @override
   List<Object?> get props => [tableName, databaseId];
 }
+
+class GetUserDataEvent extends BaseAllProductsEvent {
+  final String accessToken;
+
+  const GetUserDataEvent(this.accessToken);
+  @override
+  List<Object?> get props => [accessToken];
+}
+
+class GetAccessTokenFromCacheEvent extends BaseAllProductsEvent {
+  final String key;
+
+  const GetAccessTokenFromCacheEvent(this.key);
+
+  @override
+  List<Object?> get props => [key];
+}

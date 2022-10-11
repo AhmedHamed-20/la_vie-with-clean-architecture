@@ -1,6 +1,7 @@
 part of 'all_products_bloc.dart';
 
 class AllProductsState extends Equatable {
+  final UserDataEntitie? userDataEntitie;
   final CartRequestState cartRequestState;
   final List<AllProductsEntitie> allProductsEntitie;
   final List<ProductsDatabaseEntitie> productsDatabaseEntitie;
@@ -8,7 +9,10 @@ class AllProductsState extends Equatable {
   final AllProductsRequestState requestState;
   final String allProductsMessage;
   final BLogsEntitie? bLogsEntitie;
+  final String accessToken;
   const AllProductsState({
+    this.accessToken = '',
+    this.userDataEntitie,
     this.cartRequestState = CartRequestState.loading,
     this.productsDatabaseEntitie = const [],
     this.deleteProductNumber = -1,
@@ -19,6 +23,8 @@ class AllProductsState extends Equatable {
   });
 
   AllProductsState copyWith({
+    String? accessToken,
+    UserDataEntitie? userDataEntitie,
     CartRequestState? cartRequestState,
     List<AllProductsEntitie>? allProductsEntitie,
     List<ProductsDatabaseEntitie>? productsDatabaseEntitie,
@@ -28,6 +34,8 @@ class AllProductsState extends Equatable {
     BLogsEntitie? bLogsEntitie,
   }) {
     return AllProductsState(
+      accessToken: accessToken ?? this.accessToken,
+      userDataEntitie: userDataEntitie ?? this.userDataEntitie,
       cartRequestState: cartRequestState ?? this.cartRequestState,
       deleteProductNumber: deleteProductNumber ?? this.deleteProductNumber,
       productsDatabaseEntitie:
@@ -41,11 +49,13 @@ class AllProductsState extends Equatable {
 
   @override
   List<Object?> get props => [
+        userDataEntitie,
         allProductsMessage,
         allProductsEntitie,
         requestState,
         bLogsEntitie,
         productsDatabaseEntitie,
         deleteProductNumber,
+        accessToken,
       ];
 }

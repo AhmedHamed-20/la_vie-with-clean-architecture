@@ -1,4 +1,8 @@
+import 'package:la_vie_with_clean_architecture/core/cache/cache_helper.dart';
+import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
+
 import '../../../../core/database/database_setup.dart';
+import '../../domain/usecases/get_access_token_from_cache.dart';
 import '../models/products_database_model.dart';
 import '../../domain/usecases/get_all_products_from_database.dart';
 import '../../domain/usecases/insert_product_into_database.dart';
@@ -14,6 +18,7 @@ abstract class BaseAllProductsLocalDataSource {
       ProductsFromDatabaseParams params);
   Future<int> deleteProductFromDatabaseById(
       ProductDeletionFromDatabaseParams params);
+  Future<dynamic> getAccessTokenFromCache(AccessTokenFromCacheParams params);
 }
 
 class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
@@ -40,7 +45,7 @@ class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
               '''INSERT INTO products(productId,name,description,imageUrl,price) VALUES(?, ?, ?, ?, ?)''');
     } on DatabaseException catch (exceptions) {
       throw AppDataBaseException(
-          DataBaseErrorMessageModel.fromException(exceptions.result));
+          LocalErrorsMessageModel.fromException(exceptions.result));
     }
   }
 
@@ -54,7 +59,7 @@ class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
       return List.from(result.map((e) => ProductsDatabaseModel.fromMap(e)));
     } on DatabaseException catch (exceptions) {
       throw AppDataBaseException(
-          DataBaseErrorMessageModel.fromException(exceptions.result));
+          LocalErrorsMessageModel.fromException(exceptions.result));
     }
   }
 
@@ -67,7 +72,17 @@ class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
       return result;
     } on DatabaseException catch (exceptions) {
       throw AppDataBaseException(
-          DataBaseErrorMessageModel.fromException(exceptions.result));
+          LocalErrorsMessageModel.fromException(exceptions.result));
+    }
+  }
+
+  @override
+  Future getAccessTokenFromCache(AccessTokenFromCacheParams params) async {
+    try {
+      final result = await CacheHelper.getData(key: params.key);
+      return result;
+    } on Exception catch (e) {
+      throw CacheException(LocalErrorsMessageModel(errorMessage: e.toString()));
     }
   }
 }

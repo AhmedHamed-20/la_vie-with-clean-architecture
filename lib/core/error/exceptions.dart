@@ -6,10 +6,14 @@ class ServerException implements Exception {
   const ServerException({required this.errorMessageModel});
 }
 
-class CacheException implements Exception {}
+class CacheException implements Exception {
+  final LocalErrorsMessageModel localErrorsMessageModel;
+
+  CacheException(this.localErrorsMessageModel);
+}
 
 class AppDataBaseException implements Exception {
-  final DataBaseErrorMessageModel dataBaseErrorMessageModel;
+  final LocalErrorsMessageModel dataBaseErrorMessageModel;
 
   const AppDataBaseException(this.dataBaseErrorMessageModel);
 }

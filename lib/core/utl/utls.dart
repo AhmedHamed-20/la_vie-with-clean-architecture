@@ -2,13 +2,14 @@ enum RequestState {
   idle,
   loading,
   loginloaded,
-  userdataloading,
-  userdataloaded,
+  cachedSuccess,
   error,
 }
 
 enum AllProductsRequestState {
   idle,
+  accessTokenGetSuccess,
+  userDataGetSuccess,
   loading,
   loaded,
   error,
@@ -51,5 +52,11 @@ enum UpdateUserDataRequestState {
   idle,
   loading,
   updatedSuccessfully,
+  error,
+}
+
+enum UserDataRequestState {
+  loading,
+  loaded,
   error,
 }

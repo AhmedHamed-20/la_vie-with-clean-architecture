@@ -1,18 +1,21 @@
 import 'package:dartz/dartz.dart';
-
+import 'package:la_vie_with_clean_architecture/features/auth/data/datasources/auth_local_datasource.dart';
+import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/auth_entitie.dart';
-import '../../domain/entities/user_data.dart';
+import '../../../products/domain/entities/user_data.dart';
 import '../../domain/repositories/auth_repositories.dart';
-import '../../domain/usecases/get_userdata_usecase.dart';
+import '../../../products/domain/usecases/get_userdata_usecase.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/signUp_usecase.dart';
 import '../datasources/auth_remote_datasource.dart';
 
 class AuthRepositoriesImpl extends AuthRepositories {
   BaseAuthRemoteDataSource baseAuthRemoteDataSource;
-  AuthRepositoriesImpl(this.baseAuthRemoteDataSource);
+  BaseAuthLocalDataSource baseAuthLocalDataSource;
+  AuthRepositoriesImpl(
+      this.baseAuthRemoteDataSource, this.baseAuthLocalDataSource);
   @override
   Future<Either<Failure, AuthDataEntitie>> login(LoginParams params) async {
     try {
@@ -38,13 +41,13 @@ class AuthRepositoriesImpl extends AuthRepositories {
   }
 
   @override
-  Future<Either<Failure, UserDataEntitie>> getUserData(
-      UserDataParams params) async {
+  Future<Either<Failure, bool>> cacheAccessToken(
+      AccessTokenCacheParams params) async {
     try {
-      final result = await baseAuthRemoteDataSource.getUserData(params);
+      final result = await baseAuthLocalDataSource.cacheAccessToken(params);
       return Right(result);
-    } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.message));
+    } on CacheException catch (failure) {
+      return Left(CacheFailure(failure.localErrorsMessageModel.errorMessage));
     }
   }
 }

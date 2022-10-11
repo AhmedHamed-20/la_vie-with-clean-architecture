@@ -13,13 +13,13 @@ class ErrorMessageModel extends Equatable {
   List<Object?> get props => [message, type];
 }
 
-class DataBaseErrorMessageModel extends Equatable {
+class LocalErrorsMessageModel extends Equatable {
   final String errorMessage;
 
-  const DataBaseErrorMessageModel({required this.errorMessage});
+  const LocalErrorsMessageModel({required this.errorMessage});
 
-  factory DataBaseErrorMessageModel.fromException(Object? error) {
-    return DataBaseErrorMessageModel(errorMessage: error.toString());
+  factory LocalErrorsMessageModel.fromException(Object? error) {
+    return LocalErrorsMessageModel(errorMessage: error.toString());
   }
   @override
   List<Object?> get props => [errorMessage];

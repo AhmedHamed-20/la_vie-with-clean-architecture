@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/media_query_of_methods.dart';
 
 import '../../../../core/constants/constants.dart';
-import '../../../auth/presentation/bloc/bloc/auth_bloc_bloc.dart';
+import '../../../auth/presentation/bloc/auth_bloc.dart';
 
 class ChangeUserDataWidget extends StatelessWidget {
   const ChangeUserDataWidget({
