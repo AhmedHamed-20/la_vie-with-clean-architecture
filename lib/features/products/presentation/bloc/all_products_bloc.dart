@@ -34,6 +34,7 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     on<GetUserDataEvent>(_getUserData);
     on<AllProductsFromDatabaseEvent>(_getAllProductsFromDatabase);
     on<GetAccessTokenFromCacheEvent>(_getAccessTokenFromCache);
+    on<CurrentActiveTabIndexEvent>(_changeCurrentActiveTabIndex);
   }
   AllProductsUseCase allProductsUseCase;
   PeroductsFromDatabaseUsecase peroductsFromDatabaseUsecase;
@@ -153,7 +154,6 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
             requestState: AllProductsRequestState.error,
             allProductsMessage: l.message)), (r) {
       accessToken = r;
-      print(accessToken);
       return emit(
         state.copyWith(
           accessToken: r,
@@ -161,5 +161,77 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
         ),
       );
     });
+  }
+
+  FutureOr<void> _changeCurrentActiveTabIndex(
+      CurrentActiveTabIndexEvent event, Emitter<AllProductsState> emit) {
+    List currentEntitiesList = [];
+
+    switch (event.currentActiveTabIndex) {
+      case 0:
+        for (var element in state.allProductsEntitie) {
+          if (element.plantEntitie != null) {
+            currentEntitiesList
+                .add({'price': element.price, 'entitie': element.plantEntitie});
+          } else if (element.seedEntitie != null) {
+            currentEntitiesList
+                .add({'price': element.price, 'entitie': element.seedEntitie});
+          } else {
+            currentEntitiesList
+                .add({'price': element.price, 'entitie': element.toolEntitie});
+          }
+        }
+        emit(
+          state.copyWith(
+            activeEntitie: currentEntitiesList,
+            currentActiveTabIndex: 0,
+          ),
+        );
+        break;
+      case 1:
+        for (var element in state.allProductsEntitie) {
+          if (element.plantEntitie != null) {
+            currentEntitiesList
+                .add({'price': element.price, 'entitie': element.plantEntitie});
+          }
+        }
+        emit(
+          state.copyWith(
+            activeEntitie: currentEntitiesList,
+            currentActiveTabIndex: 1,
+          ),
+        );
+
+        break;
+      case 2:
+        for (var element in state.allProductsEntitie) {
+          if (element.seedEntitie != null) {
+            currentEntitiesList
+                .add({'price': element.price, 'entitie': element.seedEntitie});
+          }
+        }
+        emit(
+          state.copyWith(
+            activeEntitie: currentEntitiesList,
+            currentActiveTabIndex: 2,
+          ),
+        );
+
+        break;
+      case 3:
+        for (var element in state.allProductsEntitie) {
+          if (element.toolEntitie != null) {
+            currentEntitiesList
+                .add({'price': element.price, 'entitie': element.toolEntitie});
+          }
+        }
+        emit(
+          state.copyWith(
+            activeEntitie: currentEntitiesList,
+            currentActiveTabIndex: 3,
+          ),
+        );
+        break;
+    }
   }
 }

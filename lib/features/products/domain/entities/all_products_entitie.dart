@@ -6,9 +6,9 @@ import 'tool_entitie.dart';
 
 class AllProductsEntitie extends Equatable {
   final int price;
-  final PlantEntitie plantEntitie;
-  final ToolEntitie toolEntitie;
-  final SeedEntitie seedEntitie;
+  final PlantEntitie? plantEntitie;
+  final ToolEntitie? toolEntitie;
+  final SeedEntitie? seedEntitie;
 
   const AllProductsEntitie(
       {required this.price,

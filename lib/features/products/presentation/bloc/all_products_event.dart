@@ -77,3 +77,12 @@ class GetAccessTokenFromCacheEvent extends BaseAllProductsEvent {
   @override
   List<Object?> get props => [key];
 }
+
+class CurrentActiveTabIndexEvent extends BaseAllProductsEvent {
+  final int currentActiveTabIndex;
+
+  const CurrentActiveTabIndexEvent({required this.currentActiveTabIndex});
+
+  @override
+  List<Object?> get props => [currentActiveTabIndex];
+}

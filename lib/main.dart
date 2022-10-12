@@ -15,13 +15,18 @@ void main() async {
   ServiceLocator().init();
   await DioHelper.init();
   await CacheHelper.init();
+  final String accessToken =
+      await CacheHelper.getData(key: 'accessToken') ?? '';
   runApp(MyApp(
+    accessToken: accessToken,
     appRouter: AppRouter(),
   ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.appRouter}) : super(key: key);
+  const MyApp({Key? key, required this.appRouter, required this.accessToken})
+      : super(key: key);
+  final String accessToken;
   final AppRouter appRouter;
   @override
   Widget build(BuildContext context) {

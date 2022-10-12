@@ -4,13 +4,16 @@ class AllProductsState extends Equatable {
   final UserDataEntitie? userDataEntitie;
   final CartRequestState cartRequestState;
   final List<AllProductsEntitie> allProductsEntitie;
+  final List activeEntitie;
+  final int currentActiveTabIndex;
   final List<ProductsDatabaseEntitie> productsDatabaseEntitie;
   final int deleteProductNumber;
   final AllProductsRequestState requestState;
   final String allProductsMessage;
-  final BLogsEntitie? bLogsEntitie;
   final String accessToken;
   const AllProductsState({
+    this.activeEntitie = const [],
+    this.currentActiveTabIndex = 0,
     this.accessToken = '',
     this.userDataEntitie,
     this.cartRequestState = CartRequestState.loading,
@@ -19,10 +22,11 @@ class AllProductsState extends Equatable {
     this.allProductsEntitie = const [],
     this.allProductsMessage = '',
     this.requestState = AllProductsRequestState.idle,
-    this.bLogsEntitie,
   });
 
   AllProductsState copyWith({
+    List? activeEntitie,
+    int? currentActiveTabIndex,
     String? accessToken,
     UserDataEntitie? userDataEntitie,
     CartRequestState? cartRequestState,
@@ -34,6 +38,9 @@ class AllProductsState extends Equatable {
     BLogsEntitie? bLogsEntitie,
   }) {
     return AllProductsState(
+      activeEntitie: activeEntitie ?? this.activeEntitie,
+      currentActiveTabIndex:
+          currentActiveTabIndex ?? this.currentActiveTabIndex,
       accessToken: accessToken ?? this.accessToken,
       userDataEntitie: userDataEntitie ?? this.userDataEntitie,
       cartRequestState: cartRequestState ?? this.cartRequestState,
@@ -43,7 +50,6 @@ class AllProductsState extends Equatable {
       allProductsEntitie: allProductsEntitie ?? this.allProductsEntitie,
       requestState: requestState ?? this.requestState,
       allProductsMessage: allProductsMessage ?? this.allProductsMessage,
-      bLogsEntitie: bLogsEntitie ?? this.bLogsEntitie,
     );
   }
 
@@ -53,9 +59,10 @@ class AllProductsState extends Equatable {
         allProductsMessage,
         allProductsEntitie,
         requestState,
-        bLogsEntitie,
         productsDatabaseEntitie,
         deleteProductNumber,
         accessToken,
+        activeEntitie,
+        currentActiveTabIndex,
       ];
 }

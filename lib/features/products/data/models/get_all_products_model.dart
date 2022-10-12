@@ -13,9 +13,12 @@ class AllProductsModel extends AllProductsEntitie {
   factory AllProductsModel.fromJson(Map<String, dynamic> json) {
     return AllProductsModel(
       price: json['price'],
-      plantEntitie: PlantModel.fromJson(json['plant'] ?? {}),
-      toolEntitie: ToolModel.fromJson(json['tool'] ?? {}),
-      seedEntitie: SeedModel.fromJson(json['seed'] ?? {}),
+      plantEntitie:
+          json['plant'] == null ? null : PlantModel.fromJson(json['plant']),
+      toolEntitie:
+          json['tool'] == null ? null : ToolModel.fromJson(json['tool']),
+      seedEntitie:
+          json['seed'] == null ? null : SeedModel.fromJson(json['seed']),
     );
   }
 }
