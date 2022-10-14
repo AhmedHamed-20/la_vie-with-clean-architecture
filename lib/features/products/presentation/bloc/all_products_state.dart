@@ -14,6 +14,7 @@ class AllProductsState extends Equatable {
   final String accessToken;
   final Map<String, int> amountOfAllProducts;
   final bool cacheCleared;
+  final bool productExist;
   const AllProductsState({
     this.cacheCleared = false,
     this.statusCode,
@@ -28,9 +29,11 @@ class AllProductsState extends Equatable {
     this.allProductsErrorMessage = '',
     this.requestState = AllProductsRequestState.idle,
     this.amountOfAllProducts = const {},
+    this.productExist = false,
   });
 
   AllProductsState copyWith({
+    bool? productExist,
     bool? cacheCleared,
     int? statusCode,
     Map<String, int>? amountOfAllProducts,
@@ -47,6 +50,7 @@ class AllProductsState extends Equatable {
     BLogsEntitie? bLogsEntitie,
   }) {
     return AllProductsState(
+      productExist: productExist ?? this.productExist,
       cacheCleared: cacheCleared ?? this.cacheCleared,
       statusCode: statusCode ?? this.statusCode,
       amountOfAllProducts: amountOfAllProducts ?? this.amountOfAllProducts,
@@ -68,6 +72,7 @@ class AllProductsState extends Equatable {
 
   @override
   List<Object?> get props => [
+        productExist,
         amountOfAllProducts,
         cacheCleared,
         statusCode,

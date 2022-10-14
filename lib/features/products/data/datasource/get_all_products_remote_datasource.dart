@@ -47,7 +47,7 @@ class AllProductRemoteDataSourceImpl extends BaseAllProductsRemoteDataSource {
 
       return UserDataModel.fromJson(response?.data['data']);
     } on DioError catch (error) {
-      print(error.response?.data);
+      print(error.response);
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(error.response?.data));
     }

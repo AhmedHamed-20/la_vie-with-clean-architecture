@@ -12,7 +12,15 @@ class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<AllProductsBloc, AllProductsState>(
+      body: BlocConsumer<AllProductsBloc, AllProductsState>(
+        listener: (context, state) {
+          if (state.productExist) {
+            flutterToast(
+                msg: 'Product exist in cart',
+                backgroundColor: AppColors.toastWarning,
+                textColor: AppColors.black);
+          }
+        },
         builder: (context, state) {
           switch (state.requestState) {
             case AllProductsRequestState.idle:

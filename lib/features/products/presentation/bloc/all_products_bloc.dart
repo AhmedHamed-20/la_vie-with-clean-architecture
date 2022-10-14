@@ -93,6 +93,12 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
 
   FutureOr<void> _insertProductIntoDatabase(
       DatabaseInsertionEvent event, Emitter<AllProductsState> emit) async {
+    for (var element in state.productsDatabaseEntitie) {
+      if (element.productId == event.productId) {
+        emit(state.copyWith(productExist: true));
+        return;
+      }
+    }
     final result = await productsInsertionIntoDatabaseUsecase(
       DatabaseProductParams(
         description: event.description,
@@ -107,10 +113,12 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     result.fold(
       (l) => emit(state.copyWith(
           cartRequestState: CartRequestState.error,
-          allProductsErrorMessage: l.message)),
+          allProductsErrorMessage: l.message,
+          productExist: false)),
       (r) => emit(
         state.copyWith(
           cartRequestState: CartRequestState.insertedSuccessfully,
+          productExist: false,
         ),
       ),
     );

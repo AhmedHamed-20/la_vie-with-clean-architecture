@@ -84,7 +84,16 @@ class CartDataWidget extends StatelessWidget {
                               ),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                context.read<AllProductsBloc>().add(
+                                      ProductDeletionFromDatabaseByIdEvent(
+                                          'cart',
+                                          state.productsDatabaseEntitie[index]
+                                              .databaseId),
+                                    );
+                                context.read<AllProductsBloc>().add(
+                                    const AllProductsFromDatabaseEvent('cart'));
+                              },
                               child: Icon(
                                 Icons.delete,
                                 color: Theme.of(context).primaryColor,

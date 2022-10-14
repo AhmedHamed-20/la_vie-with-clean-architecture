@@ -1,5 +1,4 @@
 import 'package:la_vie_with_clean_architecture/core/cache/cache_helper.dart';
-import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_user_database.dart';
 
