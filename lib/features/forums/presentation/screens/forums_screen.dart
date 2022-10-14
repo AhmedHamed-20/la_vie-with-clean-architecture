@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
 
 import '../../../../core/services/service_locator.dart';
 import '../bloc/forums_bloc.dart';
@@ -12,15 +13,13 @@ class ForumsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => servicelocator<ForumsBloc>()
         ..add(
-          const ForumsMeEvent(
-            accessToken:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQ5MjMxMjEsImV4cCI6MTY2NTA5NTkyMX0.Ki-V2wepIiRwJ-oazru800Ci-radI3jHPP-gn7IZWWY',
+          ForumsMeEvent(
+            accessToken: accessToken,
           ),
         )
         ..add(
-          const ForumsMeEvent(
-            accessToken:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQ5MjMxMjEsImV4cCI6MTY2NTA5NTkyMX0.Ki-V2wepIiRwJ-oazru800Ci-radI3jHPP-gn7IZWWY',
+          ForumsMeEvent(
+            accessToken: accessToken,
           ),
         ),
       child: Scaffold(

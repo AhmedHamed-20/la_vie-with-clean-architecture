@@ -4,9 +4,7 @@ import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cac
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/auth_entitie.dart';
-import '../../../products/domain/entities/user_data.dart';
 import '../../domain/repositories/auth_repositories.dart';
-import '../../../products/domain/usecases/get_userdata_usecase.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/signUp_usecase.dart';
 import '../datasources/auth_remote_datasource.dart';
@@ -23,7 +21,9 @@ class AuthRepositoriesImpl extends AuthRepositories {
 
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.message));
+      return Left(ServerFailure(
+          message: failure.errorMessageModel.message,
+          statusCode: failure.errorMessageModel.type));
     }
   }
 
@@ -35,7 +35,9 @@ class AuthRepositoriesImpl extends AuthRepositories {
       return Right(result);
     } on ServerException catch (failure) {
       return Left(
-        ServerFailure(failure.errorMessageModel.message),
+        ServerFailure(
+            message: failure.errorMessageModel.message,
+            statusCode: failure.errorMessageModel.type),
       );
     }
   }
@@ -47,7 +49,8 @@ class AuthRepositoriesImpl extends AuthRepositories {
       final result = await baseAuthLocalDataSource.cacheAccessToken(params);
       return Right(result);
     } on CacheException catch (failure) {
-      return Left(CacheFailure(failure.localErrorsMessageModel.errorMessage));
+      return Left(
+          CacheFailure(message: failure.localErrorsMessageModel.errorMessage));
     }
   }
 }

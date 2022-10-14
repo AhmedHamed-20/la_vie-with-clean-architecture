@@ -4,7 +4,7 @@ import '../../../products/domain/entities/tool_entitie.dart';
 
 class ToolsBlogsModel extends ToolEntitie {
   const ToolsBlogsModel(
-      {required super.toolId,
+      {required super.id,
       required super.name,
       required super.description,
       required super.imageUrl,
@@ -14,7 +14,7 @@ class ToolsBlogsModel extends ToolEntitie {
 //
   factory ToolsBlogsModel.fromJson(Map<String, dynamic> json) {
     return ToolsBlogsModel(
-        toolId: json['plantId'] ?? '',
+        id: json['toolId'] ?? '',
         name: json['name'] ?? '',
         description: json['description'] ?? '',
         imageUrl: json['imageUrl'] == null || json['imageUrl'] == ''

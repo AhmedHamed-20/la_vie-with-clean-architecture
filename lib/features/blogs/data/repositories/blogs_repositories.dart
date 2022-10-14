@@ -17,7 +17,9 @@ class BlogsRepositoriesImpl extends BlogRepositories {
       final result = await baseBlogsRemoteDataSource.getBLogs(params);
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.message));
+      return Left(ServerFailure(
+          message: failure.errorMessageModel.message,
+          statusCode: failure.errorMessageModel.type));
     }
   }
 }

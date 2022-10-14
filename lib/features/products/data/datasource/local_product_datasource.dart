@@ -1,5 +1,7 @@
 import 'package:la_vie_with_clean_architecture/core/cache/cache_helper.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_cache.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_user_database.dart';
 
 import '../../../../core/database/database_setup.dart';
 import '../../domain/usecases/get_access_token_from_cache.dart';
@@ -19,6 +21,8 @@ abstract class BaseAllProductsLocalDataSource {
   Future<int> deleteProductFromDatabaseById(
       ProductDeletionFromDatabaseParams params);
   Future<dynamic> getAccessTokenFromCache(AccessTokenFromCacheParams params);
+  Future<int> clearUserCartDataBase(UserCartDataBaseClearParams params);
+  Future<bool> clearUserCache(CacheClearParams params);
 }
 
 class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
@@ -67,7 +71,7 @@ class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
   Future<int> deleteProductFromDatabaseById(
       ProductDeletionFromDatabaseParams params) async {
     try {
-      final result = await DatabaseProvider.deleteReimnderFromDatabaseById(
+      final result = await DatabaseProvider.deleteUserCartFromDatabaseById(
           id: params.databaseIds, tableName: params.tableName);
       return result;
     } on DatabaseException catch (exceptions) {
@@ -83,6 +87,28 @@ class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
       return result;
     } on Exception catch (e) {
       throw CacheException(LocalErrorsMessageModel(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<bool> clearUserCache(CacheClearParams params) async {
+    try {
+      final result = await CacheHelper.removeData(params.key);
+      return result;
+    } on Exception catch (e) {
+      throw CacheException(LocalErrorsMessageModel.fromException(e.toString()));
+    }
+  }
+
+  @override
+  Future<int> clearUserCartDataBase(UserCartDataBaseClearParams params) async {
+    try {
+      final result = await DatabaseProvider.deleteAllUserCartsFromDatabase(
+          tableName: params.tableName);
+      return result;
+    } on DatabaseException catch (exceptions) {
+      throw AppDataBaseException(
+          LocalErrorsMessageModel.fromException(exceptions.result));
     }
   }
 }

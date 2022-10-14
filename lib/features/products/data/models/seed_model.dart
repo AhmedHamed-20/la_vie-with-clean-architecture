@@ -4,7 +4,7 @@ import '../../domain/entities/seed_entitie.dart';
 
 class SeedModel extends SeedEntitie {
   const SeedModel(
-      {required super.seedId,
+      {required super.id,
       required super.name,
       required super.description,
       required super.imageUrl,
@@ -14,7 +14,7 @@ class SeedModel extends SeedEntitie {
 //
   factory SeedModel.fromJson(Map<String, dynamic> json) {
     return SeedModel(
-        seedId: json['plantId'] ?? '',
+        id: json['seedId'] ?? '',
         name: json['name'] ?? '',
         description: json['description'] ?? '',
         imageUrl: json['imageUrl'] == null || json['imageUrl'] == ''

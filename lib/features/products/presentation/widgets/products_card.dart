@@ -11,9 +11,14 @@ class ProductsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AllProductsBloc, AllProductsState>(
+    return BlocConsumer<AllProductsBloc, AllProductsState>(
+      listener: (context, state) {
+        print(state.deleteProductNumber);
+      },
       builder: (context, state) {
         return GridView.builder(
+          padding: const EdgeInsets.only(
+              top: AppPadding.p40, left: AppPadding.p10, right: AppPadding.p10),
           itemCount: state.activeEntitie.length,
           itemBuilder: (context, index) {
             return Card(
@@ -47,7 +52,15 @@ class ProductsCard extends StatelessWidget {
                       child: Row(
                         children: [
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              context.read<AllProductsBloc>().add(
+                                    AmountValueEvent(
+                                      id: state
+                                          .activeEntitie[index]['entitie'].id,
+                                      isIncrement: false,
+                                    ),
+                                  );
+                            },
                             child: Container(
                               color: AppColors.textFormFieldFillColor,
                               child: Icon(
@@ -57,11 +70,21 @@ class ProductsCard extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '1',
+                            state.amountOfAllProducts[
+                                    state.activeEntitie[index]['entitie'].id]
+                                .toString(),
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              context.read<AllProductsBloc>().add(
+                                    AmountValueEvent(
+                                      id: state
+                                          .activeEntitie[index]['entitie'].id,
+                                      isIncrement: true,
+                                    ),
+                                  );
+                            },
                             child: Container(
                               color: AppColors.textFormFieldFillColor,
                               child: Icon(

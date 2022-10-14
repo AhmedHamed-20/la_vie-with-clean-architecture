@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class ToolEntitie extends Equatable {
-  final String toolId;
+  final String id;
   final String name;
   final String description;
   final String imageUrl;
@@ -10,7 +10,7 @@ class ToolEntitie extends Equatable {
   final int temperature;
 
   const ToolEntitie(
-      {required this.toolId,
+      {required this.id,
       required this.name,
       required this.description,
       required this.imageUrl,
@@ -20,7 +20,7 @@ class ToolEntitie extends Equatable {
 
   @override
   List<Object?> get props => [
-        toolId,
+        id,
         name,
         description,
         imageUrl,

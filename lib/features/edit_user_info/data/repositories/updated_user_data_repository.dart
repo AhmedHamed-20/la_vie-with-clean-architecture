@@ -20,7 +20,8 @@ class UpdatedUserDataRepositoryImpl extends UpdatedUserDataRepository {
     } on ServerException catch (failure) {
       return Left(
         ServerFailure(
-          failure.errorMessageModel.message,
+          message: failure.errorMessageModel.message,
+          statusCode: failure.errorMessageModel.type,
         ),
       );
     }

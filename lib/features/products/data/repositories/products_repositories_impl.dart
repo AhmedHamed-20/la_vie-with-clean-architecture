@@ -1,4 +1,7 @@
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_user_database.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_access_token_from_cache.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../../domain/entities/user_data.dart';
 import '../../domain/usecases/get_userdata_usecase.dart';
@@ -31,7 +34,9 @@ class AllProductsRepositoriesImpl extends AllProductsRepositories {
 
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.message));
+      return Left(ServerFailure(
+          message: failure.errorMessageModel.message,
+          statusCode: failure.errorMessageModel.type));
     }
   }
 
@@ -43,8 +48,8 @@ class AllProductsRepositoriesImpl extends AllProductsRepositories {
           .insertProductIntoDatabase(params);
       return Right(result);
     } on AppDataBaseException catch (failure) {
-      return Left(
-          DatabaseFailure(failure.dataBaseErrorMessageModel.errorMessage));
+      return Left(DatabaseFailure(
+          message: failure.dataBaseErrorMessageModel.errorMessage));
     }
   }
 
@@ -58,7 +63,7 @@ class AllProductsRepositoriesImpl extends AllProductsRepositories {
     } on AppDataBaseException catch (failure) {
       return Left(
         DatabaseFailure(
-          failure.dataBaseErrorMessageModel.errorMessage,
+          message: failure.dataBaseErrorMessageModel.errorMessage,
         ),
       );
     }
@@ -74,7 +79,7 @@ class AllProductsRepositoriesImpl extends AllProductsRepositories {
     } on AppDataBaseException catch (failure) {
       return Left(
         DatabaseFailure(
-          failure.dataBaseErrorMessageModel.errorMessage,
+          message: failure.dataBaseErrorMessageModel.errorMessage,
         ),
       );
     }
@@ -87,7 +92,9 @@ class AllProductsRepositoriesImpl extends AllProductsRepositories {
       final result = await baseAllProductsRemoteDataSource.getUserData(params);
       return Right(result);
     } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.message));
+      return Left(ServerFailure(
+          message: failure.errorMessageModel.message,
+          statusCode: failure.errorMessageModel.type));
     }
   }
 
@@ -99,7 +106,33 @@ class AllProductsRepositoriesImpl extends AllProductsRepositories {
           await baseAllProductsLocalDataSource.getAccessTokenFromCache(params);
       return Right(result);
     } on CacheException catch (failure) {
-      return Left(CacheFailure(failure.localErrorsMessageModel.errorMessage));
+      return Left(
+          CacheFailure(message: failure.localErrorsMessageModel.errorMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> clearUserCache(CacheClearParams params) async {
+    try {
+      final result =
+          await baseAllProductsLocalDataSource.clearUserCache(params);
+      return Right(result);
+    } on CacheException catch (failure) {
+      return Left(
+          CacheFailure(message: failure.localErrorsMessageModel.errorMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> clearUserCartDataBase(
+      UserCartDataBaseClearParams params) async {
+    try {
+      final result =
+          await baseAllProductsLocalDataSource.clearUserCartDataBase(params);
+      return Right(result);
+    } on AppDataBaseException catch (failure) {
+      return Left(DatabaseFailure(
+          message: failure.dataBaseErrorMessageModel.errorMessage));
     }
   }
 }

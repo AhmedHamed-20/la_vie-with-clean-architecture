@@ -25,7 +25,9 @@ class ForumsRepositoriesImpl extends ForumsRepositories {
 
       return Right(forums);
     } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.message));
+      return Left(ServerFailure(
+          message: failure.errorMessageModel.message,
+          statusCode: failure.errorMessageModel.type));
     }
   }
 
@@ -37,7 +39,9 @@ class ForumsRepositoriesImpl extends ForumsRepositories {
 
       return Right(forumsMe);
     } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.message));
+      return Left(ServerFailure(
+          message: failure.errorMessageModel.message,
+          statusCode: failure.errorMessageModel.type));
     }
   }
 
@@ -48,7 +52,9 @@ class ForumsRepositoriesImpl extends ForumsRepositories {
 
       return Right(forumsMe);
     } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.message));
+      return Left(ServerFailure(
+          message: failure.errorMessageModel.message,
+          statusCode: failure.errorMessageModel.type));
     }
   }
 }

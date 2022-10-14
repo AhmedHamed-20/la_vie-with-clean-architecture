@@ -51,7 +51,8 @@ class AllForumsRemoteDatasource extends BaseForumsRemoteDatesource {
         (e) => ForumsMeModel.fromJson(e),
       ));
     } on DioError catch (error) {
-      throw ServerException(errorMessageModel: error.response?.data);
+      throw ServerException(
+          errorMessageModel: ErrorMessageModel.fromJson(error.response?.data));
     }
   }
 

@@ -86,3 +86,32 @@ class CurrentActiveTabIndexEvent extends BaseAllProductsEvent {
   @override
   List<Object?> get props => [currentActiveTabIndex];
 }
+
+class AmountMapEvent extends BaseAllProductsEvent {
+  final List<AllProductsEntitie> allProducts;
+
+  const AmountMapEvent(this.allProducts);
+
+  @override
+  List<Object?> get props => [allProducts];
+}
+
+class AmountValueEvent extends BaseAllProductsEvent {
+  final String id;
+  final bool isIncrement;
+
+  const AmountValueEvent({required this.id, required this.isIncrement});
+
+  @override
+  List<Object?> get props => [id, isIncrement];
+}
+
+class LogoutEvent extends BaseAllProductsEvent {
+  final String tableName;
+  final String cacheKey;
+
+  const LogoutEvent(this.tableName, this.cacheKey);
+
+  @override
+  List<Object?> get props => [tableName, cacheKey];
+}

@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_cache.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_user_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_access_token_from_cache.dart';
 
 import '../../../../core/error/failures.dart';
@@ -25,4 +27,7 @@ abstract class AllProductsRepositories {
 
   Future<Either<Failure, dynamic>> getAccessTokenFromCache(
       AccessTokenFromCacheParams params);
+  Future<Either<Failure, int>> clearUserCartDataBase(
+      UserCartDataBaseClearParams params);
+  Future<Either<Failure, bool>> clearUserCache(CacheClearParams params);
 }

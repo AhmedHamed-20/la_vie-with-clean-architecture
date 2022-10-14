@@ -15,8 +15,7 @@ class BlogsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => servicelocator<BlogsBloc>()
         ..add(
-          const AllBlogsEvent(
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQ5MjMxMjEsImV4cCI6MTY2NTA5NTkyMX0.Ki-V2wepIiRwJ-oazru800Ci-radI3jHPP-gn7IZWWY'),
+          AllBlogsEvent(accessToken),
         ),
       child: Scaffold(
         appBar: AppBar(

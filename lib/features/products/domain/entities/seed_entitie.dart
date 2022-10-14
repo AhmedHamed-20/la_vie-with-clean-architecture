@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class SeedEntitie extends Equatable {
-  final String seedId;
+  final String id;
   final String name;
   final String description;
   final String imageUrl;
@@ -10,7 +10,7 @@ class SeedEntitie extends Equatable {
   final int temperature;
 
   const SeedEntitie(
-      {required this.seedId,
+      {required this.id,
       required this.name,
       required this.description,
       required this.imageUrl,
@@ -20,7 +20,7 @@ class SeedEntitie extends Equatable {
 
   @override
   List<Object?> get props => [
-        seedId,
+        id,
         name,
         description,
         imageUrl,

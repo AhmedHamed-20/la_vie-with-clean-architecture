@@ -4,7 +4,7 @@ import '../../../products/domain/entities/plant_entitie.dart';
 
 class PlantBlogsModel extends PlantEntitie {
   const PlantBlogsModel(
-      {required super.plantId,
+      {required super.id,
       required super.name,
       required super.description,
       required super.imageUrl,
@@ -14,7 +14,7 @@ class PlantBlogsModel extends PlantEntitie {
 
   factory PlantBlogsModel.fromJson(Map<String, dynamic> json) {
     return PlantBlogsModel(
-        plantId: json['plantId'] ?? '',
+        id: json['plantId'] ?? '',
         name: json['name'] ?? '',
         description: json['description'] ?? '',
         imageUrl: json['imageUrl'] == null || json['imageUrl'] == ''

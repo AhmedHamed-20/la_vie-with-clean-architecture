@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/data/datasources/updated_user_remote_datasource.dart';
@@ -15,6 +16,8 @@ import '../../features/forums/domain/usecases/post_new_forums.dart';
 import '../../features/auth/data/datasources/auth_remote_datasource.dart';
 import '../../features/auth/data/repositories/repositories_impl.dart';
 import '../../features/auth/domain/repositories/auth_repositories.dart';
+import '../../features/products/domain/usecases/clear_cache.dart';
+import '../../features/products/domain/usecases/clear_user_database.dart';
 import '../../features/products/domain/usecases/get_userdata_usecase.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/usecases/signUp_usecase.dart';
@@ -46,13 +49,18 @@ class ServiceLocator {
           servicelocator(),
           servicelocator(),
         ));
-    servicelocator.registerFactory<AllProductsBloc>(() => AllProductsBloc(
+    servicelocator.registerFactory<AllProductsBloc>(
+      () => AllProductsBloc(
         servicelocator(),
         servicelocator(),
         servicelocator(),
         servicelocator(),
         servicelocator(),
-        servicelocator()));
+        servicelocator(),
+        servicelocator(),
+        servicelocator(),
+      ),
+    );
     servicelocator
         .registerFactory<BlogsBloc>(() => BlogsBloc(servicelocator()));
     servicelocator.registerFactory<ForumsBloc>(
@@ -60,6 +68,7 @@ class ServiceLocator {
     servicelocator.registerFactory<UserInfoBloc>(() => UserInfoBloc(
           servicelocator(),
         ));
+    servicelocator.registerFactory<MainLayoutBloc>(() => MainLayoutBloc());
     //useCases
     servicelocator.registerLazySingleton(() => LoginUsecase(servicelocator()));
     servicelocator.registerLazySingleton(() => SignupUscase(servicelocator()));
@@ -87,6 +96,10 @@ class ServiceLocator {
         .registerLazySingleton(() => AccessTokenCacheUsecase(servicelocator()));
     servicelocator.registerLazySingleton(
         () => AccessTokenFromCacheUsecase(servicelocator()));
+    servicelocator
+        .registerLazySingleton(() => CacheClearUsecase(servicelocator()));
+    servicelocator.registerLazySingleton(
+        () => UserCartDataBaseClearUsecase(servicelocator()));
     //Repositories
     servicelocator.registerLazySingleton<AuthRepositories>(
         () => AuthRepositoriesImpl(servicelocator(), servicelocator()));

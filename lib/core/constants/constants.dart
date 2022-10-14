@@ -28,6 +28,8 @@ class AppPadding {
   static const double p22 = 22;
   static const double p25 = 25;
   static const double p30 = 30;
+  static const double p40 = 40;
+
   static const double p6 = 6;
 }
 
@@ -178,16 +180,21 @@ void navigatePushAndRemove(
 // ];
 Widget appBarWidgets(BuildContext context, int index) {
   List<Widget> appBarWidgetsdata = [
-    Image.asset('assets/images/logo.png'),
     const SizedBox(),
+    const SizedBox(),
+    Image.asset('assets/images/logo.png'),
     Text(
       'Notification',
       style: Theme.of(context).textTheme.titleLarge,
     ),
-    const SizedBox(),
   ];
   return appBarWidgetsdata[index];
 }
+
+//const BlogsScreen(),
+// const ForumsScreen(),
+// const ProductsScreen(),
+// const UserProfileScreen(),
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
@@ -195,11 +202,12 @@ double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 class AppRoutesNames {
   static const String loginScreen = '/';
   static const String homeScreen = '/home_screen';
-  static const String blogsScreen = '/blogs_screen';
-  static const String blogsScreenDetails = '/blogs_screen/details';
-  static const String forumsScreen = '/forums_screen';
-  static const String postForumScreen = '/forums_screen/post_forum';
-  static const String userProfileScreen = '/user_profile_screen';
+  static const String productsScreen = '/home_screen/products_screen';
+  static const String blogsScreen = 'home_screen/blogs_screen';
+  static const String blogsScreenDetails = 'home_screen/blogs_screen/details';
+  static const String forumsScreen = 'home_screen/forums_screen';
+  static const String postForumScreen = 'home_screen/forums_screen/post_forum';
+  static const String userProfileScreen = 'home_screen/user_profile_screen';
 }
 
 String accessToken = '';
