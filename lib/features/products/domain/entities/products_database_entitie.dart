@@ -7,7 +7,7 @@ class ProductsDatabaseEntitie extends Equatable {
   final String description;
   final String imageUrl;
   final int price;
-
+  final int amount;
   const ProductsDatabaseEntitie({
     required this.databaseId,
     required this.productId,
@@ -15,6 +15,7 @@ class ProductsDatabaseEntitie extends Equatable {
     required this.description,
     required this.imageUrl,
     required this.price,
+    required this.amount,
   });
   @override
   List<Object?> get props => [
@@ -24,5 +25,6 @@ class ProductsDatabaseEntitie extends Equatable {
         description,
         imageUrl,
         price,
+        amount,
       ];
 }

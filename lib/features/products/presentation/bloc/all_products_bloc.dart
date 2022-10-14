@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/entities/products_database_entitie.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/entities/user_data.dart';
@@ -101,6 +100,7 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
         name: event.name,
         price: event.price,
         productId: event.productId,
+        amount: event.amount,
       ),
     );
 
@@ -268,7 +268,7 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
 
   FutureOr<void> _changeProductAmountValueWithId(
       AmountValueEvent event, Emitter<AllProductsState> emit) {
-    Map<String, int> updatedMap = state.amountOfAllProducts;
+    Map<String, int> updatedMap = Map.from(state.amountOfAllProducts);
     if (event.isIncrement) {
       updatedMap[event.id] = updatedMap[event.id]! + 1;
       emit(state.copyWith(
@@ -276,14 +276,13 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
       ));
     } else {
       if (updatedMap[event.id] == 1) {
-        updatedMap[event.id] == 1;
         emit(state.copyWith(
           amountOfAllProducts: updatedMap,
         ));
       } else {
-        updatedMap[event.id] == updatedMap[event.id]! - 1;
+        updatedMap[event.id] = updatedMap[event.id]! - 1;
         emit(state.copyWith(
-          amountOfAllProducts: updatedMap,
+          amountOfAllProducts: state.amountOfAllProducts,
         ));
       }
     }

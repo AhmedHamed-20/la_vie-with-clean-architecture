@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/components/defaults.dart';
-import '../../../../core/constants/constants.dart';
-import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
+import '../../../../../core/components/defaults.dart';
+import '../../../../../core/constants/constants.dart';
+import '../../../../../core/text_fileds_controlers/textfiled_controlers.dart';
 
 class HomeScreenSearchBarRow extends StatelessWidget {
   const HomeScreenSearchBarRow({
@@ -41,7 +41,9 @@ class HomeScreenSearchBarRow extends StatelessWidget {
           ),
           Expanded(
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRoutesNames.cartScreen);
+              },
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppRadius.r5),

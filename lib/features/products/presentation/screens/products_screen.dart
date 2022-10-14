@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:la_vie_with_clean_architecture/core/components/defaults.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
 import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
 import '../../../../core/utl/utls.dart';
 import '../../../../core/widgets/error_widget.dart';
-import '../widgets/products_main_widget.dart';
+import '../widgets/products/products_main_widget.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key? key}) : super(key: key);

@@ -21,13 +21,16 @@ class DatabaseProductParams extends Equatable {
   final String description;
   final String imageUrl;
   final int price;
+  final int amount;
 
-  const DatabaseProductParams(
-      {required this.productId,
-      required this.name,
-      required this.description,
-      required this.imageUrl,
-      required this.price});
+  const DatabaseProductParams({
+    required this.productId,
+    required this.name,
+    required this.description,
+    required this.imageUrl,
+    required this.price,
+    required this.amount,
+  });
 
   @override
   List<Object?> get props => [
@@ -36,5 +39,6 @@ class DatabaseProductParams extends Equatable {
         description,
         imageUrl,
         price,
+        amount,
       ];
 }

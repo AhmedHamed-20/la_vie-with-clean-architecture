@@ -26,7 +26,7 @@ void main() async {
       databasesName: 'cart.db',
       version: 1,
       query:
-          '''CREATE TABLE cart (id INTEGER PRIMARY KEY,productId TEXT,translation TEXT,name TEXT,description TEXT,imageUrl TEXT,price INTEGER)''');
+          '''CREATE TABLE cart (id INTEGER PRIMARY KEY,productId TEXT,translation TEXT,name TEXT,description TEXT,imageUrl TEXT,price INTEGER,amount INTEGER)''');
   final String accessToken =
       await CacheHelper.getData(key: 'accessToken') ?? '';
   runApp(MyApp(

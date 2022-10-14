@@ -202,6 +202,7 @@ double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 class AppRoutesNames {
   static const String loginScreen = '/';
   static const String homeScreen = '/home_screen';
+  static const String cartScreen = '/home_screen/products_screen/cart_screen';
   static const String productsScreen = '/home_screen/products_screen';
   static const String blogsScreen = 'home_screen/blogs_screen';
   static const String blogsScreenDetails = 'home_screen/blogs_screen/details';

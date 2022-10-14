@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/screens/home_screen.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/screens/user_data_info_screen.dart';
+import 'package:la_vie_with_clean_architecture/features/products/presentation/screens/cart_screen.dart';
 import 'package:la_vie_with_clean_architecture/features/products/presentation/screens/products_screen.dart';
 
 import '../../features/auth/presentation/screens/login_screen.dart';
@@ -34,7 +35,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const PostForumScreen());
       case AppRoutesNames.userProfileScreen:
         return MaterialPageRoute(builder: (_) => const UserProfileScreen());
-
+      case AppRoutesNames.cartScreen:
+        return MaterialPageRoute(builder: (_) => const CartScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(

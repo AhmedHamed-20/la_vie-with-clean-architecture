@@ -26,13 +26,16 @@ class DatabaseInsertionEvent extends BaseAllProductsEvent {
   final String description;
   final String imageUrl;
   final int price;
+  final int amount;
 
-  const DatabaseInsertionEvent(
-      {required this.productId,
-      required this.name,
-      required this.description,
-      required this.imageUrl,
-      required this.price});
+  const DatabaseInsertionEvent({
+    required this.productId,
+    required this.name,
+    required this.description,
+    required this.imageUrl,
+    required this.price,
+    required this.amount,
+  });
 
   @override
   List<Object?> get props => [
@@ -41,6 +44,7 @@ class DatabaseInsertionEvent extends BaseAllProductsEvent {
         description,
         imageUrl,
         price,
+        amount,
       ];
 }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:la_vie_with_clean_architecture/features/products/presentation/widgets/products_card.dart';
+import 'package:la_vie_with_clean_architecture/features/products/presentation/widgets/products/products_card.dart';
 import 'home_screen_search_bar_row.dart';
 import 'home_tabs.dart';
 

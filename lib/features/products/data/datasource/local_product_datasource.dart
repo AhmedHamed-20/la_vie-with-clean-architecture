@@ -35,6 +35,7 @@ class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
         description: params.description,
         imageUrl: params.imageUrl,
         price: params.price,
+        amount: params.amount,
       );
 
       await DatabaseProvider.insertIntoDataBase(
@@ -44,9 +45,10 @@ class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
             convertedMap['description'],
             convertedMap['imageUrl'],
             convertedMap['price'],
+            convertedMap['amount'],
           ],
           query:
-              '''INSERT INTO products(productId,name,description,imageUrl,price) VALUES(?, ?, ?, ?, ?)''');
+              '''INSERT INTO cart(productId,name,description,imageUrl,price,amount) VALUES(?, ?, ?, ?, ?, ?)''');
     } on DatabaseException catch (exceptions) {
       throw AppDataBaseException(
           LocalErrorsMessageModel.fromException(exceptions.result));
