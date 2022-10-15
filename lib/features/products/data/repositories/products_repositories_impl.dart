@@ -1,6 +1,7 @@
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_user_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_access_token_from_cache.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/update_amount_database.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../domain/entities/user_data.dart';
@@ -129,6 +130,19 @@ class AllProductsRepositoriesImpl extends AllProductsRepositories {
     try {
       final result =
           await baseAllProductsLocalDataSource.clearUserCartDataBase(params);
+      return Right(result);
+    } on AppDataBaseException catch (failure) {
+      return Left(DatabaseFailure(
+          message: failure.dataBaseErrorMessageModel.errorMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> updateAmountInCartDatabase(
+      AmountUpdateInDataBaseParams params) async {
+    try {
+      final result =
+          await baseAllProductsLocalDataSource.updateAmountCartDatabase(params);
       return Right(result);
     } on AppDataBaseException catch (failure) {
       return Left(DatabaseFailure(

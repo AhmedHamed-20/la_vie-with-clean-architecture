@@ -119,3 +119,17 @@ class LogoutEvent extends BaseAllProductsEvent {
   @override
   List<Object?> get props => [tableName, cacheKey];
 }
+
+class AmountOfProductsInCartEvent extends BaseAllProductsEvent {
+  final int dataBaseProductsId;
+  final int amount;
+  final bool isIncrement;
+
+  const AmountOfProductsInCartEvent(
+      {required this.dataBaseProductsId,
+      required this.isIncrement,
+      required this.amount});
+
+  @override
+  List<Object?> get props => [dataBaseProductsId, isIncrement, amount];
+}

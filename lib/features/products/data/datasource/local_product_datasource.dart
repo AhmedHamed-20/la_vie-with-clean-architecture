@@ -1,6 +1,8 @@
 import 'package:la_vie_with_clean_architecture/core/cache/cache_helper.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_user_database.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/update_amount_database.dart';
+import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
 
 import '../../../../core/database/database_setup.dart';
 import '../../domain/usecases/get_access_token_from_cache.dart';
@@ -22,6 +24,7 @@ abstract class BaseAllProductsLocalDataSource {
   Future<dynamic> getAccessTokenFromCache(AccessTokenFromCacheParams params);
   Future<int> clearUserCartDataBase(UserCartDataBaseClearParams params);
   Future<bool> clearUserCache(CacheClearParams params);
+  Future<int> updateAmountCartDatabase(AmountUpdateInDataBaseParams params);
 }
 
 class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
@@ -110,6 +113,21 @@ class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
     } on DatabaseException catch (exceptions) {
       throw AppDataBaseException(
           LocalErrorsMessageModel.fromException(exceptions.result));
+    }
+  }
+
+  @override
+  Future<int> updateAmountCartDatabase(
+      AmountUpdateInDataBaseParams params) async {
+    try {
+      final result = await DatabaseProvider.updateDataBase(
+          'UPDATE cart SET amount = ? WHERE id = ? ',
+          params.amount,
+          params.databaseId);
+      return result;
+    } on DatabaseException catch (e) {
+      throw AppDataBaseException(
+          LocalErrorsMessageModel.fromException(e.result));
     }
   }
 }

@@ -42,5 +42,16 @@ class DatabaseProvider {
     );
   }
 
+  static Future<int> updateDataBase(
+    String query,
+    int amount,
+    int id,
+  ) async {
+    return await database.rawUpdate(query, [
+      amount,
+      '$id',
+    ]);
+  }
+
   static Future close() async => database.close();
 }

@@ -52,7 +52,24 @@ class CartDataWidget extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        context.read<AllProductsBloc>().add(
+                                              AmountOfProductsInCartEvent(
+                                                dataBaseProductsId: state
+                                                    .productsDatabaseEntitie[
+                                                        index]
+                                                    .databaseId,
+                                                isIncrement: false,
+                                                amount: state
+                                                    .productsDatabaseEntitie[
+                                                        index]
+                                                    .amount,
+                                              ),
+                                            );
+                                        context.read<AllProductsBloc>().add(
+                                            const AllProductsFromDatabaseEvent(
+                                                'cart'));
+                                      },
                                       child: Icon(
                                         Icons.remove,
                                         color: Theme.of(context).primaryColor,
@@ -73,7 +90,22 @@ class CartDataWidget extends StatelessWidget {
                                       width: AppWidth.w2,
                                     ),
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        context.read<AllProductsBloc>().add(
+                                            AmountOfProductsInCartEvent(
+                                                dataBaseProductsId: state
+                                                    .productsDatabaseEntitie[
+                                                        index]
+                                                    .databaseId,
+                                                isIncrement: true,
+                                                amount: state
+                                                    .productsDatabaseEntitie[
+                                                        index]
+                                                    .amount));
+                                        context.read<AllProductsBloc>().add(
+                                            const AllProductsFromDatabaseEvent(
+                                                'cart'));
+                                      },
                                       child: Icon(
                                         Icons.add,
                                         color: Theme.of(context).primaryColor,
@@ -121,11 +153,16 @@ class CartDataWidget extends StatelessWidget {
                       'Total',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    Text(
-                      '${800} EGP',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: Theme.of(context).primaryColor,
-                          ),
+                    BlocBuilder<AllProductsBloc, AllProductsState>(
+                      builder: (context, state) {
+                        return Text(
+                          '${state.totalCartPrice} EGP',
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                        );
+                      },
                     ),
                   ],
                 ),

@@ -47,7 +47,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => servicelocator<MainLayoutBloc>()),
         BlocProvider(
           create: (context) => servicelocator<AllProductsBloc>()
-            ..add(const GetAccessTokenFromCacheEvent('accessToken')),
+            ..add(const GetAccessTokenFromCacheEvent('accessToken'))
+            ..add(const AllProductsFromDatabaseEvent('cart')),
         ),
         BlocProvider(create: (context) => servicelocator<AuthBloc>()),
       ],

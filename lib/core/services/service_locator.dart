@@ -12,6 +12,7 @@ import 'package:la_vie_with_clean_architecture/features/products/domain/usecases
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_access_token_from_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_all_products_from_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/insert_product_into_database.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/update_amount_database.dart';
 import '../../features/forums/domain/usecases/post_new_forums.dart';
 import '../../features/auth/data/datasources/auth_remote_datasource.dart';
 import '../../features/auth/data/repositories/repositories_impl.dart';
@@ -51,6 +52,7 @@ class ServiceLocator {
         ));
     servicelocator.registerFactory<AllProductsBloc>(
       () => AllProductsBloc(
+        servicelocator(),
         servicelocator(),
         servicelocator(),
         servicelocator(),
@@ -100,6 +102,9 @@ class ServiceLocator {
         .registerLazySingleton(() => CacheClearUsecase(servicelocator()));
     servicelocator.registerLazySingleton(
         () => UserCartDataBaseClearUsecase(servicelocator()));
+    servicelocator.registerLazySingleton(
+        () => AmountUpdateInDataBaseUsecase(servicelocator()));
+
     //Repositories
     servicelocator.registerLazySingleton<AuthRepositories>(
         () => AuthRepositoriesImpl(servicelocator(), servicelocator()));

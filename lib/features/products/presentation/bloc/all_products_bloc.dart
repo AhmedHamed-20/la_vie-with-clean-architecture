@@ -12,6 +12,7 @@ import 'package:la_vie_with_clean_architecture/features/products/domain/usecases
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_all_products_from_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_userdata_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/insert_product_into_database.dart';
+import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/update_amount_database.dart';
 
 import '../../../../core/utl/utls.dart';
 import '../../../blogs/domain/entities/blogs_entitie.dart';
@@ -30,7 +31,8 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
       this.userDataUsecase,
       this.accessTokenFromCacheUsecase,
       this.cacheClearUsecase,
-      this.userCartDataBaseClearUsecase)
+      this.userCartDataBaseClearUsecase,
+      this.amountUpdateInDataBaseUsecase)
       : super(const AllProductsState()) {
     on<AllProductsEvent>(_getAllProducts);
     on<ProductDeletionFromDatabaseByIdEvent>(_deleteProductById);
@@ -42,6 +44,7 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     on<AmountMapEvent>(_generateAmountsMap);
     on<AmountValueEvent>(_changeProductAmountValueWithId);
     on<LogoutEvent>(_logot);
+    on<AmountOfProductsInCartEvent>(_changeAmountOfProductsInCart);
   }
   AllProductsUseCase allProductsUseCase;
   PeroductsFromDatabaseUsecase peroductsFromDatabaseUsecase;
@@ -51,6 +54,7 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
   AccessTokenFromCacheUsecase accessTokenFromCacheUsecase;
   UserCartDataBaseClearUsecase userCartDataBaseClearUsecase;
   CacheClearUsecase cacheClearUsecase;
+  AmountUpdateInDataBaseUsecase amountUpdateInDataBaseUsecase;
   FutureOr<void> _getAllProducts(
       AllProductsEvent event, Emitter<AllProductsState> emit) async {
     final result =
@@ -132,16 +136,30 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
       ),
     );
     result.fold(
-      (l) => emit(state.copyWith(
-          cartRequestState: CartRequestState.error,
-          allProductsErrorMessage: l.message)),
-      (r) => emit(
+        (l) => emit(state.copyWith(
+            cartRequestState: CartRequestState.error,
+            allProductsErrorMessage: l.message,
+            productExist: false)), (r) {
+      int totalAmount = caculateProductsTotalPrice(r);
+      return emit(
         state.copyWith(
-          cartRequestState: CartRequestState.loaded,
-          productsDatabaseEntitie: r,
-        ),
-      ),
-    );
+            totalCartPrice: totalAmount,
+            cartRequestState: CartRequestState.loaded,
+            productsDatabaseEntitie: r,
+            productExist: false),
+      );
+    });
+  }
+
+  int caculateProductsTotalPrice(List<ProductsDatabaseEntitie>? products) {
+    if (products == []) {
+      return 0;
+    }
+    int totalAmount = 0;
+    products?.forEach((element) {
+      totalAmount = totalAmount + (element.amount * element.price);
+    });
+    return totalAmount;
   }
 
   FutureOr<void> _getUserData(
@@ -307,5 +325,29 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
         state.copyWith(cacheCleared: r),
       ),
     );
+  }
+
+  FutureOr<void> _changeAmountOfProductsInCart(
+      AmountOfProductsInCartEvent event, Emitter<AllProductsState> emit) async {
+    if (event.isIncrement) {
+      int newAmount = event.amount + 1;
+      final result = await amountUpdateInDataBaseUsecase(
+        AmountUpdateInDataBaseParams(
+            databaseId: event.dataBaseProductsId, amount: newAmount),
+      );
+      result.fold(
+          (l) => emit(state.copyWith(allProductsErrorMessage: l.message)),
+          (r) => emit(state.copyWith(deleteProductNumber: r)));
+    } else {
+      int newAmount = event.amount - 1;
+      final result = await amountUpdateInDataBaseUsecase(
+        AmountUpdateInDataBaseParams(
+            databaseId: event.dataBaseProductsId,
+            amount: newAmount <= 1 ? 1 : newAmount),
+      );
+      result.fold(
+          (l) => emit(state.copyWith(allProductsErrorMessage: l.message)),
+          (r) => emit(state.copyWith(deleteProductNumber: r)));
+    }
   }
 }
