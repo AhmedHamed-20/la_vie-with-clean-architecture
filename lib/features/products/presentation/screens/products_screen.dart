@@ -24,18 +24,6 @@ class ProductsScreen extends StatelessWidget {
         builder: (context, state) {
           switch (state.requestState) {
             case AllProductsRequestState.idle:
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            case AllProductsRequestState.accessTokenGetSuccess:
-              accessToken = state.accessToken;
-              context
-                  .read<AllProductsBloc>()
-                  .add(GetUserDataEvent(accessToken));
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            case AllProductsRequestState.userDataGetSuccess:
               context.read<AllProductsBloc>().add(
                     AllProductsEvent(
                       accessToken,

@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/services/service_locator.dart';
-import '../../../products/domain/entities/user_data.dart';
 
 import '../../../../core/components/defaults.dart';
 import '../../../../core/constants/constants.dart';
+import '../../../../core/services/service_locator.dart';
 import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
 import '../../../../core/utl/utls.dart';
 import '../bloc/forums_bloc.dart';
@@ -47,7 +44,6 @@ class PostForumScreen extends StatelessWidget {
             children: [
               BlocBuilder<ForumsBloc, ForumsState>(
                 builder: (context, state) {
-                  print(state.convertedImageToBase64);
                   switch (state.imagePickeRequestState) {
                     case ImagePickeRequestState.loading:
                       return GestureDetector(
@@ -112,7 +108,7 @@ class PostForumScreen extends StatelessWidget {
                         ),
                       );
                     case ImagePickeRequestState.error:
-                      return Text('error');
+                      return const Text('error');
                   }
                 },
               ),
@@ -188,7 +184,6 @@ class PostForumScreen extends StatelessWidget {
                         height: AppHeight.h46,
                       );
                     case ForumsPostRequestState.error:
-                      print('error');
                       return defaultButton(
                         onPressed: () {},
                         buttonChild: Text(

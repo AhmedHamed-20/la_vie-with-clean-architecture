@@ -1,6 +1,5 @@
 import '../../../../core/constants/constants.dart';
 import '../../../../core/network/endpoints.dart';
-import '../../domain/entities/seed_entitie.dart';
 import '../../domain/entities/tool_entitie.dart';
 
 class ToolModel extends ToolEntitie {

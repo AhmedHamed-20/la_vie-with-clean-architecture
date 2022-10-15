@@ -8,8 +8,6 @@ enum RequestState {
 
 enum AllProductsRequestState {
   idle,
-  accessTokenGetSuccess,
-  userDataGetSuccess,
   loading,
   loaded,
   error,
@@ -57,6 +55,7 @@ enum UpdateUserDataRequestState {
 
 enum UserDataRequestState {
   loading,
+  accessTokenGetSuccess,
   loaded,
   error,
 }

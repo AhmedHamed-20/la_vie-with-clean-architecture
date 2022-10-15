@@ -1,5 +1,5 @@
 import '../../domain/entities/user_data.dart';
-import '../../../auth/data/models/notifications_model.dart';
+import '../../../../../../features/auth/data/models/notifications_model.dart';
 
 class UserDataModel extends UserDataEntitie {
   const UserDataModel({

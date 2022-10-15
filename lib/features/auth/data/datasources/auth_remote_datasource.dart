@@ -4,11 +4,9 @@ import '../../../../core/error/error_message_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/dio.dart';
 import '../../../../core/network/endpoints.dart';
-import '../../../products/domain/usecases/get_userdata_usecase.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/signUp_usecase.dart';
 import '../models/auth_model.dart';
-import '../../../products/data/models/user_data_model.dart';
 
 abstract class BaseAuthRemoteDataSource {
   Future<AuthModel> login(LoginParams loginParams);

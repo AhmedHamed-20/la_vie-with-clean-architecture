@@ -6,8 +6,6 @@ import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cac
 
 import '../../../../core/utl/utls.dart';
 import '../../domain/entities/auth_entitie.dart';
-import '../../../products/domain/entities/user_data.dart';
-import '../../../products/domain/usecases/get_userdata_usecase.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/signUp_usecase.dart';
 

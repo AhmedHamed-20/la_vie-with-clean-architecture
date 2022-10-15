@@ -1,4 +1,7 @@
 import 'package:get_it/get_it.dart';
+import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/data/datasources/main_layout_remote_datasource.dart';
+import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/data/repositories/main_layout_repository_impl.dart';
+import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/domain/repositories/main_layout_repository.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
@@ -9,7 +12,7 @@ import 'package:la_vie_with_clean_architecture/features/edit_user_info/domain/us
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/bloc/user_info_bloc.dart';
 import 'package:la_vie_with_clean_architecture/features/products/data/datasource/local_product_datasource.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/delete_product_from_database.dart';
-import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_access_token_from_cache.dart';
+import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/domain/usecases/get_access_token_from_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_all_products_from_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/insert_product_into_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/update_amount_database.dart';
@@ -19,7 +22,8 @@ import '../../features/auth/data/repositories/repositories_impl.dart';
 import '../../features/auth/domain/repositories/auth_repositories.dart';
 import '../../features/products/domain/usecases/clear_cache.dart';
 import '../../features/products/domain/usecases/clear_user_database.dart';
-import '../../features/products/domain/usecases/get_userdata_usecase.dart';
+import '../layout/features/main_layout/data/datasources/main_layout_local_datasource.dart';
+import '../layout/features/main_layout/domain/usecases/get_userdata_usecase.dart';
 import '../../features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/domain/usecases/signUp_usecase.dart';
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
@@ -59,8 +63,6 @@ class ServiceLocator {
         servicelocator(),
         servicelocator(),
         servicelocator(),
-        servicelocator(),
-        servicelocator(),
       ),
     );
     servicelocator
@@ -70,7 +72,8 @@ class ServiceLocator {
     servicelocator.registerFactory<UserInfoBloc>(() => UserInfoBloc(
           servicelocator(),
         ));
-    servicelocator.registerFactory<MainLayoutBloc>(() => MainLayoutBloc());
+    servicelocator.registerFactory<MainLayoutBloc>(
+        () => MainLayoutBloc(servicelocator(), servicelocator()));
     //useCases
     servicelocator.registerLazySingleton(() => LoginUsecase(servicelocator()));
     servicelocator.registerLazySingleton(() => SignupUscase(servicelocator()));
@@ -116,6 +119,8 @@ class ServiceLocator {
         () => ForumsRepositoriesImpl(servicelocator()));
     servicelocator.registerLazySingleton<UpdatedUserDataRepository>(
         () => UpdatedUserDataRepositoryImpl(servicelocator()));
+    servicelocator.registerLazySingleton<MainLayoutRepository>(
+        () => MainLayoutRepositoryImpl(servicelocator(), servicelocator()));
     //DataSource
     servicelocator.registerLazySingleton<BaseAuthRemoteDataSource>(
         () => RemoteAuthDataSourceImpl());
@@ -131,5 +136,9 @@ class ServiceLocator {
         () => AllProductLocalDataSourceImpl());
     servicelocator.registerLazySingleton<BaseUpdatedUserRemoteDatasource>(
         () => UpdatedUserDataRemoteDataSourceImpl());
+    servicelocator.registerLazySingleton<BaseMainLayoutRemoteDataSource>(
+        () => MainLayoutRemoteDataSourceImpl());
+    servicelocator.registerLazySingleton<BaseMainLayoutLocalDataSource>(
+        () => MainLayoutLocalDataSourceImpl());
   }
 }

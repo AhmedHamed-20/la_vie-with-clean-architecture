@@ -1,4 +1,7 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
 
 import '../../../../../core/components/defaults.dart';
 import '../../../../../core/constants/constants.dart';
@@ -44,18 +47,30 @@ class HomeScreenSearchBarRow extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed(AppRoutesNames.cartScreen);
               },
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.r5),
-                ),
-                color: Theme.of(context).primaryColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(AppPadding.p8),
-                  child: Icon(
-                    Icons.shopping_cart_outlined,
-                    color: AppColors.iconColorWhite,
-                  ),
-                ),
+              child: BlocBuilder<AllProductsBloc, AllProductsState>(
+                builder: (context, state) {
+                  return Badge(
+                    animationType: BadgeAnimationType.scale,
+                    badgeContent: Text(
+                      state.productsDatabaseEntitie.length.toString(),
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                    showBadge: state.productsDatabaseEntitie.isNotEmpty,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppRadius.r5),
+                      ),
+                      color: Theme.of(context).primaryColor,
+                      child: Padding(
+                        padding: const EdgeInsets.all(AppPadding.p8),
+                        child: Icon(
+                          Icons.shopping_cart_outlined,
+                          color: AppColors.iconColorWhite,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),

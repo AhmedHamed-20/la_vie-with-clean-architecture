@@ -2,15 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/entities/products_database_entitie.dart';
-import 'package:la_vie_with_clean_architecture/features/products/domain/entities/user_data.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_user_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/delete_product_from_database.dart';
-import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_access_token_from_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_all_products_from_database.dart';
-import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_userdata_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/insert_product_into_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/update_amount_database.dart';
 
@@ -28,8 +24,6 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
       this.peroductsFromDatabaseUsecase,
       this.productDeletionFromDatabaseByIdUsecase,
       this.productsInsertionIntoDatabaseUsecase,
-      this.userDataUsecase,
-      this.accessTokenFromCacheUsecase,
       this.cacheClearUsecase,
       this.userCartDataBaseClearUsecase,
       this.amountUpdateInDataBaseUsecase)
@@ -37,9 +31,9 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     on<AllProductsEvent>(_getAllProducts);
     on<ProductDeletionFromDatabaseByIdEvent>(_deleteProductById);
     on<DatabaseInsertionEvent>(_insertProductIntoDatabase);
-    on<GetUserDataEvent>(_getUserData);
+
     on<AllProductsFromDatabaseEvent>(_getAllProductsFromDatabase);
-    on<GetAccessTokenFromCacheEvent>(_getAccessTokenFromCache);
+
     on<CurrentActiveTabIndexEvent>(_changeCurrentActiveTabIndex);
     on<AmountMapEvent>(_generateAmountsMap);
     on<AmountValueEvent>(_changeProductAmountValueWithId);
@@ -50,8 +44,6 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
   PeroductsFromDatabaseUsecase peroductsFromDatabaseUsecase;
   ProductsInsertionIntoDatabaseUsecase productsInsertionIntoDatabaseUsecase;
   ProductDeletionFromDatabaseByIdUsecase productDeletionFromDatabaseByIdUsecase;
-  UserDataUsecase userDataUsecase;
-  AccessTokenFromCacheUsecase accessTokenFromCacheUsecase;
   UserCartDataBaseClearUsecase userCartDataBaseClearUsecase;
   CacheClearUsecase cacheClearUsecase;
   AmountUpdateInDataBaseUsecase amountUpdateInDataBaseUsecase;
@@ -162,45 +154,6 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     return totalAmount;
   }
 
-  FutureOr<void> _getUserData(
-      GetUserDataEvent event, Emitter<AllProductsState> emit) async {
-    final result = await userDataUsecase(
-      UserDataParams(accessToken: event.accessToken),
-    );
-    result.fold(
-      (l) => emit(state.copyWith(
-          requestState: AllProductsRequestState.error,
-          statusCode: l.statusCode,
-          allProductsErrorMessage: l.message)),
-      (r) => emit(
-        state.copyWith(
-          userDataEntitie: r,
-          requestState: AllProductsRequestState.userDataGetSuccess,
-        ),
-      ),
-    );
-  }
-
-  FutureOr<void> _getAccessTokenFromCache(GetAccessTokenFromCacheEvent event,
-      Emitter<AllProductsState> emit) async {
-    emit(state.copyWith(requestState: AllProductsRequestState.loading));
-    final result = await accessTokenFromCacheUsecase(
-        AccessTokenFromCacheParams(event.key));
-
-    result.fold(
-        (l) => emit(state.copyWith(
-            requestState: AllProductsRequestState.error,
-            allProductsErrorMessage: l.message)), (r) {
-      accessToken = r;
-      return emit(
-        state.copyWith(
-          accessToken: r,
-          requestState: AllProductsRequestState.accessTokenGetSuccess,
-        ),
-      );
-    });
-  }
-
   FutureOr<void> _changeCurrentActiveTabIndex(
       CurrentActiveTabIndexEvent event, Emitter<AllProductsState> emit) {
     List currentEntitiesList = [];
@@ -308,7 +261,7 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
       } else {
         updatedMap[event.id] = updatedMap[event.id]! - 1;
         emit(state.copyWith(
-          amountOfAllProducts: state.amountOfAllProducts,
+          amountOfAllProducts: updatedMap,
         ));
       }
     }

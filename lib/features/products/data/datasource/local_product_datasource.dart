@@ -2,18 +2,15 @@ import 'package:la_vie_with_clean_architecture/core/cache/cache_helper.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_cache.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/clear_user_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/update_amount_database.dart';
-import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
-
-import '../../../../core/database/database_setup.dart';
-import '../../domain/usecases/get_access_token_from_cache.dart';
-import '../models/products_database_model.dart';
-import '../../domain/usecases/get_all_products_from_database.dart';
-import '../../domain/usecases/insert_product_into_database.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../../../../core/database/database_setup.dart';
 import '../../../../core/error/error_message_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../domain/usecases/delete_product_from_database.dart';
+import '../../domain/usecases/get_all_products_from_database.dart';
+import '../../domain/usecases/insert_product_into_database.dart';
+import '../models/products_database_model.dart';
 
 abstract class BaseAllProductsLocalDataSource {
   Future<void> insertProductIntoDatabase(DatabaseProductParams params);
@@ -21,7 +18,6 @@ abstract class BaseAllProductsLocalDataSource {
       ProductsFromDatabaseParams params);
   Future<int> deleteProductFromDatabaseById(
       ProductDeletionFromDatabaseParams params);
-  Future<dynamic> getAccessTokenFromCache(AccessTokenFromCacheParams params);
   Future<int> clearUserCartDataBase(UserCartDataBaseClearParams params);
   Future<bool> clearUserCache(CacheClearParams params);
   Future<int> updateAmountCartDatabase(AmountUpdateInDataBaseParams params);
@@ -81,16 +77,6 @@ class AllProductLocalDataSourceImpl extends BaseAllProductsLocalDataSource {
     } on DatabaseException catch (exceptions) {
       throw AppDataBaseException(
           LocalErrorsMessageModel.fromException(exceptions.result));
-    }
-  }
-
-  @override
-  Future getAccessTokenFromCache(AccessTokenFromCacheParams params) async {
-    try {
-      final result = await CacheHelper.getData(key: params.key);
-      return result;
-    } on Exception catch (e) {
-      throw CacheException(LocalErrorsMessageModel(errorMessage: e.toString()));
     }
   }
 

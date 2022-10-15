@@ -1,7 +1,6 @@
 part of 'all_products_bloc.dart';
 
 class AllProductsState extends Equatable {
-  final UserDataEntitie? userDataEntitie;
   final CartRequestState cartRequestState;
   final List<AllProductsEntitie> allProductsEntitie;
   final List activeEntitie;
@@ -11,7 +10,7 @@ class AllProductsState extends Equatable {
   final AllProductsRequestState requestState;
   final String allProductsErrorMessage;
   final int? statusCode;
-  final String accessToken;
+
   final Map<String, int> amountOfAllProducts;
   final bool cacheCleared;
   final bool productExist;
@@ -22,8 +21,6 @@ class AllProductsState extends Equatable {
     this.statusCode,
     this.activeEntitie = const [],
     this.currentActiveTabIndex = 0,
-    this.accessToken = '',
-    this.userDataEntitie,
     this.cartRequestState = CartRequestState.loading,
     this.productsDatabaseEntitie = const [],
     this.deleteProductNumber = -1,
@@ -42,8 +39,6 @@ class AllProductsState extends Equatable {
     Map<String, int>? amountOfAllProducts,
     List? activeEntitie,
     int? currentActiveTabIndex,
-    String? accessToken,
-    UserDataEntitie? userDataEntitie,
     CartRequestState? cartRequestState,
     List<AllProductsEntitie>? allProductsEntitie,
     List<ProductsDatabaseEntitie>? productsDatabaseEntitie,
@@ -61,8 +56,6 @@ class AllProductsState extends Equatable {
       activeEntitie: activeEntitie ?? this.activeEntitie,
       currentActiveTabIndex:
           currentActiveTabIndex ?? this.currentActiveTabIndex,
-      accessToken: accessToken ?? this.accessToken,
-      userDataEntitie: userDataEntitie ?? this.userDataEntitie,
       cartRequestState: cartRequestState ?? this.cartRequestState,
       deleteProductNumber: deleteProductNumber ?? this.deleteProductNumber,
       productsDatabaseEntitie:
@@ -81,13 +74,11 @@ class AllProductsState extends Equatable {
         amountOfAllProducts,
         cacheCleared,
         statusCode,
-        userDataEntitie,
         allProductsErrorMessage,
         allProductsEntitie,
         requestState,
         productsDatabaseEntitie,
         deleteProductNumber,
-        accessToken,
         activeEntitie,
         currentActiveTabIndex,
       ];

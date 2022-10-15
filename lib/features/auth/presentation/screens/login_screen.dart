@@ -113,7 +113,6 @@ class LoginScreen extends StatelessWidget {
                                 );
 
                               case RequestState.error:
-                                print(state.authMessage);
                                 return const Center(
                                   child: Text('data'),
                                 );
