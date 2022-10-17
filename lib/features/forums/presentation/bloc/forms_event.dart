@@ -41,3 +41,12 @@ class PickImageEvent extends ForumsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class ActiveTabForumsEvent extends ForumsEvent {
+  final int currentActiveTabe;
+
+  const ActiveTabForumsEvent(this.currentActiveTabe);
+
+  @override
+  List<Object?> get props => [currentActiveTabe];
+}

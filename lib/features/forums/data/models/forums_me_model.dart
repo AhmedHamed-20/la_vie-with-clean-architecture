@@ -1,3 +1,6 @@
+import 'package:la_vie_with_clean_architecture/features/forums/data/models/forums_user_model.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/entities/forums_user_entitie.dart';
+
 import '../../../../core/constants/constants.dart';
 import '../../../../core/network/endpoints.dart';
 import '../../domain/entities/forums_likes_entitie.dart';
@@ -7,6 +10,7 @@ import 'forums_comments_model.dart';
 class ForumsMeModel extends ForumsMeEntitie {
   const ForumsMeModel(
       {required super.userId,
+      required super.forumsUserEntitie,
       required super.forumsId,
       required super.title,
       required super.description,
@@ -16,6 +20,7 @@ class ForumsMeModel extends ForumsMeEntitie {
 
   factory ForumsMeModel.fromJson(Map<String, dynamic> json) {
     return ForumsMeModel(
+      forumsUserEntitie: ForumsUserModel.fromJson(json['user']),
       userId: json['userId'],
       forumsId: json['forumId'] ?? '',
       title: json['title'],

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/entities/forums_user_entitie.dart';
 
 import 'forums_comments_entitie.dart';
 import 'forums_likes_entitie.dart';
@@ -11,8 +12,10 @@ class ForumsEntitie extends Equatable {
   final String image;
   final List<ForumsLikesEntitie> formsLikesEntitie;
   final List<ForumsCommentsEtitie> forumsCommentsEtitie;
+  final ForumsUserEntitie forumsUserEntitie;
 
   const ForumsEntitie({
+    required this.forumsUserEntitie,
     required this.userId,
     required this.forumsId,
     required this.title,
@@ -24,6 +27,7 @@ class ForumsEntitie extends Equatable {
 
   @override
   List<Object> get props => [
+        forumsUserEntitie,
         forumsId,
         title,
         description,

@@ -8,8 +8,11 @@ class ForumsState extends Equatable {
   final List<ForumsMeEntitie> forumsMeEntitie;
   final String? errorMessage;
   final String? convertedImageToBase64;
-
+  final List activeEtitie;
+  final int currentActiveIndex;
   const ForumsState({
+    this.currentActiveIndex = 0,
+    this.activeEtitie = const [],
     this.forumsPostRequestState = ForumsPostRequestState.idle,
     this.forumsRequestState = ForumsRequestState.loading,
     this.allForumsEntitie = const [],
@@ -20,6 +23,8 @@ class ForumsState extends Equatable {
   });
 
   ForumsState copyWith({
+    int? currentActiveIndex,
+    List? activeEtitie,
     ForumsPostRequestState? forumsPostRequestState,
     ForumsRequestState? forumsRequestState,
     List<ForumsEntitie>? allForumsEntitie,
@@ -29,6 +34,8 @@ class ForumsState extends Equatable {
     ImagePickeRequestState? imagePickeRequestState,
   }) {
     return ForumsState(
+      currentActiveIndex: currentActiveIndex ?? this.currentActiveIndex,
+      activeEtitie: activeEtitie ?? this.activeEtitie,
       forumsRequestState: forumsRequestState ?? this.forumsRequestState,
       allForumsEntitie: allForumsEntitie ?? this.allForumsEntitie,
       errorMessage: errorMessage ?? this.errorMessage,
@@ -51,5 +58,7 @@ class ForumsState extends Equatable {
         forumsPostRequestState,
         convertedImageToBase64,
         imagePickeRequestState,
+        currentActiveIndex,
+        activeEtitie,
       ];
 }

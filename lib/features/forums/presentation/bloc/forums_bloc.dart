@@ -24,12 +24,15 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
     on<ForumsMeEvent>(_getForumsMe);
     on<ForumsPostEvent>(_postNewForum);
     on<PickImageEvent>(_pickImageAndConvertItToBase64);
+    on<ActiveTabForumsEvent>(_changeActiveTabIndex);
   }
   final AllForumsUsecase allForumsUsecase;
   final ForumsMeUsecase forumsMeUsecase;
   final ForumsPostUscase forumsPostUsecase;
   FutureOr<void> _getAllForums(
       AllForumsEvent event, Emitter<ForumsState> emit) async {
+    emit(state.copyWith(forumsRequestState: ForumsRequestState.loading));
+
     final result =
         await allForumsUsecase(AllForumsParams(accessToken: event.accessToken));
     result.fold(
@@ -45,9 +48,9 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
 
   FutureOr<void> _getForumsMe(
       ForumsMeEvent event, Emitter<ForumsState> emit) async {
+    emit(state.copyWith(forumsRequestState: ForumsRequestState.loading));
     final result =
         await forumsMeUsecase(ForumsMeParams(accessToken: event.accessToken));
-    emit(state.copyWith(forumsRequestState: ForumsRequestState.loading));
     result.fold(
       (l) => state.copyWith(
           errorMessage: l.message,
@@ -109,6 +112,24 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
       // User canceled the picker
       emit(
           state.copyWith(imagePickeRequestState: ImagePickeRequestState.error));
+    }
+  }
+
+  FutureOr<void> _changeActiveTabIndex(
+      ActiveTabForumsEvent event, Emitter<ForumsState> emit) {
+    switch (event.currentActiveTabe) {
+      case 0:
+        emit(state.copyWith(
+            currentActiveIndex: 0, activeEtitie: state.allForumsEntitie));
+        break;
+      case 1:
+        emit(state.copyWith(
+            currentActiveIndex: 1, activeEtitie: state.forumsMeEntitie));
+        break;
+      default:
+        emit(state.copyWith(
+            currentActiveIndex: 0, activeEtitie: state.allForumsEntitie));
+        break;
     }
   }
 }
