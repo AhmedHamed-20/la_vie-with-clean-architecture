@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
 
 import '../../../../core/components/defaults.dart';
 import '../../../../core/constants/constants.dart';
@@ -74,6 +75,9 @@ class LoginScreen extends StatelessWidget {
                         BlocConsumer<AuthBloc, AuthBlocState>(
                           listener: (context, state) {
                             if (state.accessTokenCached) {
+                              context.read<MainLayoutBloc>().add(
+                                  const GetAccessTokenFromCacheEvent(
+                                      'accessToken'));
                               Navigator.of(context)
                                   .pushNamed(AppRoutesNames.homeScreen);
                             }

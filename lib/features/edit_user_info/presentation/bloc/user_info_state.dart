@@ -1,21 +1,21 @@
 part of 'user_info_bloc.dart';
 
-class UpdatedUserDataState extends Equatable {
+class UserInfoState extends Equatable {
   final UpdatedUserDataEntitie? updatedUserDataEntitie;
   final String updatedUserDataErrorMessage;
   final UpdateUserDataRequestState updateUserDataRequestState;
 
-  const UpdatedUserDataState(
+  const UserInfoState(
       {this.updatedUserDataEntitie,
       this.updatedUserDataErrorMessage = '',
       this.updateUserDataRequestState = UpdateUserDataRequestState.idle});
 
-  UpdatedUserDataState copyWith({
+  UserInfoState copyWith({
     UpdatedUserDataEntitie? updatedUserDataEntitie,
     UpdateUserDataRequestState? updateUserDataRequestState,
     String? updatedUserDataErrorMessage,
   }) {
-    return UpdatedUserDataState(
+    return UserInfoState(
         updateUserDataRequestState:
             updateUserDataRequestState ?? this.updateUserDataRequestState,
         updatedUserDataEntitie:

@@ -9,21 +9,24 @@ class UserProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.black.withOpacity(0.8),
-      body: Column(
-        children: [
-          Align(
-            alignment: AlignmentDirectional.topEnd,
-            child: SizedBox(
-              height: MediaQueryOfMethods.getAppHeight(context) * 0.4,
-              child: const UpPhotoWidget(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Align(
+              alignment: AlignmentDirectional.topEnd,
+              child: SizedBox(
+                height: MediaQueryOfMethods.getAppHeight(context) * 0.4,
+                child: const UpPhotoWidget(),
+              ),
             ),
-          ),
-          const Align(
-            alignment: AlignmentDirectional.bottomCenter,
-            child: ChangeUserDataWidget(),
-          ),
-        ],
+            const Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: ChangeUserDataWidget(),
+            ),
+          ],
+        ),
       ),
     );
   }

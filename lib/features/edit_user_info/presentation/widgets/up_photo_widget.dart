@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
 
 import '../../../../core/constants/constants.dart';
+import '../bloc/user_info_bloc.dart';
 
 class UpPhotoWidget extends StatelessWidget {
   const UpPhotoWidget({
@@ -52,26 +53,31 @@ class UpPhotoWidget extends StatelessWidget {
           Align(
             alignment: AlignmentDirectional.center,
             child: BlocBuilder<MainLayoutBloc, MainLayoutState>(
-              builder: (context, state) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: AppRadius.r70,
-                      backgroundImage:
-                          NetworkImage(state.userDataEntitie!.imageUrl),
-                    ),
-                    const SizedBox(
-                      height: AppHeight.h8,
-                    ),
-                    Text(
-                      '${state.userDataEntitie!.firstName} ${state.userDataEntitie!.lastName}',
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            fontSize: AppFontSize.s20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                    ),
-                  ],
+              builder: (context, mainLayoutState) {
+                return BlocBuilder<UserInfoBloc, UserInfoState>(
+                  builder: (context, userInfoState) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: AppRadius.r70,
+                          backgroundImage: NetworkImage(
+                              mainLayoutState.userDataEntitie!.imageUrl),
+                        ),
+                        const SizedBox(
+                          height: AppHeight.h8,
+                        ),
+                        Text(
+                          '${userInfoState.updatedUserDataEntitie?.firstName ?? mainLayoutState.userDataEntitie!.firstName} ${userInfoState.updatedUserDataEntitie?.lastName ?? mainLayoutState.userDataEntitie!.lastName}',
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    fontSize: AppFontSize.s20,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                        ),
+                      ],
+                    );
+                  },
                 );
               },
             ),

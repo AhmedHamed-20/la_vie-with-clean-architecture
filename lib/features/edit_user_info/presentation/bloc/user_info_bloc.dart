@@ -9,15 +9,14 @@ import 'package:la_vie_with_clean_architecture/features/edit_user_info/domain/us
 part 'user_info_event.dart';
 part 'user_info_state.dart';
 
-class UserInfoBloc extends Bloc<UserInfoEvent, UpdatedUserDataState> {
-  UserInfoBloc(this.updateUserDataUsecasel)
-      : super(const UpdatedUserDataState()) {
+class UserInfoBloc extends Bloc<UserInfoEvent, UserInfoState> {
+  UserInfoBloc(this.updateUserDataUsecasel) : super(const UserInfoState()) {
     on<UpdatedUserDataEvent>(_updateUserData);
   }
   UpdateUserDataUsecase updateUserDataUsecasel;
 
   FutureOr<void> _updateUserData(
-      UpdatedUserDataEvent event, Emitter<UpdatedUserDataState> emit) async {
+      UpdatedUserDataEvent event, Emitter<UserInfoState> emit) async {
     emit(
       state.copyWith(
         updateUserDataRequestState: UpdateUserDataRequestState.loading,
