@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io' as io;
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -101,6 +102,8 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
         await FilePicker.platform.pickFiles(type: FileType.image);
 
     if (result != null) {
+      final filePath = io.File(result.files.single.path.toString());
+      emit(state.copyWith(photoPath: filePath));
       final image = await convertImageToBase64(result);
       emit(
         state.copyWith(

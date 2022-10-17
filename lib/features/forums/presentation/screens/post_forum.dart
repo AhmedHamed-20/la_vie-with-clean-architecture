@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:la_vie_with_clean_architecture/core/services/service_locator.dart';
 
 import '../../../../core/components/defaults.dart';
 import '../../../../core/constants/constants.dart';
-import '../../../../core/services/service_locator.dart';
 import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
 import '../../../../core/utl/utls.dart';
 import '../bloc/forums_bloc.dart';
+import '../widgets/add_photo_widget.dart';
 
 class PostForumScreen extends StatelessWidget {
   const PostForumScreen({Key? key}) : super(key: key);
@@ -14,7 +15,6 @@ class PostForumScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      //TODO remove it after include all forums ui
       create: (context) => servicelocator<ForumsBloc>(),
       child: Scaffold(
         resizeToAvoidBottomInset: true,
@@ -42,7 +42,15 @@ class PostForumScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BlocBuilder<ForumsBloc, ForumsState>(
+              BlocConsumer<ForumsBloc, ForumsState>(
+                listener: (context, state) {
+                  if (state.imagePickeRequestState.name == 'error') {
+                    flutterToast(
+                        msg: 'please select an image',
+                        backgroundColor: AppColors.toastError,
+                        textColor: AppColors.white);
+                  }
+                },
                 builder: (context, state) {
                   switch (state.imagePickeRequestState) {
                     case ImagePickeRequestState.loading:
@@ -50,42 +58,7 @@ class PostForumScreen extends StatelessWidget {
                         onTap: () {
                           context.read<ForumsBloc>().add(PickImageEvent());
                         },
-                        child: Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              color: Theme.of(context).backgroundColor,
-                              borderRadius: BorderRadius.circular(
-                                AppRadius.r5,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(AppPadding.p30),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.add,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  const SizedBox(
-                                    height: AppHeight.h8,
-                                  ),
-                                  Text(
-                                    'Add Photo',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.copyWith(
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: const AddPhotoWidget(),
                       );
 
                     case ImagePickeRequestState.picked:
@@ -94,21 +67,20 @@ class PostForumScreen extends StatelessWidget {
                           context.read<ForumsBloc>().add(PickImageEvent());
                         },
                         child: Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              color: Theme.of(context).backgroundColor,
-                              borderRadius: BorderRadius.circular(
-                                AppRadius.r5,
-                              ),
-                            ),
+                          child: Image.file(
+                            state.photoPath!,
+                            width: AppWidth.w100,
+                            height: AppHeight.h100,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       );
                     case ImagePickeRequestState.error:
-                      return const Text('error');
+                      return GestureDetector(
+                          onTap: () {
+                            context.read<ForumsBloc>().add(PickImageEvent());
+                          },
+                          child: const AddPhotoWidget());
                   }
                 },
               ),
@@ -154,8 +126,7 @@ class PostForumScreen extends StatelessWidget {
                       return defaultButton(
                         onPressed: () {
                           context.read<ForumsBloc>().add(ForumsPostEvent(
-                              accessToken:
-                                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQwMjkwNC00MzMxLTRkOGEtODRmOC1hOGVkNjRjMjVmM2IiLCJpYXQiOjE2NjQ5MjMxMjEsImV4cCI6MTY2NTA5NTkyMX0.Ki-V2wepIiRwJ-oazru800Ci-radI3jHPP-gn7IZWWY',
+                              accessToken: accessToken,
                               description: TextFormFieldControllers
                                   .descriptionPostController.text,
                               imageBae64: state.convertedImageToBase64!,

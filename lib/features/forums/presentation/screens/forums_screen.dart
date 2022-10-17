@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
-import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
+
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utl/utls.dart';
 import '../bloc/forums_bloc.dart';
@@ -26,6 +26,13 @@ class ForumsScreen extends StatelessWidget {
         )
         ..add(const ActiveTabForumsEvent(0)),
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(AppRoutesNames.postForumScreen);
+          },
+          backgroundColor: Theme.of(context).primaryColor,
+          child: const Icon(Icons.add),
+        ),
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {

@@ -10,7 +10,9 @@ class ForumsState extends Equatable {
   final String? convertedImageToBase64;
   final List activeEtitie;
   final int currentActiveIndex;
+  final File? photoPath;
   const ForumsState({
+    this.photoPath,
     this.currentActiveIndex = 0,
     this.activeEtitie = const [],
     this.forumsPostRequestState = ForumsPostRequestState.idle,
@@ -32,8 +34,10 @@ class ForumsState extends Equatable {
     List<ForumsMeEntitie>? forumsMeEntitie,
     String? convertedImageToBase64,
     ImagePickeRequestState? imagePickeRequestState,
+    File? photoPath,
   }) {
     return ForumsState(
+      photoPath: photoPath ?? this.photoPath,
       currentActiveIndex: currentActiveIndex ?? this.currentActiveIndex,
       activeEtitie: activeEtitie ?? this.activeEtitie,
       forumsRequestState: forumsRequestState ?? this.forumsRequestState,
@@ -51,6 +55,7 @@ class ForumsState extends Equatable {
 
   @override
   List<Object?> get props => [
+        photoPath,
         forumsRequestState,
         allForumsEntitie,
         errorMessage,
