@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_comment_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
 import '../../../../core/utl/utls.dart';
 import '../../domain/entities/forums_entitie.dart';
@@ -19,7 +20,7 @@ part 'forums_state.dart';
 
 class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
   ForumsBloc(this.allForumsUsecase, this.forumsMeUsecase,
-      this.forumsPostUsecase, this.likeAddUsecase)
+      this.forumsPostUsecase, this.likeAddUsecase, this.commentsAddingUsecase)
       : super(const ForumsState()) {
     on<AllForumsEvent>(_getAllForums);
     on<ForumsMeEvent>(_getForumsMeAndStoreIsLiked);
@@ -27,11 +28,13 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
     on<PickImageEvent>(_pickImageAndConvertItToBase64);
     on<ActiveTabForumsEvent>(_changeActiveTabIndex);
     on<LikesAddEvent>(_addLikeToPost);
+    on<AddCommentEvent>(_addComment);
   }
   final AllForumsUsecase allForumsUsecase;
   final ForumsMeUsecase forumsMeUsecase;
   final ForumsPostUscase forumsPostUsecase;
   final LikeAddUsecase likeAddUsecase;
+  final CommentsAddingUsecase commentsAddingUsecase;
   FutureOr<void> _getAllForums(
       AllForumsEvent event, Emitter<ForumsState> emit) async {
     final result =
@@ -40,7 +43,8 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
         (l) => emit(state.copyWith(
             errorMessage: l.message,
             forumsRequestState: ForumsRequestState.error)), (r) {
-      final List<bool> isLiked = List.from(getIslikedList(r, event.userId));
+      final List<bool> isLiked = getIslikedList(r, event.userId);
+      // print(isLiked);
 
       return emit(
         state.copyWith(
@@ -62,7 +66,7 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
             errorMessage: l.message,
             forumsRequestState: ForumsRequestState.error), (r) {
       final List<bool> isLiked = getIslikedList(r, event.userId);
-
+      // print(isLiked);
       return emit(
         state.copyWith(
           forumsMeEntitie: r,
@@ -74,17 +78,11 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
   }
 
   List<bool> getIslikedList(List forums, String userId) {
-    List<bool> isLiked = [];
+    List<bool> isLiked = List.filled(forums.length, false);
     for (int i = 0; i < forums.length; i++) {
-      if (forums[i].forumsLikesEntitie.isEmpty) {
-        isLiked.add(false);
-      } else {
-        for (int j = 0; j < forums[i].forumsLikesEntitie.length; j++) {
-          if (forums[i].forumsLikesEntitie[j].userId == userId) {
-            isLiked[i] = true;
-          } else {
-            isLiked.add(false);
-          }
+      for (int j = 0; j < forums[i].forumsLikesEntitie.length; j++) {
+        if (forums[i].forumsLikesEntitie[j].userId == userId) {
+          isLiked[i] = true;
         }
       }
     }
@@ -171,8 +169,21 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
     result.fold((l) => emit(state.copyWith(errorMessage: l.message)), (r) {
       if (state.currentActiveIndex == 0) {
         add(AllForumsEvent(accessToken: accessToken, userId: userId));
-      } else {
+      } else if (state.currentActiveIndex == 1) {
         add(ForumsMeEvent(accessToken: accessToken, userId: userId));
+      }
+    });
+  }
+
+  FutureOr<void> _addComment(
+      AddCommentEvent event, Emitter<ForumsState> emit) async {
+    final result = await commentsAddingUsecase(
+        CommentsAddingParams(event.accessToken, event.forumId, event.comment));
+    result.fold((l) => emit(state.copyWith(errorMessage: l.message)), (r) {
+      if (state.currentActiveIndex == 0) {
+        add(AllForumsEvent(accessToken: event.accessToken, userId: userId));
+      } else if (state.currentActiveIndex == 1) {
+        add(ForumsMeEvent(accessToken: event.accessToken, userId: userId));
       }
     });
   }

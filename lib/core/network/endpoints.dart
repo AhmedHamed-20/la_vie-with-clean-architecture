@@ -13,4 +13,6 @@ class EndPoints {
   static const String signInWithGoogle = '$baseUrl/api/v1/auth/google';
   static String addLike(String forumsId) =>
       '$baseUrl/api/v1/forums/$forumsId/like';
+  static String addComment(String forumsId) =>
+      '$baseUrl/api/v1/forums/$forumsId/comment';
 }

@@ -63,3 +63,17 @@ class LikesAddEvent extends ForumsEvent {
   @override
   List<Object?> get props => [accessToken, forumsId];
 }
+
+class AddCommentEvent extends ForumsEvent {
+  final String forumId;
+  final String accessToken;
+  final String comment;
+
+  const AddCommentEvent(
+      {required this.forumId,
+      required this.accessToken,
+      required this.comment});
+
+  @override
+  List<Object?> get props => [forumId, accessToken, comment];
+}

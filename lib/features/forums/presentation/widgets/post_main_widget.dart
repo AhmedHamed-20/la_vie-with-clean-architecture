@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/post_allforums_design.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/post_forums_me_design.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/all_forums_widgtes/post_allforums_design.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/forums_me_widgets/post_forums_me_design.dart';
 
 import '../../../../core/components/defaults.dart';
 import '../../../../core/constants/constants.dart';

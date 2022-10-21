@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_comment_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
 
 import '../../../../core/error/error_message_model.dart';
@@ -16,6 +17,7 @@ abstract class BaseForumsRemoteDatesource {
   Future<List<ForumsMeModel>> getForumsMe(ForumsMeParams params);
   Future<void> postForum(ForumsPostParams params);
   Future<dynamic> addLikeToPost(LikesAddParams params);
+  Future<dynamic> addCommentToPost(CommentsAddingParams params);
 }
 
 class AllForumsRemoteDatasource extends BaseForumsRemoteDatesource {
@@ -94,6 +96,25 @@ class AllForumsRemoteDatasource extends BaseForumsRemoteDatesource {
       return response;
     } on DioError catch (error) {
       print(error.response);
+      throw ServerException(
+          errorMessageModel: ErrorMessageModel.fromJson(error.response?.data));
+    }
+  }
+
+  @override
+  Future addCommentToPost(CommentsAddingParams params) async {
+    try {
+      final response = await DioHelper.postData(
+        url: EndPoints.addComment(params.forumId),
+        data: {"comment": params.comment},
+        headers: {
+          'Authorization': 'Bearer ${params.accessToken}',
+          'Content-Type': 'application/json',
+        },
+      );
+      print(response);
+    } on DioError catch (error) {
+      print(error);
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(error.response?.data));
     }

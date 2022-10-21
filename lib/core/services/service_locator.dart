@@ -10,6 +10,7 @@ import 'package:la_vie_with_clean_architecture/features/edit_user_info/data/repo
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/domain/repositories/updated_user_data_repository.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/domain/usecases/update_user_data.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/bloc/user_info_bloc.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_comment_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
 import 'package:la_vie_with_clean_architecture/features/products/data/datasource/local_product_datasource.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/delete_product_from_database.dart';
@@ -72,6 +73,7 @@ class ServiceLocator {
         servicelocator(),
         servicelocator(),
         servicelocator(),
+        servicelocator(),
         servicelocator()));
     servicelocator.registerFactory<UserInfoBloc>(() => UserInfoBloc(
           servicelocator(),
@@ -114,6 +116,9 @@ class ServiceLocator {
 
     servicelocator
         .registerLazySingleton(() => LikeAddUsecase(servicelocator()));
+    servicelocator
+        .registerLazySingleton(() => CommentsAddingUsecase(servicelocator()));
+
     //Repositories
     servicelocator.registerLazySingleton<AuthRepositories>(
         () => AuthRepositoriesImpl(servicelocator(), servicelocator()));

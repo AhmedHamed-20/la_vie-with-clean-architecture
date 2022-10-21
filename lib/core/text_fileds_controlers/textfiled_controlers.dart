@@ -21,6 +21,7 @@ class TextFormFieldControllers {
       TextEditingController();
   static TextEditingController changeNameController = TextEditingController();
   static TextEditingController changeEmailController = TextEditingController();
+  static TextEditingController addCommentController = TextEditingController();
 }
 
 class TabBarController {
