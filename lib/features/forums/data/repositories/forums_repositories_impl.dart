@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
 import '../../domain/usecases/get_forums_me.dart';
 import '../../domain/entities/forums_me_entitie.dart';
 import '../../domain/usecases/post_new_forums.dart';
@@ -55,6 +56,19 @@ class ForumsRepositoriesImpl extends ForumsRepositories {
       return Left(ServerFailure(
           message: failure.errorMessageModel.message,
           statusCode: failure.errorMessageModel.type));
+    }
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> addLikeToPost(LikesAddParams params) async {
+    try {
+      final result = await baseremoteDataSource.addLikeToPost(params);
+      return Right(result);
+    } on ServerException catch (exceptions) {
+      return Left(ServerFailure(
+        message: exceptions.errorMessageModel.message,
+        statusCode: exceptions.errorMessageModel.type,
+      ));
     }
   }
 }

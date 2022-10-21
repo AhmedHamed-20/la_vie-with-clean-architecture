@@ -10,7 +10,7 @@ class ForumsMeEntitie extends Equatable {
   final String title;
   final String description;
   final String image;
-  final List<ForumsLikesEntitie> formsLikesEntitie;
+  final List<ForumsLikesEntitie> forumsLikesEntitie;
   final List<ForumsCommentsEtitie> forumsCommentsEtitie;
   final ForumsUserEntitie forumsUserEntitie;
   const ForumsMeEntitie({
@@ -20,7 +20,7 @@ class ForumsMeEntitie extends Equatable {
     required this.title,
     required this.description,
     required this.image,
-    required this.formsLikesEntitie,
+    required this.forumsLikesEntitie,
     required this.forumsCommentsEtitie,
   });
 
@@ -30,7 +30,7 @@ class ForumsMeEntitie extends Equatable {
         title,
         description,
         image,
-        formsLikesEntitie,
+        forumsLikesEntitie,
         forumsUserEntitie,
         forumsCommentsEtitie
       ];

@@ -1,6 +1,8 @@
 part of 'forums_bloc.dart';
 
 class ForumsState extends Equatable {
+  final List<bool> isLikedAllForums;
+  final List<bool> isLikedMeForums;
   final ImagePickeRequestState imagePickeRequestState;
   final ForumsRequestState forumsRequestState;
   final ForumsPostRequestState forumsPostRequestState;
@@ -8,13 +10,13 @@ class ForumsState extends Equatable {
   final List<ForumsMeEntitie> forumsMeEntitie;
   final String? errorMessage;
   final String? convertedImageToBase64;
-  final List activeEtitie;
   final int currentActiveIndex;
   final File? photoPath;
   const ForumsState({
+    this.isLikedMeForums = const [],
+    this.isLikedAllForums = const [],
     this.photoPath,
     this.currentActiveIndex = 0,
-    this.activeEtitie = const [],
     this.forumsPostRequestState = ForumsPostRequestState.idle,
     this.forumsRequestState = ForumsRequestState.loading,
     this.allForumsEntitie = const [],
@@ -25,8 +27,9 @@ class ForumsState extends Equatable {
   });
 
   ForumsState copyWith({
+    List<bool>? isLikedMeForums,
+    List<bool>? isLikedAllForums,
     int? currentActiveIndex,
-    List? activeEtitie,
     ForumsPostRequestState? forumsPostRequestState,
     ForumsRequestState? forumsRequestState,
     List<ForumsEntitie>? allForumsEntitie,
@@ -37,9 +40,10 @@ class ForumsState extends Equatable {
     File? photoPath,
   }) {
     return ForumsState(
+      isLikedMeForums: isLikedMeForums ?? this.isLikedMeForums,
+      isLikedAllForums: isLikedAllForums ?? this.isLikedAllForums,
       photoPath: photoPath ?? this.photoPath,
       currentActiveIndex: currentActiveIndex ?? this.currentActiveIndex,
-      activeEtitie: activeEtitie ?? this.activeEtitie,
       forumsRequestState: forumsRequestState ?? this.forumsRequestState,
       allForumsEntitie: allForumsEntitie ?? this.allForumsEntitie,
       errorMessage: errorMessage ?? this.errorMessage,
@@ -55,6 +59,8 @@ class ForumsState extends Equatable {
 
   @override
   List<Object?> get props => [
+        isLikedAllForums,
+        isLikedMeForums,
         photoPath,
         forumsRequestState,
         allForumsEntitie,
@@ -64,6 +70,5 @@ class ForumsState extends Equatable {
         convertedImageToBase64,
         imagePickeRequestState,
         currentActiveIndex,
-        activeEtitie,
       ];
 }

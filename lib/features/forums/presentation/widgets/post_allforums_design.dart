@@ -1,20 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/constants/constants.dart';
 import '../bloc/forums_bloc.dart';
 
-class PostDesign extends StatelessWidget {
-  const PostDesign({super.key});
+class PostAllForumsDesign extends StatelessWidget {
+  const PostAllForumsDesign({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ForumsBloc, ForumsState>(
       builder: (context, state) {
+        //  print('value ${state.activeListOfLikes}');
         return Expanded(
           child: ListView.builder(
-              itemCount: state.activeEtitie.length,
+              itemCount: state.allForumsEntitie.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(AppPadding.p8),
@@ -44,7 +44,7 @@ class PostDesign extends StatelessWidget {
                                       ),
                                   placeholder: (context, url) =>
                                       const CircularProgressIndicator(),
-                                  imageUrl: state.activeEtitie[index]
+                                  imageUrl: state.allForumsEntitie[index]
                                       .forumsUserEntitie.imageUrl,
                                   errorWidget: (context, url, error) {
                                     return const Center(
@@ -58,7 +58,7 @@ class PostDesign extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${state.activeEtitie[index].forumsUserEntitie.firstName} ${state.activeEtitie[index].forumsUserEntitie.lastName}',
+                                    '${state.allForumsEntitie[index].forumsUserEntitie.firstName} ${state.allForumsEntitie[index].forumsUserEntitie.lastName}',
                                     style:
                                         Theme.of(context).textTheme.titleLarge,
                                   ),
@@ -81,7 +81,7 @@ class PostDesign extends StatelessWidget {
                             right: AppPadding.p8,
                           ),
                           child: Text(
-                            state.activeEtitie[index].title,
+                            state.allForumsEntitie[index].title,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge
@@ -100,7 +100,7 @@ class PostDesign extends StatelessWidget {
                             right: AppPadding.p8,
                           ),
                           child: Text(
-                            state.activeEtitie[index].description,
+                            state.allForumsEntitie[index].description,
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
                         ),
@@ -109,7 +109,7 @@ class PostDesign extends StatelessWidget {
                         ),
                         Center(
                           child: CachedNetworkImage(
-                            imageUrl: state.activeEtitie[index].image,
+                            imageUrl: state.allForumsEntitie[index].image,
                             width: double.infinity,
                             fit: BoxFit.cover,
                             filterQuality: FilterQuality.low,
@@ -136,17 +136,25 @@ class PostDesign extends StatelessWidget {
                             Row(
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.read<ForumsBloc>().add(
+                                        LikesAddEvent(
+                                            accessToken,
+                                            state.allForumsEntitie[index]
+                                                .forumsId));
+                                  },
                                   icon: Icon(
-                                    Icons.thumb_up_alt_outlined,
+                                    state.isLikedAllForums[index]
+                                        ? Icons.thumb_up_alt
+                                        : Icons.thumb_up_alt_outlined,
                                     color: AppColors.iconColorGrey,
                                   ),
                                 ),
                                 GestureDetector(
                                   onTap: () {},
                                   child: Text(
-                                    state.activeEtitie[index].formsLikesEntitie
-                                        .length
+                                    state.allForumsEntitie[index]
+                                        .forumsLikesEntitie.length
                                         .toString(),
                                     style:
                                         Theme.of(context).textTheme.subtitle1,
@@ -160,8 +168,8 @@ class PostDesign extends StatelessWidget {
                             GestureDetector(
                               onTap: () {},
                               child: Text(
-                                state.activeEtitie[index].forumsCommentsEtitie
-                                    .length
+                                state.allForumsEntitie[index]
+                                    .forumsCommentsEtitie.length
                                     .toString(),
                                 style: Theme.of(context).textTheme.subtitle1,
                               ),

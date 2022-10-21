@@ -5,21 +5,24 @@ abstract class ForumsEvent extends Equatable {
 }
 
 class AllForumsEvent extends ForumsEvent {
+  final String userId;
   final String accessToken;
 
-  const AllForumsEvent({required this.accessToken});
+  const AllForumsEvent({required this.accessToken, required this.userId});
 
   @override
-  List<Object> get props => [accessToken];
+  List<Object> get props => [accessToken, userId];
 }
 
 class ForumsMeEvent extends ForumsEvent {
+  //to calCulate isLiked
+  final String userId;
   final String accessToken;
 
-  const ForumsMeEvent({required this.accessToken});
+  const ForumsMeEvent({required this.accessToken, required this.userId});
 
   @override
-  List<Object> get props => [accessToken];
+  List<Object> get props => [accessToken, userId];
 }
 
 class ForumsPostEvent extends ForumsEvent {
@@ -49,4 +52,14 @@ class ActiveTabForumsEvent extends ForumsEvent {
 
   @override
   List<Object?> get props => [currentActiveTabe];
+}
+
+class LikesAddEvent extends ForumsEvent {
+  final String accessToken;
+  final String forumsId;
+
+  const LikesAddEvent(this.accessToken, this.forumsId);
+
+  @override
+  List<Object?> get props => [accessToken, forumsId];
 }

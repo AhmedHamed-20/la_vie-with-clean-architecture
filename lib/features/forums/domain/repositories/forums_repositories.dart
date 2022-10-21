@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
 
 import '../../../../core/error/failures.dart';
 import '../entities/forums_entitie.dart';
@@ -13,4 +14,5 @@ abstract class ForumsRepositories {
   Future<Either<Failure, List<ForumsMeEntitie>>> getForumsMe(
       ForumsMeParams params);
   Future<Either<Failure, void>> postNewForum(ForumsPostParams params);
+  Future<Either<Failure, dynamic>> addLikeToPost(LikesAddParams params);
 }

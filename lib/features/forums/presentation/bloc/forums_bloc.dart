@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io' as io;
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
-
+import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
 import '../../../../core/utl/utls.dart';
 import '../../domain/entities/forums_entitie.dart';
 import '../../domain/entities/forums_me_entitie.dart';
@@ -18,51 +18,77 @@ part 'forms_event.dart';
 part 'forums_state.dart';
 
 class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
-  ForumsBloc(
-      this.allForumsUsecase, this.forumsMeUsecase, this.forumsPostUsecase)
+  ForumsBloc(this.allForumsUsecase, this.forumsMeUsecase,
+      this.forumsPostUsecase, this.likeAddUsecase)
       : super(const ForumsState()) {
     on<AllForumsEvent>(_getAllForums);
-    on<ForumsMeEvent>(_getForumsMe);
+    on<ForumsMeEvent>(_getForumsMeAndStoreIsLiked);
     on<ForumsPostEvent>(_postNewForum);
     on<PickImageEvent>(_pickImageAndConvertItToBase64);
     on<ActiveTabForumsEvent>(_changeActiveTabIndex);
+    on<LikesAddEvent>(_addLikeToPost);
   }
   final AllForumsUsecase allForumsUsecase;
   final ForumsMeUsecase forumsMeUsecase;
   final ForumsPostUscase forumsPostUsecase;
+  final LikeAddUsecase likeAddUsecase;
   FutureOr<void> _getAllForums(
       AllForumsEvent event, Emitter<ForumsState> emit) async {
-    emit(state.copyWith(forumsRequestState: ForumsRequestState.loading));
-
     final result =
         await allForumsUsecase(AllForumsParams(accessToken: event.accessToken));
     result.fold(
-      (l) => emit(state.copyWith(
-          errorMessage: l.message,
-          forumsRequestState: ForumsRequestState.error)),
-      (r) => emit(
+        (l) => emit(state.copyWith(
+            errorMessage: l.message,
+            forumsRequestState: ForumsRequestState.error)), (r) {
+      final List<bool> isLiked = List.from(getIslikedList(r, event.userId));
+
+      return emit(
         state.copyWith(
-            allForumsEntitie: r, forumsRequestState: ForumsRequestState.loaded),
-      ),
-    );
+          allForumsEntitie: r,
+          forumsRequestState: ForumsRequestState.loaded,
+          isLikedAllForums: isLiked,
+        ),
+      );
+    });
   }
 
-  FutureOr<void> _getForumsMe(
+  FutureOr<void> _getForumsMeAndStoreIsLiked(
       ForumsMeEvent event, Emitter<ForumsState> emit) async {
-    emit(state.copyWith(forumsRequestState: ForumsRequestState.loading));
-    final result =
-        await forumsMeUsecase(ForumsMeParams(accessToken: event.accessToken));
+    final result = await forumsMeUsecase(ForumsMeParams(
+      accessToken: event.accessToken,
+    ));
     result.fold(
-      (l) => state.copyWith(
-          errorMessage: l.message,
-          forumsRequestState: ForumsRequestState.error),
-      (r) => emit(
+        (l) => state.copyWith(
+            errorMessage: l.message,
+            forumsRequestState: ForumsRequestState.error), (r) {
+      final List<bool> isLiked = getIslikedList(r, event.userId);
+
+      return emit(
         state.copyWith(
           forumsMeEntitie: r,
           forumsRequestState: ForumsRequestState.loaded,
+          isLikedMeForums: isLiked,
         ),
-      ),
-    );
+      );
+    });
+  }
+
+  List<bool> getIslikedList(List forums, String userId) {
+    List<bool> isLiked = [];
+    for (int i = 0; i < forums.length; i++) {
+      if (forums[i].forumsLikesEntitie.isEmpty) {
+        isLiked.add(false);
+      } else {
+        for (int j = 0; j < forums[i].forumsLikesEntitie.length; j++) {
+          if (forums[i].forumsLikesEntitie[j].userId == userId) {
+            isLiked[i] = true;
+          } else {
+            isLiked.add(false);
+          }
+        }
+      }
+    }
+    return isLiked;
   }
 
   FutureOr<void> _postNewForum(
@@ -112,7 +138,6 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
         ),
       );
     } else {
-      // User canceled the picker
       emit(
           state.copyWith(imagePickeRequestState: ImagePickeRequestState.error));
     }
@@ -123,16 +148,32 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
     switch (event.currentActiveTabe) {
       case 0:
         emit(state.copyWith(
-            currentActiveIndex: 0, activeEtitie: state.allForumsEntitie));
+          currentActiveIndex: 0,
+        ));
         break;
       case 1:
         emit(state.copyWith(
-            currentActiveIndex: 1, activeEtitie: state.forumsMeEntitie));
+          currentActiveIndex: 1,
+        ));
         break;
       default:
         emit(state.copyWith(
-            currentActiveIndex: 0, activeEtitie: state.allForumsEntitie));
+          currentActiveIndex: 0,
+        ));
         break;
     }
+  }
+
+  FutureOr<void> _addLikeToPost(
+      LikesAddEvent event, Emitter<ForumsState> emit) async {
+    final result =
+        await likeAddUsecase(LikesAddParams(event.forumsId, event.accessToken));
+    result.fold((l) => emit(state.copyWith(errorMessage: l.message)), (r) {
+      if (state.currentActiveIndex == 0) {
+        add(AllForumsEvent(accessToken: accessToken, userId: userId));
+      } else {
+        add(ForumsMeEvent(accessToken: accessToken, userId: userId));
+      }
+    });
   }
 }

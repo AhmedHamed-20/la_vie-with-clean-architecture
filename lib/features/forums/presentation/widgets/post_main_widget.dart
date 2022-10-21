@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/post_design.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/post_allforums_design.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/post_forums_me_design.dart';
 
 import '../../../../core/components/defaults.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
+import '../bloc/forums_bloc.dart';
 import 'forums_tob_tabs.dart';
 
 class PostMainWidget extends StatelessWidget {
@@ -44,7 +47,15 @@ class PostMainWidget extends StatelessWidget {
           height: screenHeight(context) * 0.08,
           child: const ForumsTobTabsWidget(),
         ),
-        const PostDesign(),
+        BlocBuilder<ForumsBloc, ForumsState>(
+          builder: (context, state) {
+            if (state.currentActiveIndex == 0) {
+              return const PostAllForumsDesign();
+            } else {
+              return const PostForumsMeDesign();
+            }
+          },
+        ),
       ],
     );
   }

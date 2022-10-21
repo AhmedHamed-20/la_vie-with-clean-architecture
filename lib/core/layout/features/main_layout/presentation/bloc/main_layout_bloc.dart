@@ -30,6 +30,7 @@ class MainLayoutBloc extends Bloc<MainLayoutEvent, MainLayoutState> {
             userDataRequestState: UserDataRequestState.error,
             mainLayoutErrorMessage: l.message)), (r) {
       accessToken = r;
+
       return emit(
         state.copyWith(
           accessToken: r,
@@ -45,17 +46,18 @@ class MainLayoutBloc extends Bloc<MainLayoutEvent, MainLayoutState> {
       UserDataParams(accessToken: event.accessToken),
     );
     result.fold(
-      (l) => emit(state.copyWith(
-          userDataRequestState: UserDataRequestState.error,
-          statusCode: l.statusCode,
-          mainLayoutErrorMessage: l.message)),
-      (r) => emit(
+        (l) => emit(state.copyWith(
+            userDataRequestState: UserDataRequestState.error,
+            statusCode: l.statusCode,
+            mainLayoutErrorMessage: l.message)), (r) {
+      userId = r.userId;
+      return emit(
         state.copyWith(
           userDataEntitie: r,
           userDataRequestState: UserDataRequestState.loaded,
         ),
-      ),
-    );
+      );
+    });
   }
 
   FutureOr<void> _changeBottomNavIndex(

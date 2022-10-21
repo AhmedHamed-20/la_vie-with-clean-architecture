@@ -11,4 +11,6 @@ class EndPoints {
   static const String updateMyData = '$baseUrl/api/v1/user/me';
   static const String createPost = '$baseUrl/api/v1/forums';
   static const String signInWithGoogle = '$baseUrl/api/v1/auth/google';
+  static String addLike(String forumsId) =>
+      '$baseUrl/api/v1/forums/$forumsId/like';
 }

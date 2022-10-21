@@ -14,7 +14,7 @@ class AllForumsModel extends ForumsEntitie {
       required super.title,
       required super.description,
       required super.image,
-      required super.formsLikesEntitie,
+      required super.forumsLikesEntitie,
       required super.forumsCommentsEtitie});
 
   factory AllForumsModel.fromJson(Map<String, dynamic> json) {
@@ -27,7 +27,7 @@ class AllForumsModel extends ForumsEntitie {
       image: json['imageUrl'] == null || json['imageUrl'] == ''
           ? defaultImage
           : EndPoints.baseUrl + json['imageUrl'],
-      formsLikesEntitie: List.from((json['ForumLikes'] as List)
+      forumsLikesEntitie: List.from((json['ForumLikes'] as List)
           .map((e) => ForumsLikesEntitie.fromJson(e))),
       forumsCommentsEtitie: List.from((json['ForumComments'] as List)
           .map((e) => ForumsCommentsModel.fromJson(e))),

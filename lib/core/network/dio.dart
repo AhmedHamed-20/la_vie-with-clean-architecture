@@ -29,7 +29,7 @@ class DioHelper {
 
   static Future<Response<dynamic>?> postData({
     required String url,
-    required dynamic data,
+    dynamic data,
     Map<String, dynamic>? headers,
     ProgressCallback? onReceiveProgress,
     ProgressCallback? onSendProgress,

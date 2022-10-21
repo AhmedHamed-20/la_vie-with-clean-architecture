@@ -15,16 +15,11 @@ class ForumsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => servicelocator<ForumsBloc>()
         ..add(
-          AllForumsEvent(
-            accessToken: accessToken,
-          ),
+          AllForumsEvent(accessToken: accessToken, userId: userId),
         )
         ..add(
-          ForumsMeEvent(
-            accessToken: accessToken,
-          ),
-        )
-        ..add(const ActiveTabForumsEvent(0)),
+          ForumsMeEvent(accessToken: accessToken, userId: userId),
+        ),
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -57,9 +52,6 @@ class ForumsScreen extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               case ForumsRequestState.loaded:
-                if (state.activeEtitie == const []) {
-                  context.read<ForumsBloc>().add(const ActiveTabForumsEvent(0));
-                }
                 return const PostMainWidget();
               case ForumsRequestState.error:
                 return Center(
