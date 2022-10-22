@@ -37,6 +37,13 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const UserProfileScreen());
       case AppRoutesNames.cartScreen:
         return MaterialPageRoute(builder: (_) => const CartScreen());
+      case AppRoutesNames.noInterNetConnetionFoundScreen:
+        return MaterialPageRoute(
+            builder: (_) => const Scaffold(
+                  body: Center(
+                    child: Text('NoInternet'),
+                  ),
+                ));
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(

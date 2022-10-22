@@ -1,5 +1,4 @@
 import 'package:la_vie_with_clean_architecture/features/forums/data/models/forums_user_model.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/domain/entities/forums_user_entitie.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/network/endpoints.dart';

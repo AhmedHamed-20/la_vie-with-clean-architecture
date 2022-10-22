@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/widgets/user_profile_alert_dialog.dart';
-import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../bloc/user_info_bloc.dart';

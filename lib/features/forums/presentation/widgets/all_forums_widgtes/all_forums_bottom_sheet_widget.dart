@@ -1,9 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/components/defaults.dart';
-import 'package:la_vie_with_clean_architecture/core/services/service_locator.dart';
 import 'package:la_vie_with_clean_architecture/core/text_fileds_controlers/textfiled_controlers.dart';
 
 import '../../../../../core/constants/constants.dart';

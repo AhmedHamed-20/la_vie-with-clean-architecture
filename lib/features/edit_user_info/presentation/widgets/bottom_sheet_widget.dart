@@ -92,7 +92,6 @@ class BottomSheetWidget extends StatelessWidget {
                       height: AppHeight.h46,
                     );
                   case UpdateUserDataRequestState.error:
-                    print(state.updatedUserDataErrorMessage);
                     return defaultButton(
                       onPressed: onPressedOnConfirm,
                       buttonChild: Text(

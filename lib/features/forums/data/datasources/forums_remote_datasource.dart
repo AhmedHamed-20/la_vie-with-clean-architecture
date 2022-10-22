@@ -92,10 +92,9 @@ class AllForumsRemoteDatasource extends BaseForumsRemoteDatesource {
           'Content-Type': 'application/json',
         },
       );
-      print(response);
+
       return response;
     } on DioError catch (error) {
-      print(error.response);
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(error.response?.data));
     }
@@ -104,7 +103,7 @@ class AllForumsRemoteDatasource extends BaseForumsRemoteDatesource {
   @override
   Future addCommentToPost(CommentsAddingParams params) async {
     try {
-      final response = await DioHelper.postData(
+      await DioHelper.postData(
         url: EndPoints.addComment(params.forumId),
         data: {"comment": params.comment},
         headers: {
@@ -112,9 +111,7 @@ class AllForumsRemoteDatasource extends BaseForumsRemoteDatesource {
           'Content-Type': 'application/json',
         },
       );
-      print(response);
     } on DioError catch (error) {
-      print(error);
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(error.response?.data));
     }

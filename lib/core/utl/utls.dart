@@ -59,3 +59,8 @@ enum UserDataRequestState {
   loaded,
   error,
 }
+
+enum InternetConnectionState {
+  connected,
+  disconnected,
+}

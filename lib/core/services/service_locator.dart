@@ -3,6 +3,7 @@ import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/data/repositories/main_layout_repository_impl.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/domain/repositories/main_layout_repository.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
+import 'package:la_vie_with_clean_architecture/core/network_connection/network_connection_bloc.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/data/datasources/updated_user_remote_datasource.dart';
@@ -80,6 +81,8 @@ class ServiceLocator {
         ));
     servicelocator.registerFactory<MainLayoutBloc>(
         () => MainLayoutBloc(servicelocator(), servicelocator()));
+    servicelocator
+        .registerFactory<NetworkConnectionBloc>(() => NetworkConnectionBloc());
     //useCases
     servicelocator.registerLazySingleton(() => LoginUsecase(servicelocator()));
     servicelocator.registerLazySingleton(() => SignupUscase(servicelocator()));
