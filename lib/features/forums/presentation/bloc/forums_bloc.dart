@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
+import 'package:la_vie_with_clean_architecture/core/text_fileds_controlers/textfiled_controlers.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_comment_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
 import '../../../../core/utl/utls.dart';
@@ -182,8 +183,10 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
     result.fold((l) => emit(state.copyWith(errorMessage: l.message)), (r) {
       if (state.currentActiveIndex == 0) {
         add(AllForumsEvent(accessToken: event.accessToken, userId: userId));
+        TextFormFieldControllers.addCommentController.clear();
       } else if (state.currentActiveIndex == 1) {
         add(ForumsMeEvent(accessToken: event.accessToken, userId: userId));
+        TextFormFieldControllers.addCommentController.clear();
       }
     });
   }

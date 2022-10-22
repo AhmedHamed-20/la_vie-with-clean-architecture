@@ -119,7 +119,20 @@ class PostForumScreen extends StatelessWidget {
               const SizedBox(
                 height: AppHeight.h12,
               ),
-              BlocBuilder<ForumsBloc, ForumsState>(
+              BlocConsumer<ForumsBloc, ForumsState>(
+                listener: (context, state) {
+                  if (state.forumsPostRequestState.name == 'posted') {
+                    flutterToast(
+                        msg: 'Posted Successfuly',
+                        backgroundColor: AppColors.toastSuccess,
+                        textColor: AppColors.white);
+                    context.read<ForumsBloc>().add(ForumsMeEvent(
+                        accessToken: accessToken, userId: userId));
+
+                    TextFormFieldControllers.titlePostController.clear();
+                    TextFormFieldControllers.descriptionPostController.clear();
+                  }
+                },
                 builder: (context, state) {
                   switch (state.forumsPostRequestState) {
                     case ForumsPostRequestState.idle:
