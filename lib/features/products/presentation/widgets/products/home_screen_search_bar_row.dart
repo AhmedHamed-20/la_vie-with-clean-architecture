@@ -11,7 +11,6 @@ class HomeScreenSearchBarRow extends StatelessWidget {
   const HomeScreenSearchBarRow({
     Key? key,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,7 +20,9 @@ class HomeScreenSearchBarRow extends StatelessWidget {
           Expanded(
             flex: 4,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRoutesNames.searchScreen);
+              },
               child: mobileHomeSearchBar(
                 enabled: false,
                 prefixIcon: Icon(

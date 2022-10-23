@@ -34,7 +34,9 @@ class MainLayoutWidget extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRoutesNames.forumsScreen);
+            },
             icon: Icon(
               Icons.forum,
               color: AppColors.iconColorGrey,
@@ -77,7 +79,7 @@ class MainLayoutWidget extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutesNames.forumsScreen);
+                Navigator.of(context).pushNamed(AppRoutesNames.scanScreen);
               },
               icon: Icon(
                 IconlyBroken.scan,

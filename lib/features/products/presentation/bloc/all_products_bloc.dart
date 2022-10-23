@@ -39,6 +39,7 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     on<AmountValueEvent>(_changeProductAmountValueWithId);
     on<LogoutEvent>(_logot);
     on<AmountOfProductsInCartEvent>(_changeAmountOfProductsInCart);
+    on<SearchAboutProductEvent>(_searchAboutProudct);
   }
   AllProductsUseCase allProductsUseCase;
   PeroductsFromDatabaseUsecase peroductsFromDatabaseUsecase;
@@ -301,6 +302,37 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
       result.fold(
           (l) => emit(state.copyWith(allProductsErrorMessage: l.message)),
           (r) => emit(state.copyWith(deleteProductNumber: r)));
+    }
+  }
+
+  FutureOr<void> _searchAboutProudct(
+      SearchAboutProductEvent event, Emitter<AllProductsState> emit) {
+    if (event.productName.isNotEmpty) {
+      List foundedSearchIteam = [];
+      for (var element in state.allProductsEntitie) {
+        if (element.plantEntitie != null) {
+          if (element.plantEntitie!.name
+              .toLowerCase()
+              .contains(event.productName)) {
+            foundedSearchIteam.add(element.plantEntitie);
+          }
+        } else if (element.seedEntitie != null) {
+          if (element.seedEntitie!.name
+              .toLowerCase()
+              .contains(event.productName)) {
+            foundedSearchIteam.add(element.seedEntitie);
+          }
+        } else if (element.toolEntitie != null) {
+          if (element.toolEntitie!.name
+              .toLowerCase()
+              .contains(event.productName)) {
+            foundedSearchIteam.add(element.toolEntitie);
+          }
+        }
+      }
+      emit(state.copyWith(foundedSearchIteam: foundedSearchIteam));
+
+      print(foundedSearchIteam);
     }
   }
 }

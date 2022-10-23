@@ -23,7 +23,9 @@ class DioHelper {
       url,
       queryParameters: query,
       onReceiveProgress: onReceiveProgress,
-      options: Options(headers: headers),
+      options: Options(
+        headers: headers,
+      ),
     );
   }
 

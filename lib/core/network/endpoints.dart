@@ -15,4 +15,6 @@ class EndPoints {
       '$baseUrl/api/v1/forums/$forumsId/like';
   static String addComment(String forumsId) =>
       '$baseUrl/api/v1/forums/$forumsId/comment';
+  static String getProductById(String productId) =>
+      '$baseUrl/api/v1/products/$productId';
 }

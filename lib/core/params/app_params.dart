@@ -13,3 +13,27 @@ class BlogsDetailsParams extends Equatable {
   @override
   List<Object?> get props => [blogDetailes, blogTitle, photoUrl];
 }
+
+class DetailsScreenParams extends Equatable {
+  final int sunLight;
+  final String title;
+  final int waterCapacity;
+  final String description;
+  final int temperature;
+
+  const DetailsScreenParams(
+      {required this.sunLight,
+      required this.title,
+      required this.waterCapacity,
+      required this.description,
+      required this.temperature});
+
+  @override
+  List<Object?> get props => [
+        sunLight,
+        title,
+        waterCapacity,
+        description,
+        temperature,
+      ];
+}

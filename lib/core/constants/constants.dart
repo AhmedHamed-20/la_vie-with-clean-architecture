@@ -204,9 +204,13 @@ class AppRoutesNames {
       '/noInternetConnectionScreen';
   static const String loginScreen = '/';
   static const String homeScreen = '/home_screen';
+  static const String scanScreen = '/home_screen/scan_screen';
   static const String cartScreen = '/home_screen/products_screen/cart_screen';
   static const String productsScreen = '/home_screen/products_screen';
   static const String blogsScreen = 'home_screen/blogs_screen';
+  static const String detailsScreen =
+      '/home_screen/blogs_screen/details_screen';
+  static const String searchScreen = '/home_screen/blogs_screen/search_screen';
   static const String blogsScreenDetails = 'home_screen/blogs_screen/details';
   static const String forumsScreen = 'home_screen/forums_screen';
   static const String postForumScreen = 'home_screen/forums_screen/post_forum';

@@ -116,3 +116,12 @@ class AmountOfProductsInCartEvent extends BaseAllProductsEvent {
   @override
   List<Object?> get props => [dataBaseProductsId, isIncrement, amount];
 }
+
+class SearchAboutProductEvent extends BaseAllProductsEvent {
+  final String productName;
+
+  const SearchAboutProductEvent(this.productName);
+
+  @override
+  List<Object?> get props => [productName];
+}

@@ -19,6 +19,11 @@ import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/get_all_products_from_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/insert_product_into_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/update_amount_database.dart';
+import 'package:la_vie_with_clean_architecture/features/scan/data/datasources/product_by_id_remote_datasource.dart';
+import 'package:la_vie_with_clean_architecture/features/scan/data/repositories/product_by_id_repository.dart';
+import 'package:la_vie_with_clean_architecture/features/scan/domain/repositories/product_by_id_repository.dart';
+import 'package:la_vie_with_clean_architecture/features/scan/domain/usecases/get_product_by_id.dart';
+import 'package:la_vie_with_clean_architecture/features/scan/presentation/bloc/scan_bloc.dart';
 import '../../features/forums/domain/usecases/post_new_forums.dart';
 import '../../features/auth/data/datasources/auth_remote_datasource.dart';
 import '../../features/auth/data/repositories/repositories_impl.dart';
@@ -83,6 +88,8 @@ class ServiceLocator {
         () => MainLayoutBloc(servicelocator(), servicelocator()));
     servicelocator
         .registerFactory<NetworkConnectionBloc>(() => NetworkConnectionBloc());
+    servicelocator.registerFactory<ScanBloc>(() => ScanBloc(servicelocator()));
+
     //useCases
     servicelocator.registerLazySingleton(() => LoginUsecase(servicelocator()));
     servicelocator.registerLazySingleton(() => SignupUscase(servicelocator()));
@@ -121,7 +128,8 @@ class ServiceLocator {
         .registerLazySingleton(() => LikeAddUsecase(servicelocator()));
     servicelocator
         .registerLazySingleton(() => CommentsAddingUsecase(servicelocator()));
-
+    servicelocator
+        .registerLazySingleton(() => ProductByIdUsecase(servicelocator()));
     //Repositories
     servicelocator.registerLazySingleton<AuthRepositories>(
         () => AuthRepositoriesImpl(servicelocator(), servicelocator()));
@@ -135,6 +143,8 @@ class ServiceLocator {
         () => UpdatedUserDataRepositoryImpl(servicelocator()));
     servicelocator.registerLazySingleton<MainLayoutRepository>(
         () => MainLayoutRepositoryImpl(servicelocator(), servicelocator()));
+    servicelocator.registerLazySingleton<ProductByIdRepository>(
+        () => ProductByIdRepositoryImpl(servicelocator()));
     //DataSource
     servicelocator.registerLazySingleton<BaseAuthRemoteDataSource>(
         () => RemoteAuthDataSourceImpl());
@@ -154,5 +164,7 @@ class ServiceLocator {
         () => MainLayoutRemoteDataSourceImpl());
     servicelocator.registerLazySingleton<BaseMainLayoutLocalDataSource>(
         () => MainLayoutLocalDataSourceImpl());
+    servicelocator.registerLazySingleton<BaseProductByIdRemoteDataSource>(
+        () => ProductByIdRemoteDataSourceImpl());
   }
 }

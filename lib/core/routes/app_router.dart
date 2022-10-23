@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:la_vie_with_clean_architecture/core/components/product_details_screen.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/screens/home_screen.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/screens/user_data_info_screen.dart';
 import 'package:la_vie_with_clean_architecture/features/products/presentation/screens/cart_screen.dart';
 import 'package:la_vie_with_clean_architecture/features/products/presentation/screens/products_screen.dart';
+import 'package:la_vie_with_clean_architecture/features/products/presentation/screens/search_screen.dart';
+import 'package:la_vie_with_clean_architecture/features/scan/presentation/screens/scan_screen.dart';
 
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/blogs/presentation/screens/blogs_details.dart';
@@ -44,6 +47,21 @@ class AppRouter {
                     child: Text('NoInternet'),
                   ),
                 ));
+      case AppRoutesNames.scanScreen:
+        return MaterialPageRoute(builder: (_) => const ScanScreen());
+      case AppRoutesNames.detailsScreen:
+        DetailsScreenParams detailsScreenParams = args as DetailsScreenParams;
+        return MaterialPageRoute(
+          builder: (_) => ProductDetailsScreen(
+            sunLight: detailsScreenParams.sunLight,
+            title: detailsScreenParams.title,
+            waterCapacity: detailsScreenParams.waterCapacity,
+            description: detailsScreenParams.description,
+            temperature: detailsScreenParams.temperature,
+          ),
+        );
+      case AppRoutesNames.searchScreen:
+        return MaterialPageRoute(builder: (_) => const SearchScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => const Scaffold(

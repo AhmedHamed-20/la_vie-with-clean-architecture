@@ -64,3 +64,15 @@ enum InternetConnectionState {
   connected,
   disconnected,
 }
+
+enum ProductDetailsRequestState {
+  loading,
+  loaded,
+  error,
+}
+
+enum ProductDetailsType {
+  plant,
+  seed,
+  tool,
+}
