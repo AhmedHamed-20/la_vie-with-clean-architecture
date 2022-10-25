@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_comment_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/search_in_forums_by_name.dart';
 
 import '../../../../core/error/error_message_model.dart';
 import '../../../../core/error/exceptions.dart';
@@ -18,6 +19,8 @@ abstract class BaseForumsRemoteDatesource {
   Future<void> postForum(ForumsPostParams params);
   Future<dynamic> addLikeToPost(LikesAddParams params);
   Future<dynamic> addCommentToPost(CommentsAddingParams params);
+  Future<List<AllForumsModel>> searchForumByTitle(
+      ForumsSearchByTitleParams params);
 }
 
 class AllForumsRemoteDatasource extends BaseForumsRemoteDatesource {
@@ -114,6 +117,25 @@ class AllForumsRemoteDatasource extends BaseForumsRemoteDatesource {
     } on DioError catch (error) {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(error.response?.data));
+    }
+  }
+
+  @override
+  Future<List<AllForumsModel>> searchForumByTitle(
+      ForumsSearchByTitleParams params) async {
+    try {
+      final response = await DioHelper.getData(
+        url: EndPoints.forumsSearch(params.forumTitle),
+        headers: {
+          'Authorization': 'Bearer ${params.accessToken}',
+          'Content-Type': 'application/json',
+        },
+      );
+      return List<AllForumsModel>.from(
+        (response?.data['data'] as List).map((e) => AllForumsModel.fromJson(e)),
+      );
+    } on DioError catch (error) {
+      throw ServerException(errorMessageModel: error.response?.data);
     }
   }
 }

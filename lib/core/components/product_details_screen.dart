@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart';
 import '../widgets/details_screen_widgets/down_details_screen_widget.dart';
 import '../widgets/details_screen_widgets/upper_details_screen_widget.dart';
-import 'defaults.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({

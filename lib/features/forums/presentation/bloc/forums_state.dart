@@ -1,6 +1,8 @@
 part of 'forums_bloc.dart';
 
 class ForumsState extends Equatable {
+  final SearchForumRequestState searchForumRequestState;
+  final List<ForumsEntitie> searchForumsEntitie;
   final List<bool> isLikedAllForums;
   final List<bool> isLikedMeForums;
   final ImagePickeRequestState imagePickeRequestState;
@@ -13,6 +15,8 @@ class ForumsState extends Equatable {
   final int currentActiveIndex;
   final File? photoPath;
   const ForumsState({
+    this.searchForumRequestState = SearchForumRequestState.loading,
+    this.searchForumsEntitie = const [],
     this.isLikedMeForums = const [],
     this.isLikedAllForums = const [],
     this.photoPath,
@@ -27,6 +31,8 @@ class ForumsState extends Equatable {
   });
 
   ForumsState copyWith({
+    SearchForumRequestState? searchForumRequestState,
+    List<ForumsEntitie>? searchForumsEntitie,
     List<bool>? isLikedMeForums,
     List<bool>? isLikedAllForums,
     int? currentActiveIndex,
@@ -40,6 +46,9 @@ class ForumsState extends Equatable {
     File? photoPath,
   }) {
     return ForumsState(
+      searchForumRequestState:
+          searchForumRequestState ?? this.searchForumRequestState,
+      searchForumsEntitie: searchForumsEntitie ?? this.searchForumsEntitie,
       isLikedMeForums: isLikedMeForums ?? this.isLikedMeForums,
       isLikedAllForums: isLikedAllForums ?? this.isLikedAllForums,
       photoPath: photoPath ?? this.photoPath,
@@ -59,6 +68,8 @@ class ForumsState extends Equatable {
 
   @override
   List<Object?> get props => [
+        searchForumRequestState,
+        searchForumsEntitie,
         isLikedAllForums,
         isLikedMeForums,
         photoPath,

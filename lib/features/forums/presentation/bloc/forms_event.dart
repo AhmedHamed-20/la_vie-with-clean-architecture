@@ -77,3 +77,16 @@ class AddCommentEvent extends ForumsEvent {
   @override
   List<Object?> get props => [forumId, accessToken, comment];
 }
+
+class ForumsSearchEvent extends ForumsEvent {
+  final String forumsTitle;
+  final String accessToken;
+
+  const ForumsSearchEvent(this.forumsTitle, this.accessToken);
+
+  @override
+  List<Object?> get props => [
+        forumsTitle,
+        accessToken,
+      ];
+}

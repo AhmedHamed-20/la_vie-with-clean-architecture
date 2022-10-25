@@ -76,3 +76,9 @@ enum ProductDetailsType {
   seed,
   tool,
 }
+
+enum SearchForumRequestState {
+  loading,
+  loaded,
+  error,
+}

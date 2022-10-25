@@ -9,6 +9,7 @@ import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
 import 'package:la_vie_with_clean_architecture/core/text_fileds_controlers/textfiled_controlers.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_comment_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/search_in_forums_by_name.dart';
 import '../../../../core/utl/utls.dart';
 import '../../domain/entities/forums_entitie.dart';
 import '../../domain/entities/forums_me_entitie.dart';
@@ -20,8 +21,13 @@ part 'forms_event.dart';
 part 'forums_state.dart';
 
 class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
-  ForumsBloc(this.allForumsUsecase, this.forumsMeUsecase,
-      this.forumsPostUsecase, this.likeAddUsecase, this.commentsAddingUsecase)
+  ForumsBloc(
+      this.allForumsUsecase,
+      this.forumsMeUsecase,
+      this.forumsPostUsecase,
+      this.likeAddUsecase,
+      this.commentsAddingUsecase,
+      this.forumsSearchByTitleUsecase)
       : super(const ForumsState()) {
     on<AllForumsEvent>(_getAllForums);
     on<ForumsMeEvent>(_getForumsMeAndStoreIsLiked);
@@ -30,12 +36,14 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
     on<ActiveTabForumsEvent>(_changeActiveTabIndex);
     on<LikesAddEvent>(_addLikeToPost);
     on<AddCommentEvent>(_addComment);
+    on<ForumsSearchEvent>(_searchForumByTitle);
   }
   final AllForumsUsecase allForumsUsecase;
   final ForumsMeUsecase forumsMeUsecase;
   final ForumsPostUscase forumsPostUsecase;
   final LikeAddUsecase likeAddUsecase;
   final CommentsAddingUsecase commentsAddingUsecase;
+  final ForumsSearchByTitleUsecase forumsSearchByTitleUsecase;
   FutureOr<void> _getAllForums(
       AllForumsEvent event, Emitter<ForumsState> emit) async {
     final result =
@@ -189,5 +197,21 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
         TextFormFieldControllers.addCommentController.clear();
       }
     });
+  }
+
+  FutureOr<void> _searchForumByTitle(
+      ForumsSearchEvent event, Emitter<ForumsState> emit) async {
+    emit(state.copyWith(
+        searchForumRequestState: SearchForumRequestState.loading));
+    final result = await forumsSearchByTitleUsecase(
+        ForumsSearchByTitleParams(event.accessToken, event.forumsTitle));
+
+    result.fold(
+        (l) => emit(state.copyWith(
+            errorMessage: l.message,
+            searchForumRequestState: SearchForumRequestState.error)),
+        (r) => emit(state.copyWith(
+            searchForumsEntitie: r,
+            searchForumRequestState: SearchForumRequestState.loaded)));
   }
 }

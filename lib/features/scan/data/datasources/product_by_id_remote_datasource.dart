@@ -21,10 +21,8 @@ class ProductByIdRemoteDataSourceImpl extends BaseProductByIdRemoteDataSource {
           'Content-Type': 'application/json',
         },
       );
-      print(response);
       return ProductByIdModel.fromJson(response?.data['data']);
     } on DioError catch (error) {
-      print(error.response);
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(error.response?.data));
     }

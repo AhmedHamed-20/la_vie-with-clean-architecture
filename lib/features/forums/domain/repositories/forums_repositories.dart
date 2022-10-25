@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_comment_usecase.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/add_like.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/domain/usecases/search_in_forums_by_name.dart';
 
 import '../../../../core/error/failures.dart';
 import '../entities/forums_entitie.dart';
@@ -18,4 +19,6 @@ abstract class ForumsRepositories {
   Future<Either<Failure, dynamic>> addLikeToPost(LikesAddParams params);
   Future<Either<Failure, dynamic>> addCommentToPost(
       CommentsAddingParams params);
+  Future<Either<Failure, List<ForumsEntitie>>> searchForumByTitle(
+      ForumsSearchByTitleParams params);
 }

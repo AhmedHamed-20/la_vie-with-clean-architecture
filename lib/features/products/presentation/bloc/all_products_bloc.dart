@@ -331,8 +331,6 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
         }
       }
       emit(state.copyWith(foundedSearchIteam: foundedSearchIteam));
-
-      print(foundedSearchIteam);
     }
   }
 }

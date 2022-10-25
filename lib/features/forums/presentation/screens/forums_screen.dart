@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
+import 'package:la_vie_with_clean_architecture/core/text_fileds_controlers/textfiled_controlers.dart';
 
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utl/utls.dart';
 import '../bloc/forums_bloc.dart';
 import '../widgets/post_main_widget.dart';
+
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class ForumsScreen extends StatelessWidget {
   const ForumsScreen({Key? key}) : super(key: key);
@@ -21,6 +24,7 @@ class ForumsScreen extends StatelessWidget {
           ForumsMeEvent(accessToken: accessToken, userId: userId),
         ),
       child: Scaffold(
+        key: _scaffoldKey,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.of(context).pushNamed(AppRoutesNames.postForumScreen);
@@ -31,6 +35,7 @@ class ForumsScreen extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
+                TextFormFieldControllers.forumsSearchController.clear();
                 Navigator.of(context).pop();
               },
               icon: Icon(

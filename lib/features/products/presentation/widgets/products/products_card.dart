@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/components/product_details_screen.dart';
-import 'package:la_vie_with_clean_architecture/core/params/app_params.dart';
 
 import '../../../../../core/constants/constants.dart';
 import '../../bloc/all_products_bloc.dart';

@@ -24,7 +24,6 @@ class ScanBloc extends Bloc<ScanEvent, ScanState> {
       ScanQrCodeEvent event, Emitter<ScanState> emit) async {
     final result = await QrcodeScannerHelper.scanQrCode(
         linColor: '#ff6666', cancelButtonText: 'cancel', scanMode: ScanMode.QR);
-    print('resutl======>' + result);
     emit(state.copyWith(scanResult: result));
   }
 

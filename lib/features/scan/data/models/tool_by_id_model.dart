@@ -1,4 +1,3 @@
-import 'package:la_vie_with_clean_architecture/features/scan/domain/entities/plant_by_id_entitie.dart';
 import 'package:la_vie_with_clean_architecture/features/scan/domain/entities/tool_by_id_entitie.dart';
 
 import '../../../../core/constants/constants.dart';
