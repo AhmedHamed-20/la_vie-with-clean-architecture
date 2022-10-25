@@ -27,7 +27,7 @@ Widget defaultTextFormField({
       cursorColor: Theme.of(context).primaryColor,
       maxLines: maxLine,
       textDirection: textDirection,
-      style: Theme.of(context).textTheme.bodyLarge,
+      style: Theme.of(context).textTheme.titleMedium,
       controller: controller,
       keyboardType: keyboardType,
       decoration: InputDecoration(

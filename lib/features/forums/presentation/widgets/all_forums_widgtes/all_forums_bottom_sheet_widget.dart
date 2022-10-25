@@ -86,7 +86,7 @@ class AllForumsBottomSheetCommentsWidget extends StatelessWidget {
                         context.read<ForumsBloc>().add(
                               AddCommentEvent(
                                 forumId: state.allForumsEntitie[index].forumsId,
-                                accessToken: accessToken,
+                                accessToken: savedaccessToken,
                                 comment: TextFormFieldControllers
                                     .addCommentController.text,
                               ),

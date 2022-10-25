@@ -23,7 +23,8 @@ class SearchLikesUserCommentDesign extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    context.read<ForumsBloc>().add(LikesAddEvent(accessToken,
+                    context.read<ForumsBloc>().add(LikesAddEvent(
+                        savedaccessToken,
                         state.searchForumsEntitie[index].forumsId));
                   },
                   icon: Icon(

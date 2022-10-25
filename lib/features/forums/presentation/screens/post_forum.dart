@@ -127,7 +127,7 @@ class PostForumScreen extends StatelessWidget {
                         backgroundColor: AppColors.toastSuccess,
                         textColor: AppColors.white);
                     context.read<ForumsBloc>().add(ForumsMeEvent(
-                        accessToken: accessToken, userId: userId));
+                        accessToken: savedaccessToken, userId: userId));
 
                     TextFormFieldControllers.titlePostController.clear();
                     TextFormFieldControllers.descriptionPostController.clear();
@@ -139,7 +139,7 @@ class PostForumScreen extends StatelessWidget {
                       return defaultButton(
                         onPressed: () {
                           context.read<ForumsBloc>().add(ForumsPostEvent(
-                              accessToken: accessToken,
+                              accessToken: savedaccessToken,
                               description: TextFormFieldControllers
                                   .descriptionPostController.text,
                               imageBae64: state.convertedImageToBase64!,

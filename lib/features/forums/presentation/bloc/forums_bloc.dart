@@ -177,9 +177,9 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
         await likeAddUsecase(LikesAddParams(event.forumsId, event.accessToken));
     result.fold((l) => emit(state.copyWith(errorMessage: l.message)), (r) {
       if (state.currentActiveIndex == 0) {
-        add(AllForumsEvent(accessToken: accessToken, userId: userId));
+        add(AllForumsEvent(accessToken: savedaccessToken, userId: userId));
       } else if (state.currentActiveIndex == 1) {
-        add(ForumsMeEvent(accessToken: accessToken, userId: userId));
+        add(ForumsMeEvent(accessToken: savedaccessToken, userId: userId));
       }
     });
   }

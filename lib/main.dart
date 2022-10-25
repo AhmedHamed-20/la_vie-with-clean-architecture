@@ -27,6 +27,7 @@ void main() async {
           '''CREATE TABLE cart (id INTEGER PRIMARY KEY,productId TEXT,translation TEXT,name TEXT,description TEXT,imageUrl TEXT,price INTEGER,amount INTEGER)''');
   final String accessToken =
       await CacheHelper.getData(key: 'accessToken') ?? '';
+  savedaccessToken = accessToken;
   runApp(MyApp(
     accessToken: accessToken,
     appRouter: AppRouter(),

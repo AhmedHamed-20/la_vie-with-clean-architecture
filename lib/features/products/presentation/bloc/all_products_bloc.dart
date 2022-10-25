@@ -37,7 +37,7 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     on<CurrentActiveTabIndexEvent>(_changeCurrentActiveTabIndex);
     on<AmountMapEvent>(_generateAmountsMap);
     on<AmountValueEvent>(_changeProductAmountValueWithId);
-    on<LogoutEvent>(_logot);
+    on<LogoutEvent>(_logout);
     on<AmountOfProductsInCartEvent>(_changeAmountOfProductsInCart);
     on<SearchAboutProductEvent>(_searchAboutProudct);
   }
@@ -268,13 +268,21 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     }
   }
 
-  FutureOr<void> _logot(
+  FutureOr<void> _logout(
       LogoutEvent event, Emitter<AllProductsState> emit) async {
     await userCartDataBaseClearUsecase(
         UserCartDataBaseClearParams(event.tableName));
     final result = await cacheClearUsecase(CacheClearParams(event.cacheKey));
+    print(result);
+    // to reset cacheEveryTime
+    emit(state.copyWith(cacheCleared: false));
+
     result.fold(
-      (l) => emit(state.copyWith(allProductsErrorMessage: l.message)),
+      (l) {
+        print(l);
+        return emit(state.copyWith(
+            allProductsErrorMessage: l.message, cacheCleared: false));
+      },
       (r) => emit(
         state.copyWith(cacheCleared: r),
       ),

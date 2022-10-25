@@ -110,7 +110,8 @@ class ScanScreen extends StatelessWidget {
                 }
                 if (state.scanResult.isNotEmpty) {
                   context.read<ScanBloc>().add(ProductByIdEvent(
-                      accessToken: accessToken, productId: state.scanResult));
+                      accessToken: savedaccessToken,
+                      productId: state.scanResult));
                 }
               },
             ),

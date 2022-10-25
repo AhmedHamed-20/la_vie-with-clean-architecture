@@ -26,7 +26,7 @@ class ProductsScreen extends StatelessWidget {
             case AllProductsRequestState.idle:
               context.read<AllProductsBloc>().add(
                     AllProductsEvent(
-                      accessToken,
+                      savedaccessToken,
                     ),
                   );
               return const Center(

@@ -18,10 +18,10 @@ class ForumsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => servicelocator<ForumsBloc>()
         ..add(
-          AllForumsEvent(accessToken: accessToken, userId: userId),
+          AllForumsEvent(accessToken: savedaccessToken, userId: userId),
         )
         ..add(
-          ForumsMeEvent(accessToken: accessToken, userId: userId),
+          ForumsMeEvent(accessToken: savedaccessToken, userId: userId),
         ),
       child: Scaffold(
         key: _scaffoldKey,

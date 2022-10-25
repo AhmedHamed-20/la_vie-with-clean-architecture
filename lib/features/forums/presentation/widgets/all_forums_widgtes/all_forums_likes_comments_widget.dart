@@ -24,7 +24,8 @@ class AllForumsLikesAndCommentsWidget extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     context.read<ForumsBloc>().add(LikesAddEvent(
-                        accessToken, state.allForumsEntitie[index].forumsId));
+                        savedaccessToken,
+                        state.allForumsEntitie[index].forumsId));
                   },
                   icon: Icon(
                     state.isLikedAllForums[index]

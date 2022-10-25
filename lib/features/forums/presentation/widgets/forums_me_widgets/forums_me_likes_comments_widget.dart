@@ -23,7 +23,8 @@ class ForumsMeLikesAndCommentsWidget extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     context.read<ForumsBloc>().add(LikesAddEvent(
-                        accessToken, state.forumsMeEntitie[index].forumsId));
+                        savedaccessToken,
+                        state.forumsMeEntitie[index].forumsId));
                   },
                   icon: Icon(
                     state.isLikedMeForums[index]

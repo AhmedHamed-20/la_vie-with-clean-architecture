@@ -217,7 +217,7 @@ class AppRoutesNames {
   static const String userProfileScreen = 'home_screen/user_profile_screen';
 }
 
-String accessToken = '';
+String savedaccessToken = '';
 String userId = '';
 const String defaultImage =
     'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';

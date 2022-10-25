@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
+import 'package:la_vie_with_clean_architecture/core/widgets/tob_tab.dart';
 
-import '../../../../core/components/defaults.dart';
 import '../../../../core/constants/constants.dart';
-import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
-import '../../../../core/utl/utls.dart';
-import '../../../auth/presentation/bloc/auth_bloc.dart';
+import '../bloc/auth_bloc.dart';
+import '../widgets/login_widgets/login_widget.dart';
+import '../widgets/sign_up_widgets/sign_up_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,11 +16,11 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            // Positioned(
-            //   top: -10,
-            //   right: -10,
-            //   child: Image.asset('assets/images/login_tree.png'),
-            // ),
+            Positioned(
+              top: -10,
+              right: -10,
+              child: Image.asset('assets/images/login_tree.png'),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppPadding.p30,
@@ -33,141 +32,65 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.2,
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(AppPadding.p16),
-                  //   child: Center(
-                  //     child: Image.asset(
-                  //       'assets/images/logo.png',
-                  //     ),
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.all(AppPadding.p16),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     height: AppHeight.h10,
                   ),
                   Expanded(
-                    flex: 1,
-                    child: Column(
-                      children: [
-                        defaultTextFormField(
-                          width: double.infinity,
-                          height: AppHeight.h46,
-                          radius: AppRadius.r5,
-                          context: context,
-                          controller:
-                              TextFormFieldControllers.emailLoginController,
-                          title: 'email',
-                        ),
-                        const SizedBox(
-                          height: AppHeight.h10,
-                        ),
-                        defaultTextFormField(
-                          width: double.infinity,
-                          height: AppHeight.h46,
-                          radius: AppRadius.r5,
-                          context: context,
-                          controller:
-                              TextFormFieldControllers.passwordLoginController,
-                          title: 'password',
-                        ),
-                        const SizedBox(
-                          height: AppHeight.h10,
-                        ),
-                        BlocConsumer<AuthBloc, AuthBlocState>(
-                          listener: (context, state) {
-                            if (state.accessTokenCached) {
-                              context.read<MainLayoutBloc>().add(
-                                  const GetAccessTokenFromCacheEvent(
-                                      'accessToken'));
-                              Navigator.of(context)
-                                  .pushNamed(AppRoutesNames.homeScreen);
-                            }
-                          },
-                          builder: (context, state) {
-                            switch (state.authState) {
-                              case RequestState.idle:
-                                return defaultButton(
-                                  onPressed: () {
-                                    context.read<AuthBloc>().add(LoginEvent(
-                                        email: TextFormFieldControllers
-                                            .emailLoginController.text,
-                                        password: TextFormFieldControllers
-                                            .passwordLoginController.text));
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 2,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: AppPadding.p30),
+                            child: BlocBuilder<AuthBloc, AuthBlocState>(
+                              builder: (context, state) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    context
+                                        .read<AuthBloc>()
+                                        .add(CurrentActiveTabIndexEvent(index));
                                   },
-                                  buttonChild: Text(
-                                    'Login',
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
+                                  child: TobTabs(
+                                    tabs: const ['SignUp', 'Login'],
+                                    currentActiveTab: state.currentActiveTab,
+                                    currentWidgetIndex: index,
+                                    context: context,
                                   ),
-                                  width: double.infinity,
-                                  height: AppHeight.h46,
                                 );
-
-                              case RequestState.loading:
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              case RequestState.loginloaded:
-                                context.read<AuthBloc>().add(
-                                      AccessTokenCacheEvent(
-                                        state.authDataEntitie!.accessToken,
-                                      ),
-                                    );
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-
-                              case RequestState.error:
-                                return const Center(
-                                  child: Text('data'),
-                                );
-                              case RequestState.cachedSuccess:
-                                // accessToken =
-                                //     state.authDataEntitie!.accessToken;
-
-                                return const SizedBox.shrink();
-                            }
-                          },
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Divider(
-                                thickness: AppHeight.h1,
-                                color: AppColors.dividerColorGrey,
-                              ),
+                              },
                             ),
-                            Text(
-                              ' or continue with ',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(
-                                      color: Theme.of(context).primaryColor),
-                            ),
-                            Expanded(
-                              child: Divider(
-                                thickness: AppHeight.h1,
-                                color: AppColors.dividerColorGrey,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: AppHeight.h12,
-                        ),
-                      ],
-                    ),
+                          );
+                        }),
+                  ),
+                  BlocBuilder<AuthBloc, AuthBlocState>(
+                    builder: (context, state) {
+                      if (state.currentActiveTab == 0) {
+                        return const SignUpWidget();
+                      } else {
+                        return const LoginWidget();
+                      }
+                    },
                   ),
                 ],
               ),
             ),
-            // Positioned(
-            //   bottom: -15,
-            //   left: -15,
-            //   child: RotationTransition(
-            //       turns: const AlwaysStoppedAnimation(180 / 360),
-            //       child: Image.asset('assets/images/login_tree.png')),
-            // ),
+            Positioned(
+              bottom: -15,
+              left: -15,
+              child: RotationTransition(
+                  turns: const AlwaysStoppedAnimation(180 / 360),
+                  child: Image.asset('assets/images/login_tree.png')),
+            ),
           ],
         ),
       ),

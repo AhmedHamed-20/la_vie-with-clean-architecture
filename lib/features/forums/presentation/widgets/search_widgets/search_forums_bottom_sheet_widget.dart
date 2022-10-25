@@ -87,7 +87,7 @@ class SearchBottomSheetCommentsWidget extends StatelessWidget {
                               AddCommentEvent(
                                 forumId:
                                     state.searchForumsEntitie[index].forumsId,
-                                accessToken: accessToken,
+                                accessToken: savedaccessToken,
                                 comment: TextFormFieldControllers
                                     .addCommentController.text,
                               ),

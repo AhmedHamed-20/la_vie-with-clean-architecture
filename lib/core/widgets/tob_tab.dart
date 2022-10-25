@@ -19,7 +19,6 @@ class TobTabs extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(AppPadding.p8),
       child: Container(
-        // width: AppWidth.w,
         height: AppHeight.h70,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(

@@ -6,6 +6,14 @@ enum RequestState {
   error,
 }
 
+enum SignUpRequestState {
+  idle,
+  loading,
+  signUploaded,
+  cachedSuccess,
+  error,
+}
+
 enum AllProductsRequestState {
   idle,
   loading,

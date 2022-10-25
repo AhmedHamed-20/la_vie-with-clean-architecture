@@ -29,8 +29,6 @@ class MainLayoutBloc extends Bloc<MainLayoutEvent, MainLayoutState> {
         (l) => emit(state.copyWith(
             userDataRequestState: UserDataRequestState.error,
             mainLayoutErrorMessage: l.message)), (r) {
-      accessToken = r;
-
       return emit(
         state.copyWith(
           accessToken: r,

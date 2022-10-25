@@ -51,7 +51,7 @@ class _PostMainWidgetState extends State<PostMainWidget> {
                   context.read<ForumsBloc>().add(
                         ForumsSearchEvent(
                           value,
-                          accessToken,
+                          savedaccessToken,
                         ),
                       );
                 });

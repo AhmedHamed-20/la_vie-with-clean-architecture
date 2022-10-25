@@ -95,7 +95,7 @@ class ForumsMeBottomModelSheet extends StatelessWidget {
                         context.read<ForumsBloc>().add(
                               AddCommentEvent(
                                 forumId: state.forumsMeEntitie[index].forumsId,
-                                accessToken: accessToken,
+                                accessToken: savedaccessToken,
                                 comment: TextFormFieldControllers
                                     .addCommentController.text,
                               ),
