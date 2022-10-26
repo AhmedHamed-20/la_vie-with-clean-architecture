@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:la_vie_with_clean_architecture/core/widgets/error_widget.dart';
+import 'package:la_vie_with_clean_architecture/core/widgets/error_401_widget.dart';
 import '../../../../../network_connection/network_connection_bloc.dart';
 import '../../../../../utl/utls.dart';
 import '../bloc/main_layout_bloc.dart';
@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                 return const MainLayoutWidget();
               case UserDataRequestState.error:
                 if (state.statusCode == 401) {
-                  return const Scaffold(body: ErrorScreen());
+                  return const Scaffold(body: Error401Screen());
                 }
                 return Scaffold(
                   body: Center(

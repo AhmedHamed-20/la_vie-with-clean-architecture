@@ -85,7 +85,7 @@ class ForumsMeBottomModelSheet extends StatelessWidget {
                   child: defaultTextFormField(
                     controller: TextFormFieldControllers.addCommentController,
                     width: double.infinity,
-                    height: AppHeight.h46,
+                    height: AppHeight.h70,
                     radius: AppRadius.r12,
                     context: context,
                     title: 'Add Comment',

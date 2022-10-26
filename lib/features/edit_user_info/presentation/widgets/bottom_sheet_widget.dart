@@ -44,7 +44,7 @@ class BottomSheetWidget extends StatelessWidget {
             ),
             defaultTextFormField(
               width: double.infinity,
-              height: AppHeight.h46,
+              height: AppHeight.h70,
               radius: AppRadius.r10,
               context: context,
               controller: controller,

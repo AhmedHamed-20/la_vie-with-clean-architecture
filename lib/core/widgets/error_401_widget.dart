@@ -5,8 +5,8 @@ import 'package:la_vie_with_clean_architecture/features/products/presentation/bl
 import '../components/defaults.dart';
 import '../constants/constants.dart';
 
-class ErrorScreen extends StatelessWidget {
-  const ErrorScreen({
+class Error401Screen extends StatelessWidget {
+  const Error401Screen({
     Key? key,
   }) : super(key: key);
 

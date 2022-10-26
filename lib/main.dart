@@ -54,7 +54,6 @@ class MyApp extends StatelessWidget {
             create: (context) => servicelocator<AllProductsBloc>()
               ..add(const AllProductsFromDatabaseEvent('cart')),
           ),
-          BlocProvider(create: (context) => servicelocator<UserInfoBloc>()),
           BlocProvider(
               create: (context) => servicelocator<NetworkConnectionBloc>()
                 ..add(const CheckInternetConnectionEvent())),
