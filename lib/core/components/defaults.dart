@@ -31,8 +31,16 @@ Widget defaultTextFormField({
       controller: controller,
       keyboardType: keyboardType,
       decoration: InputDecoration(
+        helperText: ' ',
+
+        // contentPadding: const EdgeInsets.symmetric(
+        //     horizontal: AppPadding.p16, vertical: AppPadding.p20),
+
+        isDense: true,
         labelText: title,
         errorMaxLines: 3,
+        errorStyle:
+            Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.red),
         contentPadding: const EdgeInsets.symmetric(
             horizontal: AppPadding.p10, vertical: AppPadding.p10),
         labelStyle: labelStyle,

@@ -66,3 +66,27 @@ class SignUpObscureTextEvent extends AuthBlocEvent {
   @override
   List<Object?> get props => [signUoObscureText];
 }
+
+class CheckEmailValidationEvent extends AuthBlocEvent {
+  final bool isEmaildValid;
+  final bool isLogin;
+
+  const CheckEmailValidationEvent(this.isLogin, this.isEmaildValid);
+  @override
+  List<Object?> get props => [isLogin, isEmaildValid];
+}
+
+class CheckPasswordValidationEvent extends AuthBlocEvent {
+  final bool isLogin;
+  final bool isPasswordValid;
+  const CheckPasswordValidationEvent(this.isLogin, this.isPasswordValid);
+  @override
+  List<Object?> get props => [isLogin, isPasswordValid];
+}
+
+class CheckPasswordConfirmValidationEvent extends AuthBlocEvent {
+  final bool isConfirmPasswordValid;
+  const CheckPasswordConfirmValidationEvent(this.isConfirmPasswordValid);
+  @override
+  List<Object?> get props => [isConfirmPasswordValid];
+}

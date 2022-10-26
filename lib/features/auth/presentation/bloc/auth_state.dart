@@ -3,7 +3,12 @@ part of 'auth_bloc.dart';
 class AuthBlocState extends Equatable {
   final bool signUpObscureText;
   final bool loginObscureText;
+  final bool isEmailLoginVaild;
+  final bool isPasswordLoginVaild;
+  final bool isEmailSignUpVaild;
+  final bool isPasswordSignUpVaild;
 
+  final bool isPasswordConfirmSignUpVaild;
   final int currentActiveTab;
   final AuthDataEntitie? authDataEntitie;
   final SignUpRequestState signUpRequestState;
@@ -11,6 +16,11 @@ class AuthBlocState extends Equatable {
   final String authMessage;
   final bool accessTokenCached;
   const AuthBlocState({
+    this.isEmailLoginVaild = false,
+    this.isEmailSignUpVaild = false,
+    this.isPasswordConfirmSignUpVaild = false,
+    this.isPasswordLoginVaild = false,
+    this.isPasswordSignUpVaild = false,
     this.signUpRequestState = SignUpRequestState.idle,
     this.loginObscureText = true,
     this.signUpObscureText = true,
@@ -22,6 +32,11 @@ class AuthBlocState extends Equatable {
   });
 
   AuthBlocState copyWith({
+    bool? isEmailLoginVaild,
+    bool? isPasswordLoginVaild,
+    bool? isEmailSignUpVaild,
+    bool? isPasswordSignUpVaild,
+    bool? isPasswordConfirmSignUpVaild,
     SignUpRequestState? signUpRequestState,
     bool? loginObscureText,
     bool? signUpObscureText,
@@ -32,6 +47,13 @@ class AuthBlocState extends Equatable {
     bool? accessTokenCached,
   }) {
     return AuthBlocState(
+      isEmailLoginVaild: isEmailLoginVaild ?? this.isEmailLoginVaild,
+      isPasswordConfirmSignUpVaild:
+          isPasswordConfirmSignUpVaild ?? this.isPasswordConfirmSignUpVaild,
+      isPasswordLoginVaild: isPasswordLoginVaild ?? this.isPasswordLoginVaild,
+      isPasswordSignUpVaild:
+          isPasswordSignUpVaild ?? this.isPasswordSignUpVaild,
+      isEmailSignUpVaild: isEmailSignUpVaild ?? this.isEmailSignUpVaild,
       signUpRequestState: signUpRequestState ?? this.signUpRequestState,
       loginObscureText: loginObscureText ?? this.loginObscureText,
       signUpObscureText: signUpObscureText ?? this.signUpObscureText,
@@ -45,6 +67,11 @@ class AuthBlocState extends Equatable {
 
   @override
   List<Object?> get props => [
+        isEmailLoginVaild,
+        isPasswordLoginVaild,
+        isEmailSignUpVaild,
+        isPasswordSignUpVaild,
+        isPasswordConfirmSignUpVaild,
         loginObscureText,
         signUpObscureText,
         authDataEntitie,

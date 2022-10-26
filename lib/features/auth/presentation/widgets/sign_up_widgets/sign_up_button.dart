@@ -12,26 +12,39 @@ class SignUpButtomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return defaultButton(
-      onPressed: () {
-        context.read<AuthBloc>().add(SignupEvent(
-            passwordConfirm: TextFormFieldControllers
-                .passwordConfirmSignUpController.text
-                .trim(),
-            firstName:
-                TextFormFieldControllers.firstNameSignUpController.text.trim(),
-            lastName:
-                TextFormFieldControllers.lastNameSignUpController.text.trim(),
-            email: TextFormFieldControllers.emailSignUpController.text.trim(),
-            password:
-                TextFormFieldControllers.passwordSignUpController.text.trim()));
-      },
-      buttonChild: Text(
-        'SignUp',
-        style: Theme.of(context).textTheme.labelMedium,
+    return BlocBuilder<AuthBloc, AuthBlocState>(
+      builder: (context, state) => defaultButton(
+        onPressed: () {
+          if (state.isEmailSignUpVaild &&
+              state.isPasswordSignUpVaild &&
+              state.isPasswordConfirmSignUpVaild) {
+            context.read<AuthBloc>().add(SignupEvent(
+                passwordConfirm: TextFormFieldControllers
+                    .passwordConfirmSignUpController.text
+                    .trim(),
+                firstName: TextFormFieldControllers
+                    .firstNameSignUpController.text
+                    .trim(),
+                lastName: TextFormFieldControllers.lastNameSignUpController.text
+                    .trim(),
+                email:
+                    TextFormFieldControllers.emailSignUpController.text.trim(),
+                password: TextFormFieldControllers.passwordSignUpController.text
+                    .trim()));
+          } else {
+            flutterToast(
+                msg: 'please make sure that you enter all data and it\'s valid',
+                backgroundColor: AppColors.toastError,
+                textColor: AppColors.white);
+          }
+        },
+        buttonChild: Text(
+          'SignUp',
+          style: Theme.of(context).textTheme.labelMedium,
+        ),
+        width: double.infinity,
+        height: AppHeight.h46,
       ),
-      width: double.infinity,
-      height: AppHeight.h46,
     );
   }
 }

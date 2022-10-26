@@ -10,6 +10,7 @@ import 'package:la_vie_with_clean_architecture/features/products/domain/usecases
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/insert_product_into_database.dart';
 import 'package:la_vie_with_clean_architecture/features/products/domain/usecases/update_amount_database.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/utl/utls.dart';
 import '../../../blogs/domain/entities/blogs_entitie.dart';
 import '../../domain/entities/all_products_entitie.dart';
@@ -277,16 +278,15 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     // to reset cacheEveryTime
     emit(state.copyWith(cacheCleared: false));
 
-    result.fold(
-      (l) {
-        print(l);
-        return emit(state.copyWith(
-            allProductsErrorMessage: l.message, cacheCleared: false));
-      },
-      (r) => emit(
+    result.fold((l) {
+      return emit(state.copyWith(
+          allProductsErrorMessage: l.message, cacheCleared: false));
+    }, (r) {
+      savedaccessToken = '';
+      return emit(
         state.copyWith(cacheCleared: r),
-      ),
-    );
+      );
+    });
   }
 
   FutureOr<void> _changeAmountOfProductsInCart(
