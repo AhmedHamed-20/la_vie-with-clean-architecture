@@ -52,7 +52,7 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
         (l) => emit(state.copyWith(
             errorMessage: l.message,
             forumsRequestState: ForumsRequestState.error)), (r) {
-      final List<bool> isLiked = getIslikedList(r, event.userId);
+      final List<bool> isLiked = List.from(getIslikedList(r, event.userId));
       // print(isLiked);
 
       return emit(

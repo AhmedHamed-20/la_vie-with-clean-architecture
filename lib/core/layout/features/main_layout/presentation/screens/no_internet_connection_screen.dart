@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/components/defaults.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
 import 'package:la_vie_with_clean_architecture/core/network_connection/network_connection_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class NoInternetConnectionScreen extends StatelessWidget {
   const NoInternetConnectionScreen({super.key});
@@ -14,8 +15,13 @@ class NoInternetConnectionScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
+            child: Lottie.asset(
+              'assets/images/no_internet.json',
+            ),
+          ),
+          Center(
             child: Text(
-              'NoInternet',
+              'No Internet connection',
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),

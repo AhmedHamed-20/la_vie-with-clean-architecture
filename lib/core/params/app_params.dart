@@ -37,3 +37,47 @@ class DetailsScreenParams extends Equatable {
         temperature,
       ];
 }
+
+class PostParams extends Equatable {
+  final int forumLength;
+  final String forumTitle;
+  final String forumDescription;
+  final String forumImage;
+  final String forumsUserFirstName;
+  final String forumsUserLastName;
+  final String forumsUserImageUrl;
+  final String forumId;
+  final int forumLikesCount;
+  final int forumsCommentsCount;
+  final bool isLiked;
+  final int index;
+  const PostParams(
+      {required this.forumLength,
+      required this.index,
+      required this.isLiked,
+      required this.forumsCommentsCount,
+      required this.forumId,
+      required this.forumLikesCount,
+      required this.forumTitle,
+      required this.forumDescription,
+      required this.forumImage,
+      required this.forumsUserFirstName,
+      required this.forumsUserLastName,
+      required this.forumsUserImageUrl});
+
+  @override
+  List<Object?> get props => [
+        forumLength,
+        forumTitle,
+        index,
+        forumDescription,
+        forumImage,
+        forumsUserFirstName,
+        forumsUserLastName,
+        forumsUserImageUrl,
+        forumId,
+        forumLikesCount,
+        forumsCommentsCount,
+        isLiked,
+      ];
+}
