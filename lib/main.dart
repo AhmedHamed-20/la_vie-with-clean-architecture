@@ -10,8 +10,6 @@ import 'core/network_connection/network_connection_bloc.dart';
 import 'core/routes/app_router.dart';
 import 'core/services/service_locator.dart';
 import 'core/theme/app_theme.dart';
-import 'features/auth/presentation/bloc/auth_bloc.dart';
-import 'features/edit_user_info/presentation/bloc/user_info_bloc.dart';
 import 'features/products/presentation/bloc/all_products_bloc.dart';
 
 void main() async {

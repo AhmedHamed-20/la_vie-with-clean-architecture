@@ -275,7 +275,6 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     await userCartDataBaseClearUsecase(
         UserCartDataBaseClearParams(event.tableName));
     final result = await cacheClearUsecase(CacheClearParams(event.cacheKey));
-    print(result);
     // to reset cacheEveryTime
     emit(state.copyWith(cacheCleared: false));
 
