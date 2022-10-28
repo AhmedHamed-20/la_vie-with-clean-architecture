@@ -15,9 +15,6 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TextFormFieldControllers.homeSearchController.addListener(() {
-
-    // });
     return BlocBuilder<AllProductsBloc, AllProductsState>(
         builder: (context, state) {
       return WillPopScope(

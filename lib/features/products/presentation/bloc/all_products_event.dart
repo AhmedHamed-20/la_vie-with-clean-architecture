@@ -125,3 +125,12 @@ class SearchAboutProductEvent extends BaseAllProductsEvent {
   @override
   List<Object?> get props => [productName];
 }
+
+class CartDataClearEvent extends BaseAllProductsEvent {
+  final String tableName;
+
+  const CartDataClearEvent(this.tableName);
+
+  @override
+  List<Object?> get props => [tableName];
+}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/constants.dart';
+import '../../../../../core/constants/constants.dart';
 
 class AddPhotoWidget extends StatelessWidget {
   const AddPhotoWidget({

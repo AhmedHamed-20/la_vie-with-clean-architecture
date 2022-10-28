@@ -1,12 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/post_design.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/search_widgets/search_forums_likes_comments_widget.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/search_widgets/search_user_info_design.dart';
-import '../../../../../../core/constants/constants.dart';
 import '../../../../../core/params/app_params.dart';
 import '../../bloc/forums_bloc.dart';
+import '../main_posts_widgets/post_design.dart';
 
 class SearchForumsWidget extends StatelessWidget {
   const SearchForumsWidget({super.key});
@@ -30,7 +26,7 @@ class SearchForumsWidget extends StatelessWidget {
                         postParamsObject: PostParams(
                             forumLength: state.searchForumsEntitie.length,
                             index: index,
-                            isLiked: state.isLikedAllForums[index],
+                            isLiked: state.isLikedSearchForums[index],
                             forumsCommentsCount: state
                                 .searchForumsEntitie[index]
                                 .forumsCommentsEtitie

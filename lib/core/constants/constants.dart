@@ -31,6 +31,7 @@ class AppPadding {
   static const double p40 = 40;
 
   static const double p6 = 6;
+  static const double p4 = 4;
 }
 
 class AppRadius {

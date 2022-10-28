@@ -41,6 +41,7 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
     on<LogoutEvent>(_logout);
     on<AmountOfProductsInCartEvent>(_changeAmountOfProductsInCart);
     on<SearchAboutProductEvent>(_searchAboutProudct);
+    on<CartDataClearEvent>(_clearCartDataBase);
   }
   AllProductsUseCase allProductsUseCase;
   PeroductsFromDatabaseUsecase peroductsFromDatabaseUsecase;
@@ -340,5 +341,13 @@ class AllProductsBloc extends Bloc<BaseAllProductsEvent, AllProductsState> {
       }
       emit(state.copyWith(foundedSearchIteam: foundedSearchIteam));
     }
+  }
+
+  FutureOr<void> _clearCartDataBase(
+      CartDataClearEvent event, Emitter<AllProductsState> emit) async {
+    await userCartDataBaseClearUsecase(
+        UserCartDataBaseClearParams(event.tableName));
+
+    add(const AllProductsFromDatabaseEvent('cart'));
   }
 }

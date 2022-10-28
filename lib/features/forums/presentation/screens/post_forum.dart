@@ -7,7 +7,7 @@ import '../../../../core/constants/constants.dart';
 import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
 import '../../../../core/utl/utls.dart';
 import '../bloc/forums_bloc.dart';
-import '../widgets/add_photo_widget.dart';
+import '../widgets/add_post_widgets/add_photo_widget.dart';
 
 class PostForumScreen extends StatelessWidget {
   const PostForumScreen({Key? key}) : super(key: key);

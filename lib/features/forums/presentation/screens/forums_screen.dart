@@ -10,7 +10,7 @@ import '../../../../core/layout/features/main_layout/presentation/screens/no_int
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utl/utls.dart';
 import '../bloc/forums_bloc.dart';
-import '../widgets/post_main_widget.dart';
+import '../widgets/main_posts_widgets/post_main_widget.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -34,14 +34,30 @@ class ForumsScreen extends StatelessWidget {
         } else {
           return Scaffold(
             key: _scaffoldKey,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutesNames.postForumScreen);
-              },
-              backgroundColor: Theme.of(context).primaryColor,
-              child: const Icon(Icons.add),
-            ),
             appBar: AppBar(
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(AppPadding.p8),
+                  child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(AppRadius.r16),
+                            ),
+                          ),
+                          backgroundColor: MaterialStatePropertyAll(
+                              Theme.of(context).primaryColor)),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(AppRoutesNames.postForumScreen);
+                      },
+                      child: Icon(
+                        Icons.add,
+                        color: AppColors.iconColorWhite,
+                      )),
+                ),
+              ],
               leading: IconButton(
                   onPressed: () {
                     TextFormFieldControllers.forumsSearchController.clear();

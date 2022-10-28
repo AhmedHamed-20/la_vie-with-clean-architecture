@@ -17,7 +17,7 @@ class TobTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppPadding.p8),
+      padding: const EdgeInsets.all(AppPadding.p4),
       child: Container(
         height: AppHeight.h70,
         decoration: BoxDecoration(
@@ -41,7 +41,7 @@ class TobTabs extends StatelessWidget {
                       .textTheme
                       .labelMedium
                       ?.copyWith(color: Theme.of(context).primaryColor)
-                  : Theme.of(context).textTheme.titleMedium,
+                  : Theme.of(context).textTheme.titleSmall,
             ),
           ),
         ),

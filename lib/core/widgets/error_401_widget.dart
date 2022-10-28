@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../components/defaults.dart';
 import '../constants/constants.dart';
@@ -15,6 +16,13 @@ class Error401Screen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Center(
+          child: Lottie.asset('assets/images/loading.json'),
+        ),
+        // ignore: prefer_const_constructors
+        SizedBox(
+          width: AppWidth.w8,
+        ),
         Center(
           child: Text(
             'your session has been expired, please logout and login again (:',

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -5,11 +7,11 @@ import 'package:la_vie_with_clean_architecture/features/forums/presentation/widg
 import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/forums_me_widgets/post_forums_me_design.dart';
 import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/search_widgets/search_widget.dart';
 
-import '../../../../core/components/defaults.dart';
-import '../../../../core/constants/constants.dart';
-import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
-import '../../../../core/utl/utls.dart';
-import '../bloc/forums_bloc.dart';
+import '../../../../../core/components/defaults.dart';
+import '../../../../../core/constants/constants.dart';
+import '../../../../../core/text_fileds_controlers/textfiled_controlers.dart';
+import '../../../../../core/utl/utls.dart';
+import '../../bloc/forums_bloc.dart';
 import 'forums_tob_tabs.dart';
 
 class PostMainWidget extends StatefulWidget {
@@ -22,13 +24,22 @@ class PostMainWidget extends StatefulWidget {
 }
 
 class _PostMainWidgetState extends State<PostMainWidget> {
+  late StreamSubscription<bool> keyboardSubscription;
+
   @override
   void initState() {
     var keyboardVisibilityController = KeyboardVisibilityController();
     super.initState();
-    keyboardVisibilityController.onChange.listen((bool visible) {
+    keyboardSubscription =
+        keyboardVisibilityController.onChange.listen((bool visible) {
       if (!visible) FocusScope.of(context).unfocus();
     });
+  }
+
+  @override
+  void dispose() {
+    keyboardSubscription.cancel();
+    super.dispose();
   }
 
   @override
@@ -39,7 +50,7 @@ class _PostMainWidgetState extends State<PostMainWidget> {
           padding: const EdgeInsets.all(AppPadding.p8),
           child: SizedBox(
             width: screenWidth(context),
-            height: screenHeight(context) * 0.08,
+            height: screenHeight(context) * 0.06,
             child: mobileHomeSearchBar(
               width: double.infinity,
               height: AppHeight.h10,
@@ -75,7 +86,7 @@ class _PostMainWidgetState extends State<PostMainWidget> {
                 TextFormFieldControllers.forumsSearchController.text.isEmpty) {
               return SizedBox(
                 width: screenWidth(context),
-                height: screenHeight(context) * 0.08,
+                height: screenHeight(context) * 0.06,
                 child: const ForumsTobTabsWidget(),
               );
             } else {

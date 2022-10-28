@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/widgets/error_401_widget.dart';
+import 'package:lottie/lottie.dart';
 import '../../../../../network_connection/network_connection_bloc.dart';
 import '../../../../../utl/utls.dart';
 import '../bloc/main_layout_bloc.dart';
@@ -21,18 +22,18 @@ class HomeScreen extends StatelessWidget {
             }
             switch (state.userDataRequestState) {
               case UserDataRequestState.loading:
-                return const Scaffold(
+                return Scaffold(
                   body: Center(
-                    child: CircularProgressIndicator(),
+                    child: Lottie.asset('assets/images/loading.json'),
                   ),
                 );
               case UserDataRequestState.accessTokenGetSuccess:
                 context
                     .read<MainLayoutBloc>()
                     .add(GetUserDataEvent(state.accessToken));
-                return const Scaffold(
+                return Scaffold(
                   body: Center(
-                    child: CircularProgressIndicator(),
+                    child: Lottie.asset('assets/images/loading.json'),
                   ),
                 );
               case UserDataRequestState.loaded:

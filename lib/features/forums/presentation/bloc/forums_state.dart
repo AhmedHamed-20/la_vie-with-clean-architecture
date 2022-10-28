@@ -5,6 +5,8 @@ class ForumsState extends Equatable {
   final List<ForumsEntitie> searchForumsEntitie;
   final List<bool> isLikedAllForums;
   final List<bool> isLikedMeForums;
+  final List<bool> isLikedSearchForums;
+
   final ImagePickeRequestState imagePickeRequestState;
   final ForumsRequestState forumsRequestState;
   final ForumsPostRequestState forumsPostRequestState;
@@ -15,6 +17,7 @@ class ForumsState extends Equatable {
   final int currentActiveIndex;
   final File? photoPath;
   const ForumsState({
+    this.isLikedSearchForums = const [],
     this.searchForumRequestState = SearchForumRequestState.loading,
     this.searchForumsEntitie = const [],
     this.isLikedMeForums = const [],
@@ -31,6 +34,7 @@ class ForumsState extends Equatable {
   });
 
   ForumsState copyWith({
+    List<bool>? isLikedSearchForums,
     SearchForumRequestState? searchForumRequestState,
     List<ForumsEntitie>? searchForumsEntitie,
     List<bool>? isLikedMeForums,
@@ -46,6 +50,7 @@ class ForumsState extends Equatable {
     File? photoPath,
   }) {
     return ForumsState(
+      isLikedSearchForums: isLikedSearchForums ?? this.isLikedSearchForums,
       searchForumRequestState:
           searchForumRequestState ?? this.searchForumRequestState,
       searchForumsEntitie: searchForumsEntitie ?? this.searchForumsEntitie,
@@ -68,6 +73,7 @@ class ForumsState extends Equatable {
 
   @override
   List<Object?> get props => [
+        isLikedSearchForums,
         searchForumRequestState,
         searchForumsEntitie,
         isLikedAllForums,

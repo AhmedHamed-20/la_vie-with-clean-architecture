@@ -29,7 +29,7 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
       this.commentsAddingUsecase,
       this.forumsSearchByTitleUsecase)
       : super(const ForumsState()) {
-    on<AllForumsEvent>(_getAllForums);
+    on<AllForumsEvent>(_getAllForumsAndStoreIsLiked);
     on<ForumsMeEvent>(_getForumsMeAndStoreIsLiked);
     on<ForumsPostEvent>(_postNewForum);
     on<PickImageEvent>(_pickImageAndConvertItToBase64);
@@ -44,7 +44,7 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
   final LikeAddUsecase likeAddUsecase;
   final CommentsAddingUsecase commentsAddingUsecase;
   final ForumsSearchByTitleUsecase forumsSearchByTitleUsecase;
-  FutureOr<void> _getAllForums(
+  FutureOr<void> _getAllForumsAndStoreIsLiked(
       AllForumsEvent event, Emitter<ForumsState> emit) async {
     final result =
         await allForumsUsecase(AllForumsParams(accessToken: event.accessToken));
@@ -209,9 +209,12 @@ class ForumsBloc extends Bloc<ForumsEvent, ForumsState> {
     result.fold(
         (l) => emit(state.copyWith(
             errorMessage: l.message,
-            searchForumRequestState: SearchForumRequestState.error)),
-        (r) => emit(state.copyWith(
-            searchForumsEntitie: r,
-            searchForumRequestState: SearchForumRequestState.loaded)));
+            searchForumRequestState: SearchForumRequestState.error)), (r) {
+      final isLikedList = List<bool>.from(getIslikedList(r, userId));
+      return emit(state.copyWith(
+          searchForumsEntitie: r,
+          searchForumRequestState: SearchForumRequestState.loaded,
+          isLikedSearchForums: isLikedList));
+    });
   }
 }

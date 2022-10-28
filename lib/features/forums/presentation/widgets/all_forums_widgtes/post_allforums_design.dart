@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/params/app_params.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/post_design.dart';
 
 import '../../bloc/forums_bloc.dart';
+import '../main_posts_widgets/post_design.dart';
 
 class PostAllForumsDesign extends StatelessWidget {
   const PostAllForumsDesign({super.key});

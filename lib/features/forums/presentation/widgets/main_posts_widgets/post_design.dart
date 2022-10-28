@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:la_vie_with_clean_architecture/core/params/app_params.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/post_likes_comments_widget.dart';
-import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/post_user_info.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/main_posts_widgets/post_likes_comments_widget.dart';
+import 'package:la_vie_with_clean_architecture/features/forums/presentation/widgets/main_posts_widgets/post_user_info.dart';
 
 import '../../../../../core/constants/constants.dart';
 

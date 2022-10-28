@@ -4,6 +4,8 @@ import 'package:la_vie_with_clean_architecture/core/components/product_details_s
 
 import '../../../../../core/constants/constants.dart';
 import '../../bloc/all_products_bloc.dart';
+import 'add_to_cart_button.dart';
+import 'change_amount_widget.dart';
 
 class ProductsCard extends StatelessWidget {
   const ProductsCard({
@@ -64,55 +66,11 @@ class ProductsCard extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        right: 0,
-                        top: 0,
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                context.read<AllProductsBloc>().add(
-                                      AmountValueEvent(
-                                        id: state
-                                            .activeEntitie[index]['entitie'].id,
-                                        isIncrement: false,
-                                      ),
-                                    );
-                              },
-                              child: Container(
-                                color: AppColors.textFormFieldFillColor,
-                                child: Icon(
-                                  Icons.remove,
-                                  color: AppColors.iconColorGrey,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              state.amountOfAllProducts[
-                                      state.activeEntitie[index]['entitie'].id]
-                                  .toString(),
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                context.read<AllProductsBloc>().add(
-                                      AmountValueEvent(
-                                        id: state
-                                            .activeEntitie[index]['entitie'].id,
-                                        isIncrement: true,
-                                      ),
-                                    );
-                              },
-                              child: Container(
-                                color: AppColors.textFormFieldFillColor,
-                                child: Icon(
-                                  Icons.add,
-                                  color: AppColors.iconColorGrey,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                          right: -10,
+                          top: 0,
+                          child: ChangeAmountWidget(
+                            index: index,
+                          )),
                       Align(
                         alignment: AlignmentDirectional.bottomStart,
                         child: Column(
@@ -124,51 +82,11 @@ class ProductsCard extends StatelessWidget {
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                             Text(
-                              state.activeEntitie[index]['entitie'].description,
+                              '${state.activeEntitie[index]['price'].toString()} EGP',
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
-                            SizedBox(
-                              width: double.infinity,
-                              child: MaterialButton(
-                                color: Theme.of(context).primaryColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(AppRadius.r5),
-                                ),
-                                onPressed: () {
-                                  context.read<AllProductsBloc>().add(
-                                        DatabaseInsertionEvent(
-                                          amount: state.amountOfAllProducts[
-                                              state
-                                                  .activeEntitie[index]
-                                                      ['entitie']
-                                                  .id]!,
-                                          productId: state
-                                              .activeEntitie[index]['entitie']
-                                              .id,
-                                          name: state
-                                              .activeEntitie[index]['entitie']
-                                              .name,
-                                          description: state
-                                              .activeEntitie[index]['entitie']
-                                              .description,
-                                          imageUrl: state
-                                              .activeEntitie[index]['entitie']
-                                              .imageUrl,
-                                          price: state.activeEntitie[index]
-                                              ['price'],
-                                        ),
-                                      );
-                                  context.read<AllProductsBloc>().add(
-                                      const AllProductsFromDatabaseEvent(
-                                          'cart'));
-                                },
-                                child: Text(
-                                  'Add To Cart',
-                                  style:
-                                      Theme.of(context).textTheme.labelMedium,
-                                ),
-                              ),
+                            AddToCartButton(
+                              index: index,
                             ),
                           ],
                         ),

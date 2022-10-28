@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/components/defaults.dart';
 import 'package:la_vie_with_clean_architecture/core/text_fileds_controlers/textfiled_controlers.dart';
 
-import '../../../../../core/constants/constants.dart';
-import '../bloc/forums_bloc.dart';
+import '../../../../../../core/constants/constants.dart';
+import '../../bloc/forums_bloc.dart';
 
 class PostCommentsBottomSheetWidget extends StatelessWidget {
   const PostCommentsBottomSheetWidget({

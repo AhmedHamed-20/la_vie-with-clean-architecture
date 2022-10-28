@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../../core/components/defaults.dart';
 import '../../../../../core/constants/constants.dart';
+import 'ask_about_buy_alert_dialog.dart';
+import 'buy_success_alert_dialog.dart';
 import 'cart_card_widget.dart';
 
 class CartDataWidget extends StatelessWidget {
@@ -167,7 +170,13 @@ class CartDataWidget extends StatelessWidget {
                   ],
                 ),
                 defaultButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const AskAboutBuyingAlertDialog();
+                        });
+                  },
                   buttonChild: Text(
                     'Checkout',
                     style: Theme.of(context).textTheme.labelMedium,

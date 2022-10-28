@@ -17,7 +17,7 @@ class EndPoints {
       '$baseUrl/api/v1/forums/$forumsId/comment';
   static String getProductById(String productId) =>
       '$baseUrl/api/v1/products/$productId';
-static String forumsSearch(String forumTitle) =>
+  static String forumsSearch(String forumTitle) =>
       '$baseUrl/api/v1/forums?search=$forumTitle';
-
+  static String claimFreeSeeds = '$baseUrl/api/v1/user/me/claimFreeSeeds';
 }
