@@ -4,6 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../constants/constants.dart';
 
 ThemeData lightMode = ThemeData(
+  colorScheme: ColorScheme.light(
+      secondary: AppColors.primaryColor, primary: AppColors.primaryColor),
+  splashColor: AppColors.primaryColor,
   bottomSheetTheme: const BottomSheetThemeData(
     backgroundColor: Colors.transparent,
     modalBackgroundColor: Colors.transparent,

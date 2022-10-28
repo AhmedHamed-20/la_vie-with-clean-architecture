@@ -25,8 +25,9 @@ class MainLayoutWidget extends StatelessWidget {
                   .read<MainLayoutBloc>()
                   .add(const ActiveScreenIndexEvent(2));
             },
-            child: const Icon(
+            child: Icon(
               IconlyBroken.home,
+              color: AppColors.iconColorWhite,
             ),
           );
         },
