@@ -37,7 +37,9 @@ class AppRouter {
       case AppRoutesNames.postForumScreen:
         return MaterialPageRoute(builder: (_) => const PostForumScreen());
       case AppRoutesNames.userProfileScreen:
-        return MaterialPageRoute(builder: (_) => const UserProfileScreen());
+        return MaterialPageRoute(
+          builder: (context) => const UserProfileScreen(),
+        );
       case AppRoutesNames.cartScreen:
         return MaterialPageRoute(builder: (_) => const CartScreen());
       case AppRoutesNames.noInterNetConnetionFoundScreen:

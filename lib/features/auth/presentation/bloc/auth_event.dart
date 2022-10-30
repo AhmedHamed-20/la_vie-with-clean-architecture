@@ -32,12 +32,13 @@ class SignupEvent extends AuthBlocEvent {
 }
 
 class AccessTokenCacheEvent extends AuthBlocEvent {
+  final bool isLogin;
   final String accessToken;
 
-  const AccessTokenCacheEvent(this.accessToken);
+  const AccessTokenCacheEvent(this.accessToken, this.isLogin);
 
   @override
-  List<Object?> get props => [accessToken];
+  List<Object?> get props => [accessToken, isLogin];
 }
 
 class CurrentActiveTabIndexEvent extends AuthBlocEvent {

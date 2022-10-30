@@ -51,13 +51,22 @@ class ScanScreen extends StatelessWidget {
                         );
                       case ProductDetailsRequestState.error:
                         return const Center(
-                          child: Text('loaded'),
+                          child: Text('error'),
                         );
                     }
                   },
                   listener: (context, state) {
+                    if (state.productDetailsRequestState.name == 'error') {
+                      flutterToast(
+                          msg: state.errorMessage,
+                          backgroundColor: AppColors.toastError,
+                          textColor: AppColors.white);
+                      Navigator.of(context)
+                          .pushNamed(AppRoutesNames.homeScreen);
+                    }
                     if (state.productDetailsRequestState.name == 'loaded') {
                       // Navigator.of(context).pop();
+
                       showModalBottomSheet(
                           isScrollControlled: true,
                           context: context,
@@ -115,7 +124,12 @@ class ScanScreen extends StatelessWidget {
                             }
                           });
                     }
-                    if (state.scanResult.isNotEmpty) {
+                    if (state.scanResult == '-1') {
+                      Navigator.of(context)
+                          .pushNamed(AppRoutesNames.homeScreen);
+                    }
+                    if (state.scanResult.isNotEmpty &&
+                        state.scanResult != '-1') {
                       context.read<ScanBloc>().add(ProductByIdEvent(
                           accessToken: savedaccessToken,
                           productId: state.scanResult));

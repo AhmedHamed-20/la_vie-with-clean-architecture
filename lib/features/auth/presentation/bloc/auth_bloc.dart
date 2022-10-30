@@ -68,16 +68,16 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     );
     emit(state.copyWith(signUpRequestState: SignUpRequestState.loading));
     result.fold(
-        (l) => emit(state.copyWith(
-            authMessage: l.message,
-            signUpRequestState: SignUpRequestState.error)), (r) {
-      return emit(
+      (l) => emit(state.copyWith(
+          authMessage: l.message,
+          signUpRequestState: SignUpRequestState.error)),
+      (r) => emit(
         state.copyWith(
           authDataEntitie: r,
           signUpRequestState: SignUpRequestState.signUploaded,
         ),
-      );
-    });
+      ),
+    );
   }
 
   FutureOr<void> _cacheAccessToken(
@@ -86,20 +86,33 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     final result = await accessTokenCacheUsecase(
         AccessTokenCacheParams(accessToken: event.accessToken));
 
-    result.fold(
-        (l) => emit(state.copyWith(
+    result.fold((l) {
+      if (event.isLogin) {
+        return emit(state.copyWith(
             authMessage: l.message,
             authState: RequestState.error,
-            accessTokenCached: false)), (r) {
-      clearAllAuthTextFiledsData();
+            accessTokenCached: false));
+      } else {
+        return emit(state.copyWith(
+            authMessage: l.message,
+            signUpRequestState: SignUpRequestState.error,
+            accessTokenCached: false));
+      }
+    }, (r) {
+      //clearAllAuthTextFiledsData();
       savedaccessToken = state.authDataEntitie!.accessToken;
-
-      return emit(
-        state.copyWith(
-          accessTokenCached: r,
-          authState: RequestState.cachedSuccess,
-        ),
-      );
+      if (event.isLogin) {
+        return emit(
+          state.copyWith(
+            accessTokenCached: true,
+            authState: RequestState.cachedSuccess,
+          ),
+        );
+      } else {
+        return emit(state.copyWith(
+            accessTokenCached: true,
+            signUpRequestState: SignUpRequestState.cachedSuccess));
+      }
     });
   }
 

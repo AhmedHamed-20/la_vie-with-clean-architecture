@@ -29,3 +29,8 @@ class GetAccessTokenFromCacheEvent extends MainLayoutEvent {
   @override
   List<Object?> get props => [key];
 }
+
+class BackToinitialEvent extends MainLayoutEvent {
+  @override
+  List<Object?> get props => [];
+}

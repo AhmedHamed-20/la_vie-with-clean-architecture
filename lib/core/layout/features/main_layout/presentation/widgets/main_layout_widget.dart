@@ -2,14 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconly/iconly.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/widgets/screens_widget.dart';
+import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
 
 import '../../../../../constants/constants.dart';
 import '../bloc/main_layout_bloc.dart';
 
-class MainLayoutWidget extends StatelessWidget {
+class MainLayoutWidget extends StatefulWidget {
   const MainLayoutWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<MainLayoutWidget> createState() => _MainLayoutWidgetState();
+}
+
+class _MainLayoutWidgetState extends State<MainLayoutWidget> {
+  @override
+  void initState() {
+    BlocProvider.of<AllProductsBloc>(context)
+        .add(const AllProductsFromDatabaseEvent('cart'));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +116,9 @@ class MainLayoutWidget extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(AppRoutesNames.userProfileScreen);
+                Navigator.of(context).pushNamed(
+                  AppRoutesNames.userProfileScreen,
+                );
               },
               icon: Icon(
                 IconlyBroken.profile,

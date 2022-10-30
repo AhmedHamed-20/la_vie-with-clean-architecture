@@ -16,26 +16,27 @@ class MainLayoutBloc extends Bloc<MainLayoutEvent, MainLayoutState> {
     on<ActiveScreenIndexEvent>(_changeBottomNavIndex);
     on<GetUserDataEvent>(_getUserData);
     on<GetAccessTokenFromCacheEvent>(_getAccessTokenFromCache);
+    on<BackToinitialEvent>(_backToInitial);
   }
   UserDataUsecase userDataUsecase;
   AccessTokenFromCacheUsecase accessTokenFromCacheUsecase;
   FutureOr<void> _getAccessTokenFromCache(
       GetAccessTokenFromCacheEvent event, Emitter<MainLayoutState> emit) async {
-    emit(state.copyWith(userDataRequestState: UserDataRequestState.loading));
+    // emit(state.copyWith(userDataRequestState: UserDataRequestState.loading));
     final result = await accessTokenFromCacheUsecase(
         AccessTokenFromCacheParams(event.key));
 
     result.fold(
-        (l) => emit(state.copyWith(
-            userDataRequestState: UserDataRequestState.error,
-            mainLayoutErrorMessage: l.message)), (r) {
-      return emit(
+      (l) => emit(state.copyWith(
+          userDataRequestState: UserDataRequestState.error,
+          mainLayoutErrorMessage: l.message)),
+      (r) => emit(
         state.copyWith(
           accessToken: r,
           userDataRequestState: UserDataRequestState.accessTokenGetSuccess,
         ),
-      );
-    });
+      ),
+    );
   }
 
   FutureOr<void> _getUserData(
@@ -65,5 +66,10 @@ class MainLayoutBloc extends Bloc<MainLayoutEvent, MainLayoutState> {
         currentBottomNavIndex: event.currentBottomNavIndex,
       ),
     );
+  }
+
+  FutureOr<void> _backToInitial(
+      BackToinitialEvent event, Emitter<MainLayoutState> emit) {
+    emit(state.copyWith(userDataRequestState: UserDataRequestState.loading));
   }
 }

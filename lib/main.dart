@@ -46,11 +46,12 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => servicelocator<MainLayoutBloc>()
-                ..add(const GetAccessTokenFromCacheEvent('accessToken'))),
+            create: (context) => servicelocator<MainLayoutBloc>(),
+              
+          ),
           BlocProvider(
             create: (context) => servicelocator<AllProductsBloc>()
-              ..add(const AllProductsFromDatabaseEvent('cart')),
+              ,
           ),
           BlocProvider(
               create: (context) => servicelocator<NetworkConnectionBloc>()

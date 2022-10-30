@@ -43,9 +43,10 @@ class BottomSheetWidget extends StatelessWidget {
               height: AppHeight.h18,
             ),
             defaultTextFormField(
+              title: bottomSheetTittle == 'Change Name' ? 'Name' : 'Email',
               width: double.infinity,
               height: AppHeight.h70,
-              radius: AppRadius.r10,
+              radius: AppRadius.r5,
               context: context,
               controller: controller,
             ),

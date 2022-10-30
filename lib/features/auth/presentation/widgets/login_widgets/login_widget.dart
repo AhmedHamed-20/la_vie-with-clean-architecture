@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../../../../../core/constants/constants.dart';
-import '../../../../../core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
 import '../../../../../core/utl/utls.dart';
 import '../../bloc/auth_bloc.dart';
 import 'login_button_widget.dart';
@@ -51,11 +50,17 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           BlocConsumer<AuthBloc, AuthBlocState>(
             listener: (context, state) {
-              if (state.accessTokenCached) {
-                context
-                    .read<MainLayoutBloc>()
-                    .add(const GetAccessTokenFromCacheEvent('accessToken'));
-                Navigator.of(context).pushNamed(AppRoutesNames.homeScreen);
+              if (state.authState.name == 'cachedSuccess') {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    AppRoutesNames.homeScreen, (route) => false);
+
+                context.read<AuthBloc>().clearAllAuthTextFiledsData();
+              }
+              if (state.authState.name == 'error') {
+                flutterToast(
+                    msg: state.authMessage,
+                    backgroundColor: AppColors.toastError,
+                    textColor: AppColors.white);
               }
             },
             builder: (context, state) {
@@ -70,6 +75,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   context.read<AuthBloc>().add(
                         AccessTokenCacheEvent(
                           state.authDataEntitie!.accessToken,
+                          true,
                         ),
                       );
                   return const Center(
@@ -77,9 +83,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   );
 
                 case RequestState.error:
-                  return const Center(
-                    child: Text('data'),
-                  );
+                  return const LoginButtonWidget();
                 case RequestState.cachedSuccess:
                   return const LoginButtonWidget();
               }

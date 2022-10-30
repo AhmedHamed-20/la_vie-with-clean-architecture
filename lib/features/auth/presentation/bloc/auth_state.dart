@@ -24,7 +24,7 @@ class AuthBlocState extends Equatable {
     this.signUpRequestState = SignUpRequestState.idle,
     this.loginObscureText = true,
     this.signUpObscureText = true,
-    this.currentActiveTab = 1,
+    this.currentActiveTab = 0,
     this.authDataEntitie,
     this.authState = RequestState.idle,
     this.authMessage = '',

@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/presentation/widgets/sign_up_widgets/sign_up_button.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/presentation/widgets/sign_up_widgets/sign_up_text_fileds.dart';
+
 import '../../../../../core/constants/constants.dart';
-import '../../../../../core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
 import '../../../../../core/utl/utls.dart';
 import '../../bloc/auth_bloc.dart';
 
@@ -53,12 +53,20 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               ),
               BlocConsumer<AuthBloc, AuthBlocState>(
                 listener: (context, state) {
-                  if (state.accessTokenCached) {
-                    context
-                        .read<MainLayoutBloc>()
-                        .add(const GetAccessTokenFromCacheEvent('accessToken'));
-                    Navigator.of(context).pushNamed(AppRoutesNames.homeScreen);
+                  if (state.signUpRequestState.name == 'cachedSuccess') {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        AppRoutesNames.homeScreen, (route) => false);
+                    // context
+                    //     .read<MainLayoutBloc>()
+                    //     .add(const GetAccessTokenFromCacheEvent('accessToken'));
+
                     context.read<AuthBloc>().clearAllAuthTextFiledsData();
+                  }
+                  if (state.signUpRequestState.name == 'error') {
+                    flutterToast(
+                        msg: state.authMessage,
+                        backgroundColor: AppColors.toastError,
+                        textColor: AppColors.white);
                   }
                 },
                 builder: (context, state) {
@@ -73,6 +81,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       context.read<AuthBloc>().add(
                             AccessTokenCacheEvent(
                               state.authDataEntitie!.accessToken,
+                              false,
                             ),
                           );
                       return const Center(
@@ -80,9 +89,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       );
 
                     case SignUpRequestState.error:
-                      return const Center(
-                        child: Text('data'),
-                      );
+                      return const SignUpButtomWidget();
                     case SignUpRequestState.cachedSuccess:
                       return const SignUpButtomWidget();
                   }

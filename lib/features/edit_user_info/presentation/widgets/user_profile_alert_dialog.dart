@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/constants/constants.dart';
 import 'package:la_vie_with_clean_architecture/features/products/presentation/bloc/all_products_bloc.dart';
 
+import '../../../../core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
+
 class UserProfileAlertDialogWidget extends StatelessWidget {
   const UserProfileAlertDialogWidget({
     Key? key,
@@ -13,6 +15,7 @@ class UserProfileAlertDialogWidget extends StatelessWidget {
     return BlocConsumer<AllProductsBloc, AllProductsState>(
       listener: (context, state) {
         if (state.cacheCleared) {
+          context.read<MainLayoutBloc>().add(BackToinitialEvent());
           Navigator.of(context).pushNamedAndRemoveUntil(
               AppRoutesNames.loginScreen, (route) => false);
         }
