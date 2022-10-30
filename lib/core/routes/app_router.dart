@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:la_vie_with_clean_architecture/core/components/product_details_screen.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/screens/home_screen.dart';
+import 'package:la_vie_with_clean_architecture/core/splash_screen/splash_screen.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/screens/user_data_info_screen.dart';
 import 'package:la_vie_with_clean_architecture/features/products/presentation/screens/cart_screen.dart';
 import 'package:la_vie_with_clean_architecture/features/products/presentation/screens/products_screen.dart';
@@ -19,6 +20,10 @@ class AppRouter {
   Route? generateRoutes(RouteSettings routeSettings) {
     final args = routeSettings.arguments;
     switch (routeSettings.name) {
+      case AppRoutesNames.splashScreen:
+        String argument = args as String;
+        return MaterialPageRoute(
+            builder: (_) => SplashScreen(accessToken: argument));
       case AppRoutesNames.loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case AppRoutesNames.homeScreen:

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/cache/cache_helper.dart';
 import 'package:la_vie_with_clean_architecture/core/database/database_setup.dart';
+import 'package:la_vie_with_clean_architecture/core/splash_screen/splash_screen.dart';
 
 import 'core/constants/constants.dart';
 import 'core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
@@ -47,22 +48,23 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => servicelocator<MainLayoutBloc>(),
-              
           ),
           BlocProvider(
-            create: (context) => servicelocator<AllProductsBloc>()
-              ,
+            create: (context) => servicelocator<AllProductsBloc>(),
           ),
           BlocProvider(
               create: (context) => servicelocator<NetworkConnectionBloc>()
                 ..add(const CheckInternetConnectionEvent())),
         ],
         child: MaterialApp(
-            title: 'Flutter Demo',
-            theme: lightMode,
-            onGenerateRoute: appRouter.generateRoutes,
-            initialRoute: accessToken == ''
-                ? AppRoutesNames.loginScreen
-                : AppRoutesNames.homeScreen));
+          title: 'Flutter Demo',
+          theme: lightMode,
+          routes: {
+            AppRoutesNames.splashScreen: (context) =>
+                SplashScreen(accessToken: accessToken),
+          },
+          onGenerateRoute: appRouter.generateRoutes,
+          initialRoute: AppRoutesNames.splashScreen,
+        ));
   }
 }

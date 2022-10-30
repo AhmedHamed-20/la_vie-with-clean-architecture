@@ -203,6 +203,7 @@ double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 class AppRoutesNames {
   static const String noInterNetConnetionFoundScreen =
       '/noInternetConnectionScreen';
+  static const String splashScreen = 'splash_screen';
   static const String loginScreen = '/';
   static const String homeScreen = '/home_screen';
   static const String scanScreen = '/home_screen/scan_screen';
