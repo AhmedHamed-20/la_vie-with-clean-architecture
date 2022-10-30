@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
                 ..add(const CheckInternetConnectionEvent())),
         ],
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'La Vie',
           theme: lightMode,
           routes: {
             AppRoutesNames.splashScreen: (context) =>

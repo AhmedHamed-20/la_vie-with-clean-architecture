@@ -4,7 +4,7 @@
 
    <application
    
-        android:label="la_vie_with_clean_architecture"
+        android:label="La Vie"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
