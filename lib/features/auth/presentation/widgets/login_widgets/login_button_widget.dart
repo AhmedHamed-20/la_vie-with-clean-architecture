@@ -28,7 +28,7 @@ class LoginButtonWidget extends StatelessWidget {
         },
         buttonChild: Text(
           'Login',
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         width: double.infinity,
         height: AppHeight.h46,

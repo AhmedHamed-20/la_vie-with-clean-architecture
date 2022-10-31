@@ -39,7 +39,10 @@ class SignUpButtomWidget extends StatelessWidget {
         },
         buttonChild: Text(
           'SignUp',
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: AppColors.white),
         ),
         width: double.infinity,
         height: AppHeight.h46,
