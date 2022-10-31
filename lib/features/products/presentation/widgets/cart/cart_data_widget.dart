@@ -42,9 +42,9 @@ class CartDataWidget extends StatelessWidget {
                         moreSubTitle: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.textFormFieldFillColor,
+                            Card(
+                              color: Theme.of(context).backgroundColor,
+                              shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(AppRadius.r10),
                               ),

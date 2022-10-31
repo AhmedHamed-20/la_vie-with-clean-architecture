@@ -53,7 +53,9 @@ class PostLikesCommentsWidget extends StatelessWidget {
                 ),
                 Text(forumsLikesCount.toString(),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: isLiked ? AppColors.white : AppColors.black))
+                        color: isLiked
+                            ? AppColors.white
+                            : Theme.of(context).textTheme.titleMedium!.color))
               ],
             ),
           ),

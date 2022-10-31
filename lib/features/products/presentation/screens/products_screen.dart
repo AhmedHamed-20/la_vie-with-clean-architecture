@@ -15,6 +15,12 @@ class ProductsScreen extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<AllProductsBloc, AllProductsState>(
         listener: (context, state) {
+          if (state.cartRequestState.name == 'insertedSuccessfully') {
+            flutterToast(
+                msg: 'added to your cart',
+                backgroundColor: AppColors.toastSuccess,
+                textColor: AppColors.white);
+          }
           if (state.productExist) {
             flutterToast(
                 msg: 'Product exist in cart',

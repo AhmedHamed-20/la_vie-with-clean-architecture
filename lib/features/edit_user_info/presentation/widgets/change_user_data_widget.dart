@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/widgets/change_information_card_widget.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/widgets/points_widget.dart';
 
 import '../../../../core/constants/constants.dart';
