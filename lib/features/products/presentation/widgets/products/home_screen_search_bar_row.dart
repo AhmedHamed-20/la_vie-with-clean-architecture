@@ -29,12 +29,8 @@ class HomeScreenSearchBarRow extends StatelessWidget {
                   Icons.search,
                   color: AppColors.iconColorGrey,
                 ),
-                label: Text(
-                  'Search',
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: AppColors.titleTextColor,
-                      ),
-                ),
+                label: Text('Search',
+                    style: Theme.of(context).textTheme.labelMedium),
                 context: context,
                 height: AppHeight.h10,
                 width: double.infinity,

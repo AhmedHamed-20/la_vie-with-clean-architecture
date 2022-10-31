@@ -44,17 +44,16 @@ class PostLikesCommentsWidget extends StatelessWidget {
               children: [
                 Icon(
                   isLiked ? Icons.thumb_up_alt : Icons.thumb_up_alt_outlined,
-                  color: isLiked ? AppColors.white : AppColors.iconColorGrey,
+                  color: isLiked
+                      ? AppColors.white
+                      : Theme.of(context).iconTheme.color,
                 ),
                 const SizedBox(
                   width: AppWidth.w8,
                 ),
-                Text(
-                  forumsLikesCount.toString(),
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color:
-                          isLiked ? AppColors.white : AppColors.iconColorGrey),
-                ),
+                Text(forumsLikesCount.toString(),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: isLiked ? AppColors.white : AppColors.black))
               ],
             ),
           ),
@@ -96,18 +95,13 @@ class PostLikesCommentsWidget extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.mode_comment_outlined,
-                      color: AppColors.iconColorGrey,
+                      color: Theme.of(context).iconTheme.color,
                     ),
                     const SizedBox(
                       width: AppWidth.w8,
                     ),
-                    Text(
-                      forumsCommentsCount.toString(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: AppColors.iconColorGrey),
-                    ),
+                    Text(forumsCommentsCount.toString(),
+                        style: Theme.of(context).textTheme.titleMedium),
                   ],
                 ),
               ),

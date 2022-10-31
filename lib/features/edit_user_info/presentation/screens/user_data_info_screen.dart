@@ -35,6 +35,7 @@ class UserProfileScreen extends StatelessWidget {
                     child: SizedBox(
                       height: MediaQueryOfMethods.getAppHeight(context) * 0.4,
                       child: const UpPhotoWidget(),
+                      
                     ),
                   ),
                   const Align(

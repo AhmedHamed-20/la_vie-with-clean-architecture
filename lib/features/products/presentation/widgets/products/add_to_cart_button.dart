@@ -40,7 +40,10 @@ class AddToCartButton extends StatelessWidget {
             },
             child: Text(
               'Add To Cart',
-              style: Theme.of(context).textTheme.labelMedium,
+              style: Theme.of(context)
+                  .textTheme
+                  .labelMedium
+                  ?.copyWith(color: AppColors.textColorButton),
             ),
           );
         },

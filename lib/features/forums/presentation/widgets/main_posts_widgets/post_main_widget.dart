@@ -71,12 +71,8 @@ class _PostMainWidgetState extends State<PostMainWidget> {
                 Icons.search,
                 color: AppColors.iconColorGrey,
               ),
-              label: Text(
-                'Search',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: AppColors.titleTextColor,
-                    ),
-              ),
+              label: Text('Search',
+                  style: Theme.of(context).textTheme.labelMedium),
             ),
           ),
         ),

@@ -90,3 +90,8 @@ enum SearchForumRequestState {
   loaded,
   error,
 }
+
+enum ThemeModeValue {
+  light,
+  dark,
+}

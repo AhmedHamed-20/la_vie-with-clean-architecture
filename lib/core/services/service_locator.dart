@@ -4,6 +4,11 @@ import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/domain/repositories/main_layout_repository.dart';
 import 'package:la_vie_with_clean_architecture/core/layout/features/main_layout/presentation/bloc/main_layout_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/network_connection/network_connection_bloc.dart';
+import 'package:la_vie_with_clean_architecture/core/theme_mode_feature/data/datasources/theme_mode_local_data_source.dart';
+import 'package:la_vie_with_clean_architecture/core/theme_mode_feature/data/repositories/theme_mode_repository.dart';
+import 'package:la_vie_with_clean_architecture/core/theme_mode_feature/domain/repositories/theme_mode_repository.dart';
+import 'package:la_vie_with_clean_architecture/core/theme_mode_feature/domain/usecases/cache_theme_mode.dart';
+import 'package:la_vie_with_clean_architecture/core/theme_mode_feature/domain/usecases/get_cache_theme_value.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:la_vie_with_clean_architecture/features/auth/domain/usecases/cache_access_token.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/data/datasources/updated_user_remote_datasource.dart';
@@ -52,12 +57,15 @@ import '../../features/products/data/repositories/products_repositories_impl.dar
 import '../../features/products/domain/repositories/products_repositories.dart';
 import '../../features/products/domain/usecases/get_all_products_usecase.dart';
 import '../../features/products/presentation/bloc/all_products_bloc.dart';
+import '../theme_mode_feature/presentation/bloc/theme_mode_bloc.dart';
 
 final servicelocator = GetIt.instance;
 
 class ServiceLocator {
   void init() {
     //Bloc
+    servicelocator.registerFactory<ThemeModeBloc>(
+        () => ThemeModeBloc(servicelocator(), servicelocator()));
     servicelocator.registerFactory<AuthBloc>(() => AuthBloc(
           servicelocator(),
           servicelocator(),
@@ -93,6 +101,7 @@ class ServiceLocator {
     servicelocator.registerFactory<ScanBloc>(() => ScanBloc(servicelocator()));
 
     //useCases
+
     servicelocator.registerLazySingleton(() => LoginUsecase(servicelocator()));
     servicelocator.registerLazySingleton(() => SignupUscase(servicelocator()));
     servicelocator
@@ -134,7 +143,10 @@ class ServiceLocator {
         .registerLazySingleton(() => ProductByIdUsecase(servicelocator()));
     servicelocator.registerLazySingleton(
         () => ForumsSearchByTitleUsecase(servicelocator()));
-
+    servicelocator
+        .registerLazySingleton(() => ThemeModaCacheUsecase(servicelocator()));
+    servicelocator
+        .registerLazySingleton(() => CacheThemeValueUsecase(servicelocator()));
     //Repositories
     servicelocator.registerLazySingleton<AuthRepositories>(
         () => AuthRepositoriesImpl(servicelocator(), servicelocator()));
@@ -150,6 +162,8 @@ class ServiceLocator {
         () => MainLayoutRepositoryImpl(servicelocator(), servicelocator()));
     servicelocator.registerLazySingleton<ProductByIdRepository>(
         () => ProductByIdRepositoryImpl(servicelocator()));
+    servicelocator.registerLazySingleton<ThemeModeRepository>(
+        () => ThemeModeRepositoryImpl(servicelocator()));
     //DataSource
     servicelocator.registerLazySingleton<BaseAuthRemoteDataSource>(
         () => RemoteAuthDataSourceImpl());
@@ -171,5 +185,7 @@ class ServiceLocator {
         () => MainLayoutLocalDataSourceImpl());
     servicelocator.registerLazySingleton<BaseProductByIdRemoteDataSource>(
         () => ProductByIdRemoteDataSourceImpl());
+    servicelocator.registerLazySingleton<BaseThemeModeLocalDatasource>(
+        () => ThemeModeLocalDatasourceImpl());
   }
 }

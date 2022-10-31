@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/components/product_details_screen.dart';
 
 import '../../../../../core/constants/constants.dart';
+import '../../../../../core/theme_mode_feature/presentation/bloc/theme_mode_bloc.dart';
 import '../../bloc/all_products_bloc.dart';
 import 'add_to_cart_button.dart';
 import 'change_amount_widget.dart';
@@ -77,13 +78,22 @@ class ProductsCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              state.activeEntitie[index]['entitie'].name,
-                              style: Theme.of(context).textTheme.titleLarge,
+                            BlocBuilder<ThemeModeBloc, ThemeModeState>(
+                              builder: (context, themeModeState) {
+                                return Text(
+                                  state.activeEntitie[index]['entitie'].name,
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                );
+                              },
                             ),
-                            Text(
-                              '${state.activeEntitie[index]['price'].toString()} EGP',
-                              style: Theme.of(context).textTheme.subtitle1,
+                            BlocBuilder<ThemeModeBloc, ThemeModeState>(
+                              builder: (context, themeModeState) {
+                                return Text(
+                                  '${state.activeEntitie[index]['price'].toString()} EGP',
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                );
+                              },
                             ),
                             AddToCartButton(
                               index: index,

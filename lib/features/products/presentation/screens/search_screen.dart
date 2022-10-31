@@ -39,7 +39,7 @@ class SearchScreen extends StatelessWidget {
               },
             ),
             title: Padding(
-              padding: const EdgeInsets.only(top: AppPadding.p8),
+              padding: const EdgeInsets.symmetric(vertical: AppPadding.p8),
               child: mobileHomeSearchBar(
                 onChanged: (value) {
                   if (TextFormFieldControllers
@@ -61,12 +61,8 @@ class SearchScreen extends StatelessWidget {
                   Icons.search,
                   color: AppColors.iconColorGrey,
                 ),
-                label: Text(
-                  'Search',
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: AppColors.titleTextColor,
-                      ),
-                ),
+                label: Text('Search',
+                    style: Theme.of(context).textTheme.labelMedium),
                 context: context,
                 width: double.infinity,
                 height: double.infinity,

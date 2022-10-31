@@ -24,7 +24,7 @@ class CartScreen extends StatelessWidget {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios,
-              color: AppColors.iconColorGrey,
+              color: Theme.of(context).iconTheme.color,
             ),
             onPressed: () {
               Navigator.of(context).pop();

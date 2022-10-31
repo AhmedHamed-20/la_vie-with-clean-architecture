@@ -42,7 +42,7 @@ class UpperDetailsScreenWidget extends StatelessWidget {
                 ),
                 Text(
                   '$sunLight % \nSun Light',
-                  style: Theme.of(context).textTheme.labelMedium,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
             ),
@@ -63,7 +63,7 @@ class UpperDetailsScreenWidget extends StatelessWidget {
                 ),
                 Text(
                   '$waterCapacity % \nWater Capacity',
-                  style: Theme.of(context).textTheme.labelMedium,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
             ),
@@ -84,7 +84,7 @@ class UpperDetailsScreenWidget extends StatelessWidget {
                 ),
                 Text(
                   '$temperature c \nTemperature',
-                  style: Theme.of(context).textTheme.labelMedium,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
             ),

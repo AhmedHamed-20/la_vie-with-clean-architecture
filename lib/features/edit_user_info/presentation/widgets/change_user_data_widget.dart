@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/widgets/change_information_card_widget.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/widgets/points_widget.dart';
 
 import '../../../../core/constants/constants.dart';
 import 'change_email_widget.dart';
 import 'change_name_widget.dart';
+import 'change_theme_mode_widget.dart';
+
+//0 light 1 dark
+int selected = 0;
 
 class ChangeUserDataWidget extends StatelessWidget {
   const ChangeUserDataWidget({
@@ -37,6 +42,7 @@ class ChangeUserDataWidget extends StatelessWidget {
             ),
             const ChangeNameWidget(),
             const ChangeEmailWidget(),
+            const ChangeThemeModeWidget(),
           ],
         ),
       ),

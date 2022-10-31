@@ -110,20 +110,27 @@ class AppWidth {
 }
 
 class AppColors {
+  static Color scaffoldBackgroundColorDark = const Color(0xff121212);
+  static Color backgroundColorDark = Colors.grey[850]!;
+  static Color backgroundColorWhite = Colors.white;
+
   static Color white = Colors.white;
   static Color black = Colors.black;
   static Color toastSuccess = Colors.green;
   static Color toastWarning = Colors.yellow;
   static Color toastError = Colors.red;
   static Color navBarBackgroundColor = Colors.white;
-  static Color scaffoldBackgroundColor = Colors.white;
+  static Color scaffoldBackgroundColor = Colors.grey[100]!;
   static Color primaryColor = const Color(0xff1ABC00);
   static Color transparentColor = Colors.transparent;
   static Color buttonColor = const Color(0xff1ABC00);
   static Color textColorButton = Colors.white;
   static Color titleTextColor = Colors.black;
+  static Color titleTextColorDark = Colors.white;
+
   static Color subtitleTextColor = const Color(0xff6F6F6F);
   static Color iconColorBlack = Colors.black;
+
   static Color iconColorWhite = Colors.white;
   static Color iconColorGrey = const Color(0xff6F6F6F);
   static Color textFieldBorderColorGrey = const Color(0xff6F6F6F);
@@ -183,7 +190,14 @@ Widget appBarWidgets(BuildContext context, int index) {
   List<Widget> appBarWidgetsdata = [
     const SizedBox(),
     const SizedBox(),
-    Image.asset('assets/images/logo.png'),
+    Card(
+        color: Theme.of(context).backgroundColor,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.r20)),
+        child: Padding(
+          padding: const EdgeInsets.all(AppPadding.p8),
+          child: Image.asset('assets/images/logo.png'),
+        )),
     Text(
       'Notification',
       style: Theme.of(context).textTheme.titleLarge,

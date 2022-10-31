@@ -24,11 +24,11 @@ class TobTabs extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             AppRadius.r10,
           ),
-          color: AppColors.textFormFieldFillColor,
+          color: Theme.of(context).backgroundColor,
           border: Border.all(
             color: currentActiveTab == currentWidgetIndex
                 ? AppColors.buttonColor
-                : AppColors.iconColorWhite,
+                : Theme.of(context).backgroundColor,
           ),
         ),
         child: Padding(

@@ -8,6 +8,8 @@ Widget changeCardInformation({
   return Padding(
     padding: const EdgeInsets.all(AppPadding.p8),
     child: Card(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.r10)),
       child: ListTile(
         title: Text(
           title,

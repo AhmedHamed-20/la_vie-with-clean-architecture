@@ -11,6 +11,7 @@ import 'core/network_connection/network_connection_bloc.dart';
 import 'core/routes/app_router.dart';
 import 'core/services/service_locator.dart';
 import 'core/theme/app_theme.dart';
+import 'core/theme_mode_feature/presentation/bloc/theme_mode_bloc.dart';
 import 'features/products/presentation/bloc/all_products_bloc.dart';
 
 void main() async {
@@ -47,6 +48,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
+            create: (context) => servicelocator<ThemeModeBloc>()
+              ..add(const GetCacheThemeValueEvent('ThemeMode')),
+          ),
+          BlocProvider(
             create: (context) => servicelocator<MainLayoutBloc>(),
           ),
           BlocProvider(
@@ -56,15 +61,23 @@ class MyApp extends StatelessWidget {
               create: (context) => servicelocator<NetworkConnectionBloc>()
                 ..add(const CheckInternetConnectionEvent())),
         ],
-        child: MaterialApp(
-          title: 'La Vie',
-          theme: lightMode,
-          routes: {
-            AppRoutesNames.splashScreen: (context) =>
-                SplashScreen(accessToken: accessToken),
+        child: BlocBuilder<ThemeModeBloc, ThemeModeState>(
+          builder: (context, state) {
+            return MaterialApp(
+              title: 'La Vie',
+              darkTheme: ThemeDataValue.darkMode,
+              theme: ThemeDataValue.lightMode,
+              themeMode: state.themeModeValue.index == 0
+                  ? ThemeMode.light
+                  : ThemeMode.dark,
+              routes: {
+                AppRoutesNames.splashScreen: (context) =>
+                    SplashScreen(accessToken: accessToken),
+              },
+              onGenerateRoute: appRouter.generateRoutes,
+              initialRoute: AppRoutesNames.splashScreen,
+            );
           },
-          onGenerateRoute: appRouter.generateRoutes,
-          initialRoute: AppRoutesNames.splashScreen,
         ));
   }
 }

@@ -75,13 +75,11 @@ class UpPhotoWidget extends StatelessWidget {
                           height: AppHeight.h8,
                         ),
                         Text(
-                          '${userInfoState.updatedUserDataEntitie?.firstName ?? mainLayoutState.userDataEntitie!.firstName} ${userInfoState.updatedUserDataEntitie?.lastName ?? mainLayoutState.userDataEntitie!.lastName}',
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    fontSize: AppFontSize.s20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                        ),
+                            '${userInfoState.updatedUserDataEntitie?.firstName ?? mainLayoutState.userDataEntitie!.firstName} ${userInfoState.updatedUserDataEntitie?.lastName ?? mainLayoutState.userDataEntitie!.lastName}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(color: Colors.white)),
                       ],
                     );
                   },

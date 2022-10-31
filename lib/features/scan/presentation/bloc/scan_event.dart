@@ -9,15 +9,6 @@ class ScanQrCodeEvent extends ScanEvent {
   List<Object?> get props => [];
 }
 
-// class ScanResultEvent extends ScanEvent {
-//   final Barcode result;
-
-//   const ScanResultEvent(this.result);
-
-//   @override
-//   List<Object> get props => [result];
-// }
-
 class ProductByIdEvent extends ScanEvent {
   final String accessToken;
   final String productId;

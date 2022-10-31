@@ -23,7 +23,9 @@ class ChangeAmountWidget extends StatelessWidget {
                     );
               },
               child: Container(
-                color: AppColors.textFormFieldFillColor,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).backgroundColor,
+                    borderRadius: BorderRadius.circular(AppRadius.r5)),
                 child: Icon(
                   Icons.remove,
                   color: AppColors.iconColorGrey,
@@ -54,7 +56,9 @@ class ChangeAmountWidget extends StatelessWidget {
                     );
               },
               child: Container(
-                color: AppColors.textFormFieldFillColor,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).backgroundColor,
+                    borderRadius: BorderRadius.circular(AppRadius.r5)),
                 child: Icon(
                   Icons.add,
                   color: AppColors.iconColorGrey,

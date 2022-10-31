@@ -68,12 +68,16 @@ class _MainLayoutWidgetState extends State<MainLayoutWidget> {
         elevation: AppElevation.eL0,
         title: BlocBuilder<MainLayoutBloc, MainLayoutState>(
           builder: (context, state) {
-            return appBarWidgets(context, state.currentBottomNavIndex);
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: appBarWidgets(context, state.currentBottomNavIndex),
+            );
           },
         ),
         centerTitle: true,
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).backgroundColor,
         shape: const CircularNotchedRectangle(),
         elevation: AppElevation.eL4,
         notchMargin: AppPadding.p8,
@@ -87,8 +91,10 @@ class _MainLayoutWidgetState extends State<MainLayoutWidget> {
               onPressed: () {
                 Navigator.of(context).pushNamed(AppRoutesNames.blogsScreen);
               },
-              icon: Image.asset(
-                'assets/images/fire.png',
+              icon: Icon(
+                Icons.nature_outlined,
+                color: Theme.of(context).iconTheme.color,
+                size: AppHeight.h28,
               ),
             ),
             IconButton(
@@ -97,7 +103,7 @@ class _MainLayoutWidgetState extends State<MainLayoutWidget> {
               },
               icon: Icon(
                 IconlyBroken.scan,
-                color: AppColors.iconColorBlack,
+                color: Theme.of(context).iconTheme.color,
                 size: AppHeight.h28,
               ),
             ),
@@ -110,7 +116,7 @@ class _MainLayoutWidgetState extends State<MainLayoutWidget> {
               },
               icon: Icon(
                 IconlyBroken.notification,
-                color: AppColors.iconColorBlack,
+                color: Theme.of(context).iconTheme.color,
                 size: AppHeight.h28,
               ),
             ),
@@ -122,7 +128,7 @@ class _MainLayoutWidgetState extends State<MainLayoutWidget> {
               },
               icon: Icon(
                 IconlyBroken.profile,
-                color: AppColors.iconColorBlack,
+                color: Theme.of(context).iconTheme.color,
                 size: AppHeight.h28,
               ),
             ),

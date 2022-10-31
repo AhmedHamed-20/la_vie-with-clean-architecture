@@ -25,7 +25,7 @@ class PostForumScreen extends StatelessWidget {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios,
-              color: AppColors.iconColorGrey,
+              color: Theme.of(context).iconTheme.color,
             ),
             onPressed: () {
               Navigator.of(context).pop();
@@ -93,7 +93,7 @@ class PostForumScreen extends StatelessWidget {
               ),
               defaultTextFormField(
                 width: double.infinity,
-                height: AppHeight.h46,
+                height: AppHeight.h70,
                 radius: AppRadius.r5,
                 context: context,
                 controller: TextFormFieldControllers.titlePostController,
@@ -111,7 +111,7 @@ class PostForumScreen extends StatelessWidget {
               defaultTextFormField(
                 maxLine: 6,
                 width: double.infinity,
-                height: AppHeight.h100,
+                height: AppHeight.h130,
                 radius: AppRadius.r5,
                 context: context,
                 controller: TextFormFieldControllers.descriptionPostController,
