@@ -47,7 +47,6 @@ class HomeScreenSearchBarRow extends StatelessWidget {
               child: BlocBuilder<AllProductsBloc, AllProductsState>(
                 builder: (context, state) {
                   return Badge(
-//animationDuration: const Duration(milliseconds: 10),
                     animationType: BadgeAnimationType.scale,
                     badgeContent: Text(
                       state.productsDatabaseEntitie.length.toString(),

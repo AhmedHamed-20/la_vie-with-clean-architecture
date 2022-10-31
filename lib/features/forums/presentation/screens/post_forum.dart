@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:la_vie_with_clean_architecture/core/services/service_locator.dart';
 
-import '../../../../core/components/defaults.dart';
 import '../../../../core/constants/constants.dart';
-import '../../../../core/text_fileds_controlers/textfiled_controlers.dart';
-import '../../../../core/utl/utls.dart';
 import '../bloc/forums_bloc.dart';
-import '../widgets/add_post_widgets/add_photo_widget.dart';
+import '../widgets/post_forum_widgets/add_photo_widget_states.dart';
+import '../widgets/post_forum_widgets/add_post_button_states_widget.dart';
+import '../widgets/post_forum_widgets/title_description_widgets.dart';
 
 class PostForumScreen extends StatelessWidget {
   const PostForumScreen({Key? key}) : super(key: key);
@@ -41,145 +40,13 @@ class PostForumScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BlocConsumer<ForumsBloc, ForumsState>(
-                listener: (context, state) {
-                  if (state.imagePickeRequestState.name == 'error') {
-                    flutterToast(
-                        msg: 'please select an image',
-                        backgroundColor: AppColors.toastError,
-                        textColor: AppColors.white);
-                  }
-                },
-                builder: (context, state) {
-                  switch (state.imagePickeRequestState) {
-                    case ImagePickeRequestState.loading:
-                      return GestureDetector(
-                        onTap: () {
-                          context.read<ForumsBloc>().add(PickImageEvent());
-                        },
-                        child: const AddPhotoWidget(),
-                      );
-
-                    case ImagePickeRequestState.picked:
-                      return GestureDetector(
-                        onTap: () {
-                          context.read<ForumsBloc>().add(PickImageEvent());
-                        },
-                        child: Center(
-                          child: Image.file(
-                            state.photoPath!,
-                            width: AppWidth.w100,
-                            height: AppHeight.h100,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      );
-                    case ImagePickeRequestState.error:
-                      return GestureDetector(
-                          onTap: () {
-                            context.read<ForumsBloc>().add(PickImageEvent());
-                          },
-                          child: const AddPhotoWidget());
-                  }
-                },
-              ),
-              Text(
-                'Title',
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-              const SizedBox(
-                height: AppHeight.h8,
-              ),
-              defaultTextFormField(
-                width: double.infinity,
-                height: AppHeight.h70,
-                radius: AppRadius.r5,
-                context: context,
-                controller: TextFormFieldControllers.titlePostController,
-              ),
-              const SizedBox(
-                height: AppHeight.h8,
-              ),
-              Text(
-                'Description',
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-              const SizedBox(
-                height: AppHeight.h8,
-              ),
-              defaultTextFormField(
-                maxLine: 6,
-                width: double.infinity,
-                height: AppHeight.h130,
-                radius: AppRadius.r5,
-                context: context,
-                controller: TextFormFieldControllers.descriptionPostController,
-              ),
-              const SizedBox(
+            children: const [
+              AddPhotoWidgetStates(),
+              TitleAndDescriptionWidgets(),
+              SizedBox(
                 height: AppHeight.h12,
               ),
-              BlocConsumer<ForumsBloc, ForumsState>(
-                listener: (context, state) {
-                  if (state.forumsPostRequestState.name == 'posted') {
-                    flutterToast(
-                        msg: 'Posted Successfuly',
-                        backgroundColor: AppColors.toastSuccess,
-                        textColor: AppColors.white);
-                    context.read<ForumsBloc>().add(ForumsMeEvent(
-                        accessToken: savedaccessToken, userId: userId));
-
-                    TextFormFieldControllers.titlePostController.clear();
-                    TextFormFieldControllers.descriptionPostController.clear();
-                  }
-                },
-                builder: (context, state) {
-                  switch (state.forumsPostRequestState) {
-                    case ForumsPostRequestState.idle:
-                      return defaultButton(
-                        onPressed: () {
-                          context.read<ForumsBloc>().add(ForumsPostEvent(
-                              accessToken: savedaccessToken,
-                              description: TextFormFieldControllers
-                                  .descriptionPostController.text,
-                              imageBae64: state.convertedImageToBase64!,
-                              title: TextFormFieldControllers
-                                  .titlePostController.text));
-                        },
-                        buttonChild: Text(
-                          'Post',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                        width: double.infinity,
-                        height: AppHeight.h46,
-                      );
-                    case ForumsPostRequestState.loading:
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    case ForumsPostRequestState.posted:
-                      return defaultButton(
-                        onPressed: () {},
-                        buttonChild: Text(
-                          'Post',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                        width: double.infinity,
-                        height: AppHeight.h46,
-                      );
-                    case ForumsPostRequestState.error:
-                      return defaultButton(
-                        onPressed: () {},
-                        buttonChild: Text(
-                          'Post',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                        width: double.infinity,
-                        height: AppHeight.h46,
-                      );
-                  }
-                },
-              ),
+              AddPostButtonStatesWidget(),
             ],
           ),
         ),
