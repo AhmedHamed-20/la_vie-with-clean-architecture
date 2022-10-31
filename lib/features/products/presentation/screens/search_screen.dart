@@ -31,7 +31,7 @@ class SearchScreen extends StatelessWidget {
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: AppColors.iconColorGrey,
+                color: Theme.of(context).iconTheme.color,
               ),
               onPressed: () {
                 TextFormFieldControllers.homeSearchController.clear();
