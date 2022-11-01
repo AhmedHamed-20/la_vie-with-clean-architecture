@@ -11,6 +11,7 @@ class ForumsTobTabsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var forumsBloc = BlocProvider.of<ForumsBloc>(context);
     return BlocBuilder<ForumsBloc, ForumsState>(
       builder: (context, state) {
         return ListView.builder(
@@ -20,7 +21,7 @@ class ForumsTobTabsWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                context.read<ForumsBloc>().add(ActiveTabForumsEvent(index));
+                forumsBloc.add(ActiveTabForumsEvent(index));
               },
               child: TobTabs(
                 tabs: const ['All Forums', 'My Forums'],

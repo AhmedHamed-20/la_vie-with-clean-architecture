@@ -11,11 +11,12 @@ class LoginButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var authBloc = BlocProvider.of<AuthBloc>(context);
     return BlocBuilder<AuthBloc, AuthBlocState>(
       builder: (context, state) => defaultButton(
         onPressed: () {
           if (state.isEmailLoginVaild && state.isPasswordLoginVaild) {
-            context.read<AuthBloc>().add(LoginEvent(
+            authBloc.add(LoginEvent(
                 email: TextFormFieldControllers.emailLoginController.text,
                 password:
                     TextFormFieldControllers.passwordLoginController.text));
@@ -28,7 +29,10 @@ class LoginButtonWidget extends StatelessWidget {
         },
         buttonChild: Text(
           'Login',
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(color: AppColors.white),
         ),
         width: double.infinity,
         height: AppHeight.h46,

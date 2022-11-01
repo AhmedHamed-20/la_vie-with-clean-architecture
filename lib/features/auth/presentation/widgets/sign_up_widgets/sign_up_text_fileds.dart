@@ -12,6 +12,8 @@ class SignUpTextFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var authBloc = BlocProvider.of<AuthBloc>(context);
+
     return Column(
       children: [
         Row(
@@ -86,7 +88,7 @@ class SignUpTextFields extends StatelessWidget {
                 obscureText: state.signUpObscureText,
                 suffixIcon: IconButton(
                     onPressed: () {
-                      context.read<AuthBloc>().add(
+                      authBloc.add(
                           SignUpObscureTextEvent(!state.signUpObscureText));
                     },
                     icon: Icon(
@@ -109,8 +111,7 @@ class SignUpTextFields extends StatelessWidget {
               child: SizedBox(
                 child: defaultTextFormField(
                   validator: (value) {
-                    return context.read<AuthBloc>().validatePassowrdConfirm(
-                        value,
+                    return authBloc.validatePassowrdConfirm(value,
                         TextFormFieldControllers.passwordSignUpController.text);
                   },
                   keyboardType: TextInputType.visiblePassword,
@@ -125,7 +126,7 @@ class SignUpTextFields extends StatelessWidget {
                   obscureText: state.signUpObscureText,
                   suffixIcon: IconButton(
                       onPressed: () {
-                        context.read<AuthBloc>().add(
+                        authBloc.add(
                             SignUpObscureTextEvent(!state.signUpObscureText));
                       },
                       icon: Icon(

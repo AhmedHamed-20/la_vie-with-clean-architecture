@@ -9,18 +9,20 @@ class ChangeAmountWidget extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
+    var allProductBloc = BlocProvider.of<AllProductsBloc>(context);
+
     return Row(
       children: [
         BlocBuilder<AllProductsBloc, AllProductsState>(
           builder: (context, state) {
             return GestureDetector(
               onTap: () {
-                context.read<AllProductsBloc>().add(
-                      AmountValueEvent(
-                        id: state.activeEntitie[index]['entitie'].id,
-                        isIncrement: false,
-                      ),
-                    );
+                allProductBloc.add(
+                  AmountValueEvent(
+                    id: state.activeEntitie[index]['entitie'].id,
+                    isIncrement: false,
+                  ),
+                );
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -48,12 +50,12 @@ class ChangeAmountWidget extends StatelessWidget {
           builder: (context, state) {
             return GestureDetector(
               onTap: () {
-                context.read<AllProductsBloc>().add(
-                      AmountValueEvent(
-                        id: state.activeEntitie[index]['entitie'].id,
-                        isIncrement: true,
-                      ),
-                    );
+                allProductBloc.add(
+                  AmountValueEvent(
+                    id: state.activeEntitie[index]['entitie'].id,
+                    isIncrement: true,
+                  ),
+                );
               },
               child: Container(
                 decoration: BoxDecoration(

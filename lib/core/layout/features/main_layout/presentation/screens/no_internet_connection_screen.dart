@@ -38,7 +38,10 @@ class NoInternetConnectionScreen extends StatelessWidget {
                   },
                   buttonChild: Text(
                     'Retry',
-                    style: Theme.of(context).textTheme.labelMedium,
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium
+                        ?.copyWith(color: AppColors.white),
                   ),
                   width: AppWidth.w100,
                   height: AppHeight.h46);

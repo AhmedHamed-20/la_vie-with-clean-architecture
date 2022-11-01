@@ -12,6 +12,7 @@ class AddToCartButton extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
+    var allProductBloc = BlocProvider.of<AllProductsBloc>(context);
     return SizedBox(
       width: double.infinity,
       child: BlocBuilder<AllProductsBloc, AllProductsState>(
@@ -22,18 +23,18 @@ class AddToCartButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppRadius.r5),
             ),
             onPressed: () {
-              context.read<AllProductsBloc>().add(
-                    DatabaseInsertionEvent(
-                      amount: state.amountOfAllProducts[
-                          state.activeEntitie[index]['entitie'].id]!,
-                      productId: state.activeEntitie[index]['entitie'].id,
-                      name: state.activeEntitie[index]['entitie'].name,
-                      description:
-                          state.activeEntitie[index]['entitie'].description,
-                      imageUrl: state.activeEntitie[index]['entitie'].imageUrl,
-                      price: state.activeEntitie[index]['price'],
-                    ),
-                  );
+              allProductBloc.add(
+                DatabaseInsertionEvent(
+                  amount: state.amountOfAllProducts[
+                      state.activeEntitie[index]['entitie'].id]!,
+                  productId: state.activeEntitie[index]['entitie'].id,
+                  name: state.activeEntitie[index]['entitie'].name,
+                  description:
+                      state.activeEntitie[index]['entitie'].description,
+                  imageUrl: state.activeEntitie[index]['entitie'].imageUrl,
+                  price: state.activeEntitie[index]['price'],
+                ),
+              );
               context
                   .read<AllProductsBloc>()
                   .add(const AllProductsFromDatabaseEvent('cart'));

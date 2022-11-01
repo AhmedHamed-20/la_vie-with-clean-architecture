@@ -22,6 +22,7 @@ class PostCommentsBottomSheetWidget extends StatelessWidget {
     late List comments;
     return BlocBuilder<ForumsBloc, ForumsState>(
       builder: (context, state) {
+        var forumsBloc = BlocProvider.of<ForumsBloc>(context);
         if (state.currentActiveIndex == 0) {
           comments = state.allForumsEntitie[index].forumsCommentsEtitie;
         } else {
@@ -88,14 +89,14 @@ class PostCommentsBottomSheetWidget extends StatelessWidget {
                       labelStyle: Theme.of(context).textTheme.titleMedium,
                       suffixIcon: IconButton(
                         onPressed: () {
-                          context.read<ForumsBloc>().add(
-                                AddCommentEvent(
-                                  forumId: forumId,
-                                  accessToken: savedaccessToken,
-                                  comment: TextFormFieldControllers
-                                      .addCommentController.text,
-                                ),
-                              );
+                          forumsBloc.add(
+                            AddCommentEvent(
+                              forumId: forumId,
+                              accessToken: savedaccessToken,
+                              comment: TextFormFieldControllers
+                                  .addCommentController.text,
+                            ),
+                          );
                         },
                         icon: Icon(
                           Icons.send,

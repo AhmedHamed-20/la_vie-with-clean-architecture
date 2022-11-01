@@ -38,8 +38,17 @@ class LoginScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(AppPadding.p16),
                       child: Center(
-                        child: Image.asset(
-                          'assets/images/logo.png',
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(AppRadius.r10)),
+                          color: Theme.of(context).backgroundColor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(AppPadding.p10),
+                            child: Image.asset(
+                              'assets/images/logo.png',
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -53,13 +62,13 @@ class LoginScreen extends StatelessWidget {
                           itemCount: 2,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: AppPadding.p30),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 45),
                               child: BlocBuilder<AuthBloc, AuthBlocState>(
                                 builder: (context, state) {
                                   return GestureDetector(
                                     onTap: () {
-                                      context.read<AuthBloc>().add(
+                                      BlocProvider.of<AuthBloc>(context).add(
                                           CurrentActiveTabIndexEvent(index));
                                     },
                                     child: TobTabs(

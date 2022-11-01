@@ -12,10 +12,11 @@ class UserProfileAlertDialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mainLayoutBloc = BlocProvider.of<MainLayoutBloc>(context);
     return BlocConsumer<AllProductsBloc, AllProductsState>(
       listener: (context, state) {
         if (state.cacheCleared) {
-          context.read<MainLayoutBloc>().add(BackToinitialEvent());
+          mainLayoutBloc.add(BackToinitialEvent());
           Navigator.of(context).pushNamedAndRemoveUntil(
               AppRoutesNames.loginScreen, (route) => false);
         }

@@ -29,7 +29,7 @@ class AppPadding {
   static const double p25 = 25;
   static const double p30 = 30;
   static const double p40 = 40;
-
+  static const double p50 = 50;
   static const double p6 = 6;
   static const double p4 = 4;
 }

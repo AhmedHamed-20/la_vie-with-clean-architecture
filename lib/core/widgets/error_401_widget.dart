@@ -13,14 +13,14 @@ class Error401Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var allProductBloc = BlocProvider.of<AllProductsBloc>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Center(
           child: Lottie.asset('assets/images/loading.json'),
         ),
-        // ignore: prefer_const_constructors
-        SizedBox(
+        const SizedBox(
           width: AppWidth.w8,
         ),
         Center(
@@ -42,13 +42,14 @@ class Error401Screen extends StatelessWidget {
         }, builder: (context, state) {
           return defaultButton(
               onPressed: () {
-                context
-                    .read<AllProductsBloc>()
-                    .add(const LogoutEvent('cart', 'accessToken'));
+                allProductBloc.add(const LogoutEvent('cart', 'accessToken'));
               },
               buttonChild: Text(
                 'Logout',
-                style: Theme.of(context).textTheme.labelMedium,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(color: AppColors.white),
               ),
               width: AppWidth.w100,
               height: AppHeight.h46);

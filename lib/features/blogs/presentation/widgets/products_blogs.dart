@@ -16,6 +16,7 @@ class ProductsBlogs extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BlogsBloc, BlogsState>(
       builder: (context, state) {
+        var blogsBloc = BlocProvider.of<BlogsBloc>(context);
         return Column(
           children: [
             SizedBox(
@@ -27,7 +28,7 @@ class ProductsBlogs extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      context.read<BlogsBloc>().add(TobTabsIndex(index));
+                      blogsBloc.add(TobTabsIndex(index));
                     },
                     child: TobTabs(
                       tabs: const ['Plants', 'Seeds', 'Tools'],

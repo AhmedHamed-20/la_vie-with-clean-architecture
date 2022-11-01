@@ -12,6 +12,7 @@ class CartDataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var allProductBloc = BlocProvider.of<AllProductsBloc>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -54,20 +55,18 @@ class CartDataWidget extends StatelessWidget {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        context.read<AllProductsBloc>().add(
-                                              AmountOfProductsInCartEvent(
-                                                dataBaseProductsId: state
-                                                    .productsDatabaseEntitie[
-                                                        index]
-                                                    .databaseId,
-                                                isIncrement: false,
-                                                amount: state
-                                                    .productsDatabaseEntitie[
-                                                        index]
-                                                    .amount,
-                                              ),
-                                            );
-                                        context.read<AllProductsBloc>().add(
+                                        allProductBloc.add(
+                                          AmountOfProductsInCartEvent(
+                                            dataBaseProductsId: state
+                                                .productsDatabaseEntitie[index]
+                                                .databaseId,
+                                            isIncrement: false,
+                                            amount: state
+                                                .productsDatabaseEntitie[index]
+                                                .amount,
+                                          ),
+                                        );
+                                        allProductBloc.add(
                                             const AllProductsFromDatabaseEvent(
                                                 'cart'));
                                       },
@@ -92,7 +91,7 @@ class CartDataWidget extends StatelessWidget {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        context.read<AllProductsBloc>().add(
+                                        allProductBloc.add(
                                             AmountOfProductsInCartEvent(
                                                 dataBaseProductsId: state
                                                     .productsDatabaseEntitie[
@@ -103,7 +102,7 @@ class CartDataWidget extends StatelessWidget {
                                                     .productsDatabaseEntitie[
                                                         index]
                                                     .amount));
-                                        context.read<AllProductsBloc>().add(
+                                        allProductBloc.add(
                                             const AllProductsFromDatabaseEvent(
                                                 'cart'));
                                       },
@@ -118,13 +117,13 @@ class CartDataWidget extends StatelessWidget {
                             ),
                             InkWell(
                               onTap: () {
-                                context.read<AllProductsBloc>().add(
-                                      ProductDeletionFromDatabaseByIdEvent(
-                                          'cart',
-                                          state.productsDatabaseEntitie[index]
-                                              .databaseId),
-                                    );
-                                context.read<AllProductsBloc>().add(
+                                allProductBloc.add(
+                                  ProductDeletionFromDatabaseByIdEvent(
+                                      'cart',
+                                      state.productsDatabaseEntitie[index]
+                                          .databaseId),
+                                );
+                                allProductBloc.add(
                                     const AllProductsFromDatabaseEvent('cart'));
                               },
                               child: Icon(
@@ -177,7 +176,10 @@ class CartDataWidget extends StatelessWidget {
                   },
                   buttonChild: Text(
                     'Checkout',
-                    style: Theme.of(context).textTheme.labelMedium,
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelMedium
+                        ?.copyWith(color: AppColors.white),
                   ),
                   width: double.infinity,
                   height: AppHeight.h46,

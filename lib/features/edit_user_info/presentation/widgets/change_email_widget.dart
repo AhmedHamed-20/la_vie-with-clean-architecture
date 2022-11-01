@@ -46,23 +46,18 @@ class ChangeEmailWidget extends StatelessWidget {
                           controller:
                               TextFormFieldControllers.changeEmailController,
                           onPressedOnConfirm: () {
-                            context.read<UserInfoBloc>().add(
-                                UpdatedUserDataEvent(
-                                    firstName: userInfoState
-                                            .updatedUserDataEntitie
-                                            ?.firstName ??
-                                        mainLayoutstate
-                                            .userDataEntitie!.firstName,
-                                    lastName:
-                                        userInfoState.updatedUserDataEntitie
-                                                ?.lastName ??
-                                            mainLayoutstate
-                                                .userDataEntitie!.lastName,
-                                    email: TextFormFieldControllers
-                                        .changeEmailController.text
-                                        .trim(),
-                                    address: 'address',
-                                    accessToken: savedaccessToken));
+                            userInfoBloc.add(UpdatedUserDataEvent(
+                                firstName: userInfoState
+                                        .updatedUserDataEntitie?.firstName ??
+                                    mainLayoutstate.userDataEntitie!.firstName,
+                                lastName: userInfoState
+                                        .updatedUserDataEntitie?.lastName ??
+                                    mainLayoutstate.userDataEntitie!.lastName,
+                                email: TextFormFieldControllers
+                                    .changeEmailController.text
+                                    .trim(),
+                                address: 'address',
+                                accessToken: savedaccessToken));
                           },
                         ),
                       );

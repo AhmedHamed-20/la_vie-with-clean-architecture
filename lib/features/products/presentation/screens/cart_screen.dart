@@ -15,7 +15,7 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'My Card',
+            'My Cart',
             style: Theme.of(context).textTheme.titleLarge,
           ),
           centerTitle: true,

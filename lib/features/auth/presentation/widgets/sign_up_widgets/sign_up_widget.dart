@@ -40,6 +40,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var authBloc = BlocProvider.of<AuthBloc>(context);
+
     return Expanded(
       flex: 6,
       child: SingleChildScrollView(
@@ -60,7 +62,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     //     .read<MainLayoutBloc>()
                     //     .add(const GetAccessTokenFromCacheEvent('accessToken'));
 
-                    context.read<AuthBloc>().clearAllAuthTextFiledsData();
+                    authBloc.clearAllAuthTextFiledsData();
                   }
                   if (state.signUpRequestState.name == 'error') {
                     flutterToast(
@@ -78,12 +80,12 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         child: CircularProgressIndicator(),
                       );
                     case SignUpRequestState.signUploaded:
-                      context.read<AuthBloc>().add(
-                            AccessTokenCacheEvent(
-                              state.authDataEntitie!.accessToken,
-                              false,
-                            ),
-                          );
+                      authBloc.add(
+                        AccessTokenCacheEvent(
+                          state.authDataEntitie!.accessToken,
+                          false,
+                        ),
+                      );
                       return const Center(
                         child: CircularProgressIndicator(),
                       );

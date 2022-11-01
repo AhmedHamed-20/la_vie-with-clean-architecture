@@ -12,6 +12,7 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var allProductsBloc = BlocProvider.of<AllProductsBloc>(context);
     return Scaffold(
       body: BlocConsumer<AllProductsBloc, AllProductsState>(
         listener: (context, state) {
@@ -31,11 +32,11 @@ class ProductsScreen extends StatelessWidget {
         builder: (context, state) {
           switch (state.requestState) {
             case AllProductsRequestState.idle:
-              context.read<AllProductsBloc>().add(
-                    AllProductsEvent(
-                      savedaccessToken,
-                    ),
-                  );
+              allProductsBloc.add(
+                AllProductsEvent(
+                  savedaccessToken,
+                ),
+              );
               return const Center(
                 child: CircularProgressIndicator(),
               );
@@ -45,7 +46,7 @@ class ProductsScreen extends StatelessWidget {
               );
             case AllProductsRequestState.loaded:
               if (state.activeEntitie == const []) {
-                context.read<AllProductsBloc>().add(
+                allProductsBloc.add(
                     const CurrentActiveTabIndexEvent(currentActiveTabIndex: 0));
                 context
                     .read<AllProductsBloc>()
@@ -66,9 +67,9 @@ class ProductsScreen extends StatelessWidget {
                     ),
                     defaultButton(
                         onPressed: () {
-                          context.read<AllProductsBloc>().add(AllProductsEvent(
-                                savedaccessToken,
-                              ));
+                          allProductsBloc.add(AllProductsEvent(
+                            savedaccessToken,
+                          ));
                         },
                         buttonChild: Text(
                           'Retry',

@@ -16,6 +16,9 @@ class LoginTextFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(
+          height: AppHeight.h10,
+        ),
         Form(
           onChanged: () {
             isValidate = true;

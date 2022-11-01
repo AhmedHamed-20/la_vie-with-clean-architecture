@@ -11,13 +11,15 @@ class SignUpButtomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var authBloc = BlocProvider.of<AuthBloc>(context);
+
     return BlocBuilder<AuthBloc, AuthBlocState>(
       builder: (context, state) => defaultButton(
         onPressed: () {
           if (state.isEmailSignUpVaild &&
               state.isPasswordSignUpVaild &&
               state.isPasswordConfirmSignUpVaild) {
-            context.read<AuthBloc>().add(SignupEvent(
+            authBloc.add(SignupEvent(
                 passwordConfirm: TextFormFieldControllers
                     .passwordConfirmSignUpController.text
                     .trim(),

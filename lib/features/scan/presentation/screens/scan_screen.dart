@@ -25,6 +25,7 @@ class ScanScreen extends StatelessWidget {
             if (internetConnectionState.isConnected == false) {
               return const NoInternetConnectionScreen();
             } else {
+              var scanBloc = BlocProvider.of<ScanBloc>(context);
               return Scaffold(
                 appBar: AppBar(
                   backgroundColor: AppColors.transparentColor,
@@ -130,7 +131,7 @@ class ScanScreen extends StatelessWidget {
                     }
                     if (state.scanResult.isNotEmpty &&
                         state.scanResult != '-1') {
-                      context.read<ScanBloc>().add(ProductByIdEvent(
+                      scanBloc.add(ProductByIdEvent(
                           accessToken: savedaccessToken,
                           productId: state.scanResult));
                     }

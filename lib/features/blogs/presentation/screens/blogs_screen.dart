@@ -26,6 +26,7 @@ class BlogsScreen extends StatelessWidget {
         if (internetConnectionState.isConnected == false) {
           return const NoInternetConnectionScreen();
         } else {
+          var blogsBloc = BlocProvider.of<BlogsBloc>(context);
           return Scaffold(
             appBar: AppBar(
               title: Text(
@@ -66,9 +67,9 @@ class BlogsScreen extends StatelessWidget {
                           ),
                           defaultButton(
                               onPressed: () {
-                                context.read<BlogsBloc>().add(
-                                      AllBlogsEvent(savedaccessToken),
-                                    );
+                                blogsBloc.add(
+                                  AllBlogsEvent(savedaccessToken),
+                                );
                               },
                               buttonChild: Text(
                                 'Retry',

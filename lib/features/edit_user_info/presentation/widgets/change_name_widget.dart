@@ -74,16 +74,14 @@ class ChangeNameWidget extends StatelessWidget {
                                           1,
                                       TextFormFieldControllers
                                           .changeNameController.text.length);
-                              context.read<UserInfoBloc>().add(
-                                  UpdatedUserDataEvent(
-                                      firstName: firstName,
-                                      lastName: lastName,
-                                      email: userInfoState
-                                              .updatedUserDataEntitie?.email ??
-                                          mainLayoutState
-                                              .userDataEntitie!.email,
-                                      address: 'address',
-                                      accessToken: savedaccessToken));
+                              userInfoBloc.add(UpdatedUserDataEvent(
+                                  firstName: firstName,
+                                  lastName: lastName,
+                                  email: userInfoState
+                                          .updatedUserDataEntitie?.email ??
+                                      mainLayoutState.userDataEntitie!.email,
+                                  address: 'address',
+                                  accessToken: savedaccessToken));
                             }
                           },
                         ),

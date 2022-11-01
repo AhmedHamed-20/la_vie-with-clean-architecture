@@ -13,6 +13,7 @@ class ChangeThemeBottomSheetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeModeBloc, ThemeModeState>(
       builder: (context, state) {
+        var themeBloc = BlocProvider.of<ThemeModeBloc>(context);
         return Container(
             decoration: BoxDecoration(
                 color: Theme.of(context).backgroundColor,
@@ -42,7 +43,7 @@ class ChangeThemeBottomSheetWidget extends StatelessWidget {
                         value: 0,
                         groupValue: state.themeModeValue.index,
                         onChanged: (value) {
-                          context.read<ThemeModeBloc>().add(
+                          themeBloc.add(
                               ChangeThemeModeEvent(ThemeDataValue.lightMode));
                           context
                               .read<ThemeModeBloc>()
@@ -58,11 +59,9 @@ class ChangeThemeBottomSheetWidget extends StatelessWidget {
                         value: 1,
                         groupValue: state.themeModeValue.index,
                         onChanged: (value) {
-                          context.read<ThemeModeBloc>().add(
+                          themeBloc.add(
                               ChangeThemeModeEvent(ThemeDataValue.darkMode));
-                          context
-                              .read<ThemeModeBloc>()
-                              .add(const CacheThemeModeEvent(true));
+                          themeBloc.add(const CacheThemeModeEvent(true));
                         },
                       ),
                     ]),

@@ -44,6 +44,7 @@ class _PostMainWidgetState extends State<PostMainWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var forumsBloc = BlocProvider.of<ForumsBloc>(context);
     return Column(
       children: [
         Padding(
@@ -59,12 +60,12 @@ class _PostMainWidgetState extends State<PostMainWidget> {
               controller: TextFormFieldControllers.forumsSearchController,
               onChanged: (value) {
                 Future.delayed(const Duration(seconds: 1), () {
-                  context.read<ForumsBloc>().add(
-                        ForumsSearchEvent(
-                          value,
-                          savedaccessToken,
-                        ),
-                      );
+                  forumsBloc.add(
+                    ForumsSearchEvent(
+                      value,
+                      savedaccessToken,
+                    ),
+                  );
                 });
               },
               prefixIcon: Icon(

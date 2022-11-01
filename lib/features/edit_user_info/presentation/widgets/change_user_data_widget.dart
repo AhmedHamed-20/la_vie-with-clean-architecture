@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/bloc/user_info_bloc.dart';
 import 'package:la_vie_with_clean_architecture/features/edit_user_info/presentation/widgets/points_widget.dart';
 
 import '../../../../core/constants/constants.dart';
@@ -16,6 +18,7 @@ class ChangeUserDataWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userInfoBloc = BlocProvider.of<UserInfoBloc>(context);
     return Container(
       width: double.infinity,
       height: screenHeight(context) * 0.6,
@@ -39,7 +42,8 @@ class ChangeUserDataWidget extends StatelessWidget {
               'Edit Your Profile',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const ChangeNameWidget(),
+            BlocProvider.value(
+                value: userInfoBloc, child: const ChangeNameWidget()),
             const ChangeEmailWidget(),
             const ChangeThemeModeWidget(),
           ],

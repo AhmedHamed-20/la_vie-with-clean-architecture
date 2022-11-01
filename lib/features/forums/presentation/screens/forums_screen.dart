@@ -32,6 +32,7 @@ class ForumsScreen extends StatelessWidget {
         if (internetConnectionState.isConnected == false) {
           return const NoInternetConnectionScreen();
         } else {
+          var forumsBloc = BlocProvider.of<ForumsBloc>(context);
           return Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
@@ -95,7 +96,7 @@ class ForumsScreen extends StatelessWidget {
                           ),
                           defaultButton(
                               onPressed: () {
-                                context.read<ForumsBloc>()
+                                forumsBloc
                                   ..add(
                                     AllForumsEvent(
                                         accessToken: savedaccessToken,

@@ -40,6 +40,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var authBloc = BlocProvider.of<AuthBloc>(context);
+
     return Expanded(
       flex: 6,
       child: Column(
@@ -54,7 +56,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     AppRoutesNames.homeScreen, (route) => false);
 
-                context.read<AuthBloc>().clearAllAuthTextFiledsData();
+                authBloc.clearAllAuthTextFiledsData();
               }
               if (state.authState.name == 'error') {
                 flutterToast(
@@ -72,12 +74,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                     child: CircularProgressIndicator(),
                   );
                 case RequestState.loginloaded:
-                  context.read<AuthBloc>().add(
-                        AccessTokenCacheEvent(
-                          state.authDataEntitie!.accessToken,
-                          true,
-                        ),
-                      );
+                  authBloc.add(
+                    AccessTokenCacheEvent(
+                      state.authDataEntitie!.accessToken,
+                      true,
+                    ),
+                  );
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
