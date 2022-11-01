@@ -73,7 +73,10 @@ class BottomSheetWidget extends StatelessWidget {
                       onPressed: onPressedOnConfirm,
                       buttonChild: Text(
                         'Confirm',
-                        style: Theme.of(context).textTheme.labelMedium,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: AppColors.white),
                       ),
                       width: double.infinity,
                       height: AppHeight.h46,
