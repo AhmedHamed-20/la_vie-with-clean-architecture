@@ -29,19 +29,19 @@ it's an e-commerce app to view and buy plants
  ┣ 📂error
  ┣ 📂layout
  ┃ ┗ 📂features
- ┃ ┃ ┗ 📂main_layout
- ┃ ┃ ┃ ┣ 📂data
- ┃ ┃ ┃ ┃ ┣ 📂datasources
- ┃ ┃ ┃ ┃ ┣ 📂models
- ┃ ┃ ┃ ┃ ┗ 📂repositories
- ┃ ┃ ┃ ┣ 📂domain
- ┃ ┃ ┃ ┃ ┣ 📂entities
- ┃ ┃ ┃ ┃ ┣ 📂repositories
- ┃ ┃ ┃ ┃ ┗ 📂usecases
- ┃ ┃ ┃ ┗ 📂presentation
- ┃ ┃ ┃ ┃ ┣ 📂bloc
- ┃ ┃ ┃ ┃ ┣ 📂screens
- ┃ ┃ ┃ ┃ ┗ 📂widgets
+ ┃   ┗ 📂main_layout
+ ┃     ┣ 📂data
+ ┃     ┃ ┣ 📂datasources
+ ┃     ┃ ┣ 📂models
+ ┃     ┃ ┗ 📂repositories
+ ┃     ┣ 📂domain
+ ┃     ┃ ┣ 📂entities
+ ┃     ┃ ┣ 📂repositories
+ ┃     ┃ ┗ 📂usecases
+ ┃     ┗ 📂presentation
+ ┃       ┣ 📂bloc
+ ┃       ┣ 📂screens
+ ┃       ┗ 📂widgets
  ┣ 📂network
  ┣ 📂network_connection
  ┣ 📂params
@@ -65,7 +65,7 @@ it's an e-commerce app to view and buy plants
  ┣ 📂usecases
  ┣ 📂utl
  ┗ 📂widgets
- ┃ ┣ 📂details_screen_widgets
+ ┃ ┗ 📂details_screen_widgets
  ┃ 
  ┗📦Features
    ┃ 
