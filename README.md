@@ -19,6 +19,7 @@ it's an e-commerce app to view and buy plants
 - Clean Architecture
 
 ## Project Structure
+'''
 📦core
  ┣ 📂cache
  ┣ 📂components 
@@ -73,6 +74,7 @@ it's an e-commerce app to view and buy plants
    ┣ 📂Scan
    ┣ 📂Forums
    ┣ 📂Edit user info
+   '''
 
 ## Screenshots
  
