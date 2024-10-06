@@ -6,7 +6,7 @@ it's the same app that I made in the orange digital center hackathon but refacto
 ![logo](https://user-images.githubusercontent.com/72945669/199287410-a090d76b-2a36-42b6-abf6-b449abec51a7.png)
 it's an e-commerce app to view and buy plants
 ## Features
-- Able to view plants and buy it.
+- Able to view plants and buy them.
 - Blogs feature that makes you know more information about each plant.
 - Scan any plant QR code and buy it.
 - Community feature that you can share your feedback about plants and see other people's feedback and react to it.
